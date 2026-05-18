@@ -60,7 +60,7 @@ export default function SEO({ title, description, keywords }: SEOProps) {
         "longitude": 5.0347
       },
       "url": "https://youngdolphins.nl",
-      "telephone": "0299-651205",
+      "telephone": "06-28421354",
       "priceRange": "€€",
       "openingHoursSpecification": [
         {

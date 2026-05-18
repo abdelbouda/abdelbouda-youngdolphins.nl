@@ -91,7 +91,7 @@ export default function InteractiveSignup() {
                   <Phone size={24} />
                 </div>
                 <p className="text-sm font-black uppercase tracking-widest text-slate-500">Telefoon</p>
-                <a href="tel:0299651205" className="text-lg font-bold hover:text-secondary transition-colors">0299 651205</a>
+                <a href="tel:0628421354" className="text-lg font-bold hover:text-secondary transition-colors">06-28421354</a>
               </div>
               <div className="space-y-4">
                 <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">

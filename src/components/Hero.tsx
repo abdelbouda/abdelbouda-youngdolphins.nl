@@ -101,7 +101,7 @@ export default function Hero() {
             </a>
             
             <a
-              href="tel:0299651205"
+              href="tel:0628421354"
               className="w-full sm:w-auto flex items-center justify-center gap-3 text-primary font-black text-lg transition-colors px-10 py-5"
             >
               <div className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center transition-colors">

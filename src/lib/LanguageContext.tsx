@@ -26,8 +26,8 @@ const translations: Translations = {
     en: 'Register Now',
   },
   cta_contact: {
-    nl: '0299 651205',
-    en: 'Call 0299 651205',
+    nl: '06-28421354',
+    en: 'Call 06-28421354',
   },
   sticky_bar_text: {
     nl: 'Nieuwe groepen starten in Monnickendam!',
