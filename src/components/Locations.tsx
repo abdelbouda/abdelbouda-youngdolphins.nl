@@ -71,7 +71,7 @@ export default function Locations() {
   ];
 
   return (
-    <section id="locaties" className="py-24 bg-white relative overflow-hidden">
+    <section id="locaties" className="py-24 bg-white relative overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex items-center gap-24">
           <div className="lg:w-1/2 mb-16 lg:mb-0">

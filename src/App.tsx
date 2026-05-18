@@ -10,6 +10,7 @@ import InteractiveSignup from './components/InteractiveSignup';
 import Footer from './components/Footer';
 import Pricing from './components/Pricing';
 import SEO from './components/SEO';
+import ServiceAreas from './components/ServiceAreas';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
 
 function AppContent() {
@@ -19,12 +20,12 @@ function AppContent() {
     <div className="min-h-screen bg-white">
       <SEO 
         title={language === 'nl' 
-          ? "Zwemles Direct Zonder Wachtlijst in Monnickendam | Young Dolphins Zwemschool"
-          : "Start Swimming Immediately Without Waiting List in Monnickendam | Young Dolphins Swim School"}
+          ? "Zwemles Amsterdam & Monnickendam | Direct Starten - Geen Wachtlijst | Young Dolphins"
+          : "Swimming Lessons Amsterdam & Monnickendam | Start Immediately - No Waiting List | Young Dolphins"}
         description={language === 'nl'
-          ? "Wil je kind direct starten met zwemles? Young Dolphins in Monnickendam biedt professionele zwemlessen voor A, B en C diploma's zonder wachttijd. Kleine groepen & warme zwembaden."
-          : "Do you want your child to start swimming lessons immediately? Young Dolphins in Monnickendam offers professional swimming lessons for A, B, and C diplomas without a waiting time."}
-        keywords="zwemles Monnickendam, geen wachtlijst zwemles, Sportfondsen Monnickendam zwemles, Young Dolphins Zwemschool, zwemles regio Amsterdam, ABC diploma Monnickendam"
+          ? "Zoek je zwemles in Amsterdam (Noord, Oost, Zuid, West) of Monnickendam? Bij Young Dolphins kun je direct starten zonder wachtlijst. Professionele ABC-diploma zwemlessen in kleine groepen."
+          : "Looking for swimming lessons in Amsterdam or Monnickendam? At Young Dolphins you can start immediately without a waiting list. Professional ABC diploma swimming lessons in small groups."}
+        keywords="zwemles Amsterdam, zwemles Monnickendam, direct starten zwemles, geen wachtlijst zwemles, ABC diploma Amsterdam, zwemles Amsterdam Noord, zwemles Amsterdam Oost, zwemles Amsterdam Zuid, zwemles Amsterdam West"
       />
 
       <Navbar />
@@ -33,6 +34,7 @@ function AppContent() {
         <Hero />
         <USPSection />
         <BentoFeatures />
+        <ServiceAreas />
         <Pricing />
         <About />
         <Locations />

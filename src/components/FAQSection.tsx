@@ -39,7 +39,7 @@ export default function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-24 bg-white relative">
+    <section id="faq" className="py-24 bg-white relative scroll-mt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-display font-black text-primary mb-6">

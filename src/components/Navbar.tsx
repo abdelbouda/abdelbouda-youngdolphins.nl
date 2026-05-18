@@ -20,12 +20,13 @@ export default function Navbar() {
     { name: t('nav_home'), href: '#hero' },
     { name: t('nav_lessons'), href: '#lessen' },
     { name: t('nav_locations'), href: '#locaties' },
+    { name: t('nav_pricing'), href: '#tarieven' },
     { name: t('nav_about'), href: '#over-ons' },
     { name: t('nav_faq'), href: '#faq' },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-20 glass-morphism' : 'h-28 bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-16 glass-morphism' : 'h-20 bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex justify-between items-center h-full">
           <motion.div 
@@ -33,7 +34,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center"
           >
-            <Logo className="w-24 sm:w-28" />
+            <Logo className="w-20 sm:w-24" />
           </motion.div>
 
           {/* Desktop Menu */}
@@ -63,7 +64,7 @@ export default function Navbar() {
             </button>
 
             <a
-              href="#contact"
+              href="#signup-form"
               className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-sm hover:bg-secondary transition-all shadow-premium gradient-shine"
             >
               {t('cta_register')}
@@ -106,7 +107,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="#signup-form"
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium"
               >

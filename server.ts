@@ -11,17 +11,30 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Sitemap route for SEO
+app.get("/sitemap.xml", (req, res) => {
+  res.header("Content-Type", "application/xml");
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://youngdolphins.nl/</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`);
+});
+
 // API route for signup
 app.post("/api/signup", async (req, res) => {
-  const { name, phone, email, childInfo } = req.body;
+  const { name, phone, email, childInfo, package: selectedPackage } = req.body;
 
   if (!name || !email) {
     return res.status(400).json({ error: "Naam en email zijn verplicht." });
   }
 
   try {
-    // Standard SMTP setup - credentials should be provided in environment variables
-    // If not provided, we log a warning but the app won't crash
+    // ... setup transporter ...
     const smtpHost = process.env.SMTP_HOST;
     const smtpPort = parseInt(process.env.SMTP_PORT || "587");
     const smtpUser = process.env.SMTP_USER;
@@ -57,6 +70,7 @@ Naam ouder: ${name}
 Telefoonnummer: ${phone}
 E-mailadres: ${email}
 Naam kind & Leeftijd: ${childInfo}
+Gekozen pakket: ${selectedPackage || 'Niet opgegeven'}
 
 Deze gegevens zijn verstuurd naar info@youngdolphins.nl en een kopie is gestuurd naar ${email}.
       `,
@@ -80,6 +94,10 @@ Deze gegevens zijn verstuurd naar info@youngdolphins.nl en een kopie is gestuurd
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Naam kind & Leeftijd:</strong></td>
               <td style="padding: 8px; border-bottom: 1px solid #eee;">${childInfo}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Gekozen pakket:</strong></td>
+              <td style="padding: 8px; border-bottom: 1px solid #eee;">${selectedPackage || 'Niet opgegeven'}</td>
             </tr>
           </table>
           <p style="margin-top: 20px; font-size: 0.9em; color: #666;">

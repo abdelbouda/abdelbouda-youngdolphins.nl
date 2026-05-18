@@ -61,6 +61,21 @@ export default function Footer() {
           </div>
 
           <div>
+            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50 text-center lg:text-left">Regio Amsterdam</h4>
+            <div className="flex flex-wrap lg:flex-col gap-x-4 gap-y-3 justify-center lg:justify-start">
+              {['Amsterdam Noord', 'Amsterdam Oost', 'Amsterdam Zuid', 'Amsterdam West', 'Amsterdam Centrum', 'Zuidoost'].map((area) => (
+                <a 
+                  key={area} 
+                  href="#signup-form" 
+                  className="text-slate-300 hover:text-secondary transition-colors font-bold text-xs uppercase tracking-widest whitespace-nowrap"
+                >
+                  {area}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
             <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">Contact</h4>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">

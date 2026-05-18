@@ -43,7 +43,7 @@ export default function StickyCTA() {
               <p className="text-sm font-bold text-primary truncate">{t('sticky_bar_text')}</p>
             </div>
             <a
-              href="#contact"
+              href="#signup-form"
               className="flex-1 sm:flex-none px-6 py-3 bg-coral text-white rounded-xl font-bold text-sm shadow-premium gradient-shine whitespace-nowrap text-center"
             >
               🚀 {t('cta_register')}

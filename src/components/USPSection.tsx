@@ -23,7 +23,7 @@ export default function USPSection() {
           </div>
           
           <div className="flex flex-col items-center relative z-10 max-w-3xl mx-auto">
-            <h2 className="text-3xl lg:text-6xl font-display font-black text-white mb-10 leading-tight text-center">
+            <h2 className="text-3xl lg:text-5xl font-display font-black text-white mb-10 leading-tight text-center">
               {t('why_monnickendam_title')}
             </h2>
             <div className="space-y-6 w-full">
@@ -39,7 +39,7 @@ export default function USPSection() {
                   <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-secondary text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                     <CheckCircle2 size={18} />
                   </div>
-                  <p className="text-lg lg:text-2xl text-white/90 font-bold leading-relaxed">{point[language]}</p>
+                  <p className="text-lg lg:text-xl text-white/90 font-bold leading-relaxed">{point[language]}</p>
                 </motion.div>
               ))}
             </div>

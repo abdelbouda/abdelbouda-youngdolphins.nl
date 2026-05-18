@@ -6,7 +6,7 @@ export default function About() {
   const { language } = useLanguage();
 
   return (
-    <section id="over-ons" className="py-24 overflow-hidden bg-slate-50">
+    <section id="over-ons" className="py-24 overflow-hidden bg-slate-50 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-black uppercase tracking-[0.2em] mb-8">

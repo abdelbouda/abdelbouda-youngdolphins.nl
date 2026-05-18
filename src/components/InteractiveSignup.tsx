@@ -1,7 +1,18 @@
 import { motion } from 'motion/react';
-import { Send, Phone, Mail, Clock, ShieldCheck, Heart } from 'lucide-react';
+import { Send, Phone, Mail, Clock, ShieldCheck, Accessibility, Users, Globe } from 'lucide-react';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
+
+const DolphinIcon = ({ className = "w-5 h-5", color = "#5AC1E6" }: { className?: string; color?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <path 
+      d="M4 14C4.5 12.5 6.5 10 10 9.5C13.5 9 15 10.5 16 12.5C17 14.5 18.5 13.5 20 13C21.5 12.5 23 11.5 23 10C23 8.5 21.5 7 19.5 6.5C17 5.8 14 6.5 12 8.5C10 10.5 8.5 13 8 15C7.8 16 8.2 17 9.5 17.5C10.8 18 12 17.5 12.5 16.5L12.8 15.5" 
+      stroke={color} 
+      strokeWidth="2.5" 
+      strokeLinecap="round" 
+    />
+  </svg>
+);
 
 export default function InteractiveSignup() {
   const [submitted, setSubmitted] = useState(false);
@@ -11,12 +22,14 @@ export default function InteractiveSignup() {
     name: '',
     phone: '',
     email: '',
-    childInfo: ''
+    childInfo: '',
+    package: 'Progress+'
   });
   
   const { t } = useLanguage();
 
   const handleSubmit = async (e: FormEvent) => {
+    // ... logic remains same ...
     e.preventDefault();
     setIsLoading(true);
     setError(null);
@@ -35,7 +48,7 @@ export default function InteractiveSignup() {
       }
 
       setSubmitted(true);
-      setFormData({ name: '', phone: '', email: '', childInfo: '' });
+      setFormData({ name: '', phone: '', email: '', childInfo: '', package: 'Progress+' });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Een onbekende fout is opgetreden.');
     } finally {
@@ -43,13 +56,13 @@ export default function InteractiveSignup() {
     }
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   return (
-    <section id="contact" className="py-24 bg-primary text-white relative overflow-hidden">
+    <section id="contact" className="py-24 bg-primary text-white relative overflow-hidden scroll-mt-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.1),transparent_50%)]"></div>
       
       {/* Decorative Dolphin Branding */}
@@ -65,7 +78,7 @@ export default function InteractiveSignup() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div className="sticky top-32">
-            <h2 className="text-4xl lg:text-7xl font-display font-black mb-8 leading-[1.1] text-white">
+            <h2 className="text-4xl lg:text-5xl font-display font-black mb-8 leading-[1.1] text-white">
               Schrijf je <span className="text-secondary">direct in</span>
             </h2>
             <p className="text-xl text-slate-300 mb-16 max-w-md font-medium leading-relaxed">
@@ -89,34 +102,53 @@ export default function InteractiveSignup() {
               </div>
             </div>
             
-            <div className="mt-16 pt-16 border-t border-white/5 flex items-center gap-6">
+            <div className="mt-16 pt-16 border-t border-white/5 space-y-4">
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
+                    <Accessibility size={16} />
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
+                    <Users size={16} />
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
+                    <Globe size={16} />
+                  </div>
+                </div>
                 <div>
-                   <p className="font-black text-secondary">Join the Dolphins</p>
+                   <p className="font-black text-secondary uppercase tracking-wider text-sm">Join the Dolphins</p>
                    <p className="text-sm font-bold text-slate-400">1200+ diploma's uitgereikt</p>
                 </div>
             </div>
           </div>
 
           <motion.div 
+            id="signup-form"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            whileHover={{ 
+              rotateY: -2,
+              rotateX: 2,
+              scale: 1.01,
+              boxShadow: "0 60px 120px rgba(0,0,0,0.4)"
+            }}
             viewport={{ once: true }}
-            className="bg-white rounded-[3rem] p-8 lg:p-16 shadow-[0_50px_100px_rgba(0,0,0,0.3)] text-primary relative overflow-hidden"
+            style={{ perspective: "1000px" }}
+            className="bg-white rounded-[2.5rem] p-6 lg:p-10 shadow-[0_40px_80px_rgba(0,0,0,0.3)] text-primary relative overflow-hidden max-w-lg mx-auto lg:ml-auto transition-all duration-500 scroll-mt-24"
           >
             {/* Glassmorphism accent */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/5 blur-3xl rounded-full"></div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-3xl rounded-full"></div>
             
             {submitted ? (
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="py-10 text-center"
+                className="py-6 text-center"
               >
-                <div className="w-24 h-24 bg-green-100 text-green-600 rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-lg">
-                  <ShieldCheck size={48} />
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <ShieldCheck size={40} />
                 </div>
-                <h3 className="text-3xl font-display font-black mb-4">{t('success_title')}</h3>
-                <p className="text-lg text-slate-600 font-medium mb-10">{t('success_desc')}</p>
+                <h3 className="text-2xl font-display font-black mb-3">{t('success_title')}</h3>
+                <p className="text-base text-slate-600 font-medium mb-8">{t('success_desc')}</p>
                 <button 
                   onClick={() => setSubmitted(false)}
                   className="px-8 py-4 bg-primary text-white rounded-2xl font-black shadow-premium hover:bg-secondary transition-all"
@@ -125,21 +157,21 @@ export default function InteractiveSignup() {
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
-                <div className="flex items-center gap-3 mb-4">
-                    <Heart className="text-accent fill-accent" size={20} />
-                    <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Stap 1: Jouw Gegevens</span>
+              <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                <div className="flex items-center gap-3 mb-2">
+                    <DolphinIcon className="w-5 h-5" color="#5AC1E6" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Direct aanmelden</span>
                 </div>
                 
                 {error && (
-                  <div className="p-4 bg-red-50 text-red-600 rounded-2xl text-sm font-bold border border-red-100 animate-in fade-in slide-in-from-top-1">
+                  <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs font-bold border border-red-100 animate-in fade-in slide-in-from-top-1">
                     {error}
                   </div>
                 )}
 
-                <div className="grid sm:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
                     <input 
                       required
                       name="name"
@@ -147,11 +179,11 @@ export default function InteractiveSignup() {
                       onChange={handleInputChange}
                       type="text" 
                       placeholder="Bijv. Mark de Vries"
-                      className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-3xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                     />
                   </div>
-                  <div className="space-y-3">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_phone')}</label>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_phone')}</label>
                     <input 
                       required
                       name="phone"
@@ -159,24 +191,41 @@ export default function InteractiveSignup() {
                       onChange={handleInputChange}
                       type="tel" 
                       placeholder="06 12345678"
-                      className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-3xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                     />
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
-                  <input 
-                    required
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    type="email" 
-                    placeholder="naam@voorbeeld.nl"
-                    className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-3xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300"
-                  />
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
+                    <input 
+                      required
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      type="email" 
+                      placeholder="naam@voorbeeld.nl"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
+                    <select
+                      name="package"
+                      value={formData.package}
+                      onChange={handleInputChange}
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer"
+                    >
+                      <option value="Starter">{t('package_starter')}</option>
+                      <option value="Progress+">{t('package_progress')}</option>
+                      <option value="Privé">{t('package_private')}</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_child_info')}</label>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_child_info')}</label>
                   <input 
                     required
                     name="childInfo"
@@ -184,26 +233,26 @@ export default function InteractiveSignup() {
                     onChange={handleInputChange}
                     type="text" 
                     placeholder="Bijv. Liam (5 jaar)"
-                    className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-3xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                   />
                 </div>
                 
                 <button 
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-6 bg-secondary text-white rounded-[2rem] font-black text-xl shadow-premium shadow-secondary/30 transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-secondary text-white rounded-2xl font-black text-lg shadow-premium shadow-secondary/30 transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
-                    <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      <Send size={24} />
+                      <Send size={20} />
                       {t('form_submit')}
                     </>
                   )}
                 </button>
                 
-                <p className="text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
+                <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                    Geen inschrijfkosten • Direct antwoord
                 </p>
               </form>
