@@ -2,11 +2,12 @@ import { motion } from 'motion/react';
 import { MapPin, Navigation, Map as MapIcon } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+import { useState, useEffect, useRef } from 'react';
 
 const API_KEY = process.env.GOOGLE_MAPS_PLATFORM_KEY || '';
 const hasValidKey = Boolean(API_KEY) && API_KEY !== 'YOUR_API_KEY';
 
-function MapDisplay() {
+function MapDisplay({ inView }: { inView: boolean }) {
   if (!hasValidKey) {
     return (
       <div className="w-full h-full bg-primary flex flex-col items-center justify-center p-8 text-center text-white">
@@ -21,6 +22,15 @@ function MapDisplay() {
           <p>3. Voeg <code className="bg-white/10 px-1 rounded text-secondary">GOOGLE_MAPS_PLATFORM_KEY</code> toe</p>
           <p>4. Plak je API key en druk op Enter</p>
         </div>
+      </div>
+    );
+  }
+
+  // Defer Map initialization until parent is inView
+  if (!inView) {
+    return (
+      <div className="w-full h-full bg-slate-100 animate-pulse flex items-center justify-center">
+        <MapIcon size={32} className="text-slate-300" />
       </div>
     );
   }
@@ -46,6 +56,26 @@ function MapDisplay() {
 
 export default function Locations() {
   const { language } = useLanguage();
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Start loading 200px before it enters viewport
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const locations = [
     {
@@ -71,7 +101,7 @@ export default function Locations() {
   ];
 
   return (
-    <section id="locaties" className="py-24 bg-white relative overflow-hidden scroll-mt-24">
+    <section id="locaties" ref={sectionRef} className="py-24 bg-white relative overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex items-center gap-24">
           <div className="lg:w-1/2 mb-16 lg:mb-0">
@@ -116,7 +146,7 @@ export default function Locations() {
 
           <div className="lg:w-1/2 relative group">
             <div className="aspect-[4/5] bg-primary rounded-[4rem] relative overflow-hidden shadow-[0_50px_100px_rgba(0,31,63,0.2)] pricing-card-3d">
-              <MapDisplay />
+              <MapDisplay inView={inView} />
               
               <div className="absolute bottom-10 left-10 right-10 p-8 glass-morphism rounded-3xl">
                   <p className="text-white font-black text-xl mb-1">Sportfondsen Monnickendam</p>
