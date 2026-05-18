@@ -25,6 +25,15 @@ app.get("/sitemap.xml", (req, res) => {
 </urlset>`);
 });
 
+// Robots.txt route
+app.get("/robots.txt", (req, res) => {
+  res.header("Content-Type", "text/plain");
+  res.send(`User-agent: *
+Allow: /
+
+Sitemap: https://youngdolphins.nl/sitemap.xml`);
+});
+
 // API route for signup
 app.post("/api/signup", async (req, res) => {
   const { name, phone, email, childInfo, package: selectedPackage } = req.body;
