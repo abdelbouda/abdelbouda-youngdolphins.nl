@@ -46,11 +46,48 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative pt-8 pb-4 lg:pt-16 lg:pb-8 overflow-hidden scroll-mt-24">
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10 bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.08),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(244,63,94,0.05),transparent_40%)]"></div>
+    <section id="hero" className="relative pt-8 pb-4 lg:pt-16 lg:pb-8 overflow-hidden scroll-mt-24 bg-aquatic">
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-secondary/10"
+            initial={{ 
+              width: Math.random() * 200 + 100, 
+              height: Math.random() * 200 + 100,
+              x: Math.random() * 100 + "%",
+              y: "110%",
+              opacity: 0.1
+            }}
+            animate={{ 
+              y: "-20%",
+              x: (Math.random() * 100 - 10) + "%",
+              opacity: [0, 0.2, 0]
+            }}
+            transition={{ 
+              duration: Math.random() * 20 + 15,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 3
+            }}
+            style={{ filter: "blur(40px)" }}
+          />
+        ))}
+
+        {/* Animated Wave */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+          <svg className="relative block w-[200%] h-24 text-white fill-current opacity-50" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <motion.path 
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.47,105.7,112.51,105.1,162.22,95.83,211.92,86.56,263.4,67.23,321.39,56.44Z"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            />
+          </svg>
+        </div>
+      </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto py-4 lg:py-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -69,7 +106,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-display font-black text-primary leading-[1.05] mb-4"
+            className="text-4xl sm:text-6xl lg:text-7xl font-display font-black text-primary leading-[1.05] mb-4 drop-shadow-sm"
           >
             {t('hero_title').split(':').map((part, i) => (
               <span key={i} className={i === 1 ? 'block text-secondary' : ''}>

@@ -37,14 +37,14 @@ export default function StickyCTA() {
           exit={{ y: 100 }}
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-xl"
         >
-          <div className="glass-morphism rounded-2xl p-4 shadow-2xl flex items-center justify-between gap-4 border-white/40">
-            <div className="hidden sm:block">
-              <p className="text-xs font-black text-primary/40 uppercase tracking-widest mb-0.5">Focus</p>
+          <div className="glass-card rounded-[2rem] p-3 sm:p-4 flex items-center justify-between gap-4 border-white/40">
+            <div className="hidden sm:block ml-4">
+              <p className="text-[10px] font-black text-primary/40 uppercase tracking-widest mb-0.5">Young Dolphins</p>
               <p className="text-sm font-bold text-primary truncate">{t('sticky_bar_text')}</p>
             </div>
             <a
               href="#signup-form"
-              className="flex-1 sm:flex-none px-6 py-3 bg-coral text-white rounded-xl font-bold text-sm shadow-premium gradient-shine whitespace-nowrap text-center"
+              className="flex-1 sm:flex-none px-8 py-4 bg-primary text-white rounded-2xl font-black text-sm shadow-premium hover:bg-secondary transition-all active:scale-95 whitespace-nowrap text-center"
             >
               🚀 {t('cta_register')}
             </a>

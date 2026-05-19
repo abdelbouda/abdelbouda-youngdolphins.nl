@@ -14,6 +14,21 @@
   --shadow-3d: 0 10px 30px -10px rgba(0, 31, 63, 0.3);
 }
 
+@layer utilities {
+  .bg-aquatic {
+    background: radial-gradient(circle at 10% 20%, rgba(90, 193, 230, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(27, 54, 93, 0.03) 0%, transparent 40%);
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/40 border border-white/40 shadow-xl;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 30px rgba(90, 193, 230, 0.4);
+  }
+}
+
 @layer base {
   body {
     @apply font-sans text-slate-900 bg-white selection:bg-secondary/30;
