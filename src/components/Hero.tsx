@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
 import { Phone, ArrowRight } from 'lucide-react';
@@ -6,8 +6,17 @@ import { Phone, ArrowRight } from 'lucide-react';
 export default function Hero() {
   const { t } = useLanguage();
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const pricingCards = [
+  useEffect(() => {
+    const m = window.matchMedia("(max-width: 640px)");
+    setIsMobile(m.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    m.addEventListener('change', handler);
+    return () => m.removeEventListener('change', handler);
+  }, []);
+
+  const pricingCards = useMemo(() => [
     { 
       title: t('pricing_starter_title'), 
       price: '€25', 
@@ -33,11 +42,11 @@ export default function Hero() {
       text: 'text-primary',
       desc: t('pricing_private_desc')
     }
-  ];
+  ], [t]);
 
   const handleCardClick = (e: React.MouseEvent, index: number) => {
     // If it's a touch device and the card isn't active yet, just show info
-    if (window.matchMedia("(max-width: 640px)").matches) {
+    if (isMobile) {
       if (activeCard !== index) {
         e.preventDefault();
         setActiveCard(index);
@@ -177,7 +186,7 @@ export default function Hero() {
                     {card.desc}
                   </p>
                   <div className="mt-2 text-[10px] font-black underline underline-offset-2 text-primary">
-                    {window.matchMedia("(max-width: 640px)").matches ? t('hero_tap_again') : `${t('hero_register_btn')} →`}
+                    {isMobile ? t('hero_tap_again') : `${t('hero_register_btn')} →`}
                   </div>
                 </div>
               </motion.a>

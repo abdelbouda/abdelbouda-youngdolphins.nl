@@ -45,6 +45,7 @@ export default function StickyCTA() {
             <a
               href="#signup-form"
               className="flex-1 sm:flex-none px-8 py-4 bg-primary text-white rounded-2xl font-black text-sm shadow-premium hover:bg-secondary transition-all active:scale-95 whitespace-nowrap text-center"
+              aria-label={t('cta_register')}
             >
               🚀 {t('cta_register')}
             </a>

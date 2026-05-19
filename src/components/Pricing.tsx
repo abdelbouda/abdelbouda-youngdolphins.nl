@@ -102,6 +102,7 @@ export default function Pricing() {
 
               <a
                 href="#signup-form"
+                aria-label={`${t('hero_register_btn')} voor ${plan.name}`}
                 className={`w-full py-5 rounded-2xl font-black text-lg transition-all shadow-xl text-center flex items-center justify-center ${plan.popular ? 'bg-primary text-white hover:bg-primary/90 hover:scale-[1.02]' : 'bg-secondary text-white hover:bg-secondary/90 hover:scale-[1.02] shadow-secondary/20'}`}
               >
                 {plan.cta}

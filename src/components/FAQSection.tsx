@@ -45,18 +45,24 @@ export default function FAQSection() {
               className="group border border-slate-100 rounded-[2rem] overflow-hidden transition-all hover:shadow-premium bg-white"
             >
               <button 
+                id={`faq-btn-${index}`}
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-content-${index}`}
                 className="w-full flex items-center justify-between p-8 text-left outline-none"
               >
                 <span className="text-lg lg:text-xl font-bold text-primary group-hover:text-secondary transition-colors">
                     {t(faq.question)}
                 </span>
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${openIndex === index ? 'bg-secondary text-white rotate-180' : 'bg-slate-50 text-secondary'}`}>
-                    <ChevronDown size={24} />
+                    <ChevronDown size={24} aria-hidden="true" />
                 </div>
               </button>
               {openIndex === index && (
                 <motion.div 
+                  id={`faq-content-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${index}`}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   className="px-8 pb-8"
