@@ -9,12 +9,13 @@ const hasValidKey = Boolean(API_KEY) && API_KEY !== 'YOUR_API_KEY';
 
 function MapDisplay({ inView }: { inView: boolean }) {
   if (!hasValidKey) {
+    const { t } = useLanguage();
     return (
       <div className="w-full h-full bg-primary flex flex-col items-center justify-center p-8 text-center text-white">
         <MapPin size={48} className="text-secondary mb-6 opacity-50" />
-        <h3 className="text-xl font-display font-black mb-4">Google Maps API Key vereist</h3>
+        <h3 className="text-xl font-display font-black mb-4">{t('loc_maps_key_required')}</h3>
         <p className="text-sm text-slate-400 mb-8 max-w-sm">
-          Om de locatie op de kaart te zien, voeg je een Google Maps API key toe aan de Secrets van het project.
+          {t('loc_maps_desc')}
         </p>
         <div className="text-xs text-left bg-white/5 p-6 rounded-3xl border border-white/10 space-y-3 font-medium">
           <p>1. Open <strong>Settings</strong> (⚙️ gear icon)</p>
@@ -55,7 +56,7 @@ function MapDisplay({ inView }: { inView: boolean }) {
 }
 
 export default function Locations() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -106,12 +107,12 @@ export default function Locations() {
         <div className="lg:flex items-center gap-24">
           <div className="lg:w-1/2 mb-16 lg:mb-0">
             <h2 className="text-4xl lg:text-5xl font-display font-black text-primary mb-8">
-              Vind ons bij jou in <span className="text-secondary underline decoration-secondary/20">de buurt</span>
+              {t('loc_find_us').split(' ').map((word, i) => (
+                (word === 'buurt' || word === 'area' || word === 'area') ? <span key={i} className="text-secondary underline decoration-secondary/20 ml-1">{word}</span> : (i === 0 ? word : ` ${word}`)
+              ))}
             </h2>
             <p className="text-xl text-slate-600 mb-12 leading-relaxed font-medium">
-                {language === 'nl' 
-                  ? "We geven les in moderne, warme zwembaden. Onze belangrijkste locatie is momenteel Monnickendam, waar we direct kunnen starten zonder wachtlijst."
-                  : "We teach in modern, warm pools. Our main location is currently Monnickendam, where we can start immediately without a waiting list."}
+                {t('loc_intro')}
             </p>
 
             <div className="space-y-6">
@@ -133,7 +134,7 @@ export default function Locations() {
                       <div className="flex items-center justify-between">
                         {loc.isActive && (
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-widest">
-                            {language === 'nl' ? 'Nu Beschikbaar' : 'Available Now'}
+                            {t('loc_available_now')}
                           </div>
                         )}
                       </div>
@@ -150,7 +151,7 @@ export default function Locations() {
               
               <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 p-6 sm:p-8 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20">
                   <p className="text-secondary font-black text-lg sm:text-xl mb-1">Sportfondsen Monnickendam</p>
-                  <p className="text-primary/70 text-[10px] font-black uppercase tracking-widest leading-none">Hoofdlocatie</p>
+                  <p className="text-primary/70 text-[10px] font-black uppercase tracking-widest leading-none">{t('loc_main_location')}</p>
               </div>
             </div>
           </div>

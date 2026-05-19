@@ -7,28 +7,28 @@ export default function BentoFeatures() {
 
   const features = [
     {
-      title: 'Zwemles A-B-C',
-      desc: 'Complete begeleiding van eerste spetter tot officieel diploma.',
+      title: t('feature_abc_title'),
+      desc: t('feature_abc_desc'),
       icon: Award,
       size: 'lg:col-span-2 lg:row-span-2',
       color: 'bg-secondary/10 text-secondary',
       image: 'https://images.unsplash.com/photo-1570481662006-a3a1374699e8?auto=format&fit=crop&w=800&q=80'
     },
     {
-      title: 'Kleine Groepen',
-      desc: 'Maximale aandacht voor elk kind.',
+      title: t('feature_groups_title'),
+      desc: t('feature_groups_desc'),
       icon: Users,
       color: 'bg-primary/5 text-primary'
     },
     {
-      title: 'Direct Starten',
-      desc: 'In Monnickendam starten we zonder wachttijden.',
+      title: t('feature_start_title'),
+      desc: t('feature_start_desc'),
       icon: Clock,
       color: 'bg-coral/10 text-coral'
     },
     {
-      title: 'Privé lessen',
-      desc: '1-op-1 coaching voor supersnelle progressie.',
+      title: t('feature_private_title'),
+      desc: t('feature_private_desc'),
       icon: Star,
       size: 'lg:col-span-2',
       color: 'bg-accent/10 text-accent'

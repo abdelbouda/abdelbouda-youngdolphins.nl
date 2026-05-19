@@ -76,6 +76,95 @@ const translations: Translations = {
   form_submit: { nl: 'Verstuur Aanmelding', en: 'Submit Application' },
   success_title: { nl: 'Aanmelding ontvangen!', en: 'Application received!' },
   success_desc: { nl: 'Bedankt voor je interesse. We nemen snel contact met je op.', en: 'Thanks for your interest. We will contact you soon.' },
+  
+  // Locations component
+  loc_maps_key_required: { nl: 'Google Maps API Key vereist', en: 'Google Maps API Key required' },
+  loc_maps_desc: { nl: 'Om de locatie op de kaart te zien, voeg je een Google Maps API key toe aan de Secrets van het project.', en: 'To see the location on the map, add a Google Maps API key to the project Secrets.' },
+  loc_find_us: { nl: 'Vind ons bij jou in de buurt', en: 'Find us in your area' },
+  loc_main_location: { nl: 'Hoofdlocatie', en: 'Main Location' },
+  loc_available_now: { nl: 'Nu Beschikbaar', en: 'Available Now' },
+
+  // Hero component extra
+  hero_most_popular: { nl: 'Meest gekozen', en: 'Most Popular' },
+  hero_register_btn: { nl: 'Inschrijven', en: 'Register Now' },
+  hero_tap_again: { nl: 'Tik nogmaals', en: 'Tap again' },
+  hero_per_lesson: { nl: '/ les', en: '/ lesson' },
+  hero_per_month: { nl: '/ maand', en: '/ month' },
+
+  // Pricing component
+  pricing_title: { nl: 'Pakketten & Tarieven', en: 'Packages & Pricing' },
+  pricing_subtitle: { nl: 'Investeer in de veiligheid en het plezier van je kind in het water.', en: 'Invest in your child\'s safety and fun in the water.' },
+
+  // InteractiveSignup component extra
+  form_phone_label: { nl: 'Telefoon', en: 'Phone' },
+  form_email_label: { nl: 'Email', en: 'Email' },
+  form_diplomas: { nl: '1200+ diploma\'s uitgereikt', en: '1200+ diplomas awarded' },
+  form_back: { nl: 'Terug naar formulier', en: 'Back to form' },
+  form_direct_register: { nl: 'Direct aanmelden', en: 'Register now' },
+  form_placeholder_parent: { nl: 'Bijv. Mark de Vries', en: 'e.g. John Doe' },
+  form_placeholder_phone: { nl: '06 12345678', en: '06 12345678' },
+  form_placeholder_email: { nl: 'naam@voorbeeld.nl', en: 'name@example.com' },
+  form_placeholder_child: { nl: 'Bijv. Liam (5 jaar)', en: 'e.g. Liam (5 years old)' },
+  form_footer: { nl: 'Geen inschrijfkosten • Direct antwoord', en: 'No registration fees • Immediate response' },
+  form_error_conn: { nl: 'Verbinding mislukt', en: 'Connection failed' },
+  form_error_server: { nl: 'Server fout', en: 'Server error' },
+  form_error_unknown: { nl: 'Een onbekende fout is opgetreden.', en: 'An unknown error occurred.' },
+
+  // About component extra
+  about_passion: { nl: 'Onze Passie', en: 'Our Passion' },
+  about_title_1: { nl: 'Liefde voor het water,', en: 'Love for the water,' },
+  about_title_2: { nl: 'vakkundigheid in de les', en: 'professionalism in the lesson' },
+  about_safety_focus: { nl: 'Veiligheid focus', en: 'Safety focus' },
+  about_team_title: { nl: 'Enthousiast', en: 'Enthusiastic' },
+  about_team_subtitle: { nl: 'Instructeurs team', en: 'Instructors team' },
+
+  // FAQ section extra
+  faq_title: { nl: 'Veelgestelde vragen', en: 'Frequently asked questions' },
+  faq_subtitle: { nl: 'Alles wat je moet weten over zwemles bij Young Dolphins.', en: 'Everything you need to know about swimming lessons at Young Dolphins.' },
+
+  // Bento features extra
+  feature_abc_title: { nl: 'Zwemles A-B-C', en: 'Swimming Lessons A-B-C' },
+  feature_abc_desc: { nl: 'Complete begeleiding van eerste spetter tot officieel diploma.', en: 'Complete guidance from the first splash to the official diploma.' },
+  feature_groups_title: { nl: 'Kleine Groepen', en: 'Small Groups' },
+  feature_groups_desc: { nl: 'Maximale aandacht voor elk kind.', en: 'Maximum attention for every child.' },
+  feature_start_title: { nl: 'Direct Starten', en: 'Start Immediately' },
+  feature_start_desc: { nl: 'In Monnickendam starten we zonder wachttijden.', en: 'In Monnickendam, we start without waiting times.' },
+  feature_private_title: { nl: 'Privé lessen', en: 'Private Lessons' },
+  feature_private_desc: { nl: '1-op-1 coaching voor supersnelle progressie.', en: '1-on-1 coaching for super-fast progression.' },
+
+  // Footer extra
+  footer_follow: { nl: 'Volg ons op', en: 'Follow us on' },
+  footer_lessons: { nl: 'Lessen', en: 'Lessons' },
+  footer_nav: { nl: 'Navigatie', en: 'Navigation' },
+  footer_regio: { nl: 'Regio Amsterdam', en: 'Amsterdam Region' },
+  footer_contact: { nl: 'Contact', en: 'Contact' },
+  footer_phone_pool: { nl: 'Telefoon Pool', en: 'Pool Phone' },
+  footer_direct_contact: { nl: 'Direct contact', en: 'Direct contact' },
+  footer_privacy: { nl: 'Privacy', en: 'Privacy' },
+  footer_terms: { nl: 'Voorwaarden', en: 'Terms' },
+  footer_cookies: { nl: 'Cookies', en: 'Cookies' },
+  footer_whatsapp: { nl: 'WhatsApp ons', en: 'WhatsApp us' },
+  footer_email_us: { nl: 'Stuur een e-mail', en: 'Send an email' },
+  footer_built: { nl: 'Young Dolphins Zwemschool. Gebouwd voor snelheid.', en: 'Young Dolphins Swim School. Built for speed.' },
+  logo_subtitle: { nl: 'Amsterdam', en: 'Amsterdam' },
+
+  // Long descriptive texts
+  footer_desc: {
+    nl: 'Professionele zwemschool die bouwt aan plezier en veiligheid in het water. Direct starten zonder wachttijd in Monnickendam.',
+    en: 'Professional swimming school that builds on fun and safety in the water. Start immediately without a waiting list in Monnickendam.'
+  },
+  about_text_1: {
+    nl: 'Young Dolphins is ontstaan uit de passie voor zwemmen en de overtuiging dat kwalitatief zwemonderwijs toegankelijk moet zijn voor iedereen. We zagen een behoefte aan zwemlessen die verder gaan dan alleen de techniek.',
+    en: 'Young Dolphins was born from a passion for swimming and the conviction that quality swimming education should be accessible to everyone. We saw a need for swimming lessons that go beyond just technique.'
+  },
+  about_text_2: {
+    nl: 'In Monnickendam zijn we gestart met een team van enthousiaste en gecertificeerde instructeurs. Door onze persoonlijke aanpak en kleine lesgroepen kunnen we de aandacht geven die nodig is om snelle en veilige voortgang te garanderen.',
+    en: 'In Monnickendam, we started with a team of enthusiastic and certified instructors. Through our personal approach and small lesson groups, we can provide the attention needed to guarantee fast and safe progress.'
+  },
+  loc_intro: {
+    nl: 'We geven les in moderne, warme zwembaden. Onze belangrijkste locatie is momenteel Monnickendam, waar we direct kunnen starten zonder wachtlijst.',
+    en: 'We teach in modern, warm pools. Our main location is currently Monnickendam, where we can start immediately without a waiting list.'
+  }
 };
 
 interface LanguageContextType {

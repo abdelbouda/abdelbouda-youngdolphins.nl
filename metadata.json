@@ -1,6 +1,6 @@
 {
   "name": "Young Dolphins Zwemschool",
-  "description": "Zwemles direct zonder wachtlijst in Monnickendam. Young Dolphins biedt professionele zwemlessen voor kinderen en volwassenen in een warme en veilige omgeving in regio Amsterdam.",
+  "description": "Meertalige website voor Young Dolphins zwemschool. Focus op directe instroom zonder wachtlijst in Monnickendam. Professionele zwemlessen in een warme en veilige omgeving regio Amsterdam.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

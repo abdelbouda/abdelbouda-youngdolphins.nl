@@ -154,7 +154,7 @@ export default function Hero() {
               >
                 {card.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest leading-none z-10 whitespace-nowrap">
-                    Meest gekozen
+                    {t('hero_most_popular')}
                   </div>
                 )}
                 
@@ -163,10 +163,10 @@ export default function Hero() {
                   <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-primary">{card.title}</span>
                   <div className="flex items-baseline gap-0.5">
                     <span className="text-xl font-black tracking-tight">{card.price}</span>
-                    <span className="text-[10px] font-bold text-primary/80">{card.unit}</span>
+                    <span className="text-[10px] font-bold text-primary/80">{card.popular ? t('hero_per_month') : t('hero_per_lesson')}</span>
                   </div>
                   <div className={`mt-2 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-all ${card.popular ? 'bg-white text-primary' : 'bg-primary text-white'}`}>
-                    Inschrijven
+                    {t('hero_register_btn')}
                   </div>
                 </div>
 
@@ -177,7 +177,7 @@ export default function Hero() {
                     {card.desc}
                   </p>
                   <div className="mt-2 text-[10px] font-black underline underline-offset-2 text-primary">
-                    {window.matchMedia("(max-width: 640px)").matches ? 'Tik nogmaals' : 'Inschrijven →'}
+                    {window.matchMedia("(max-width: 640px)").matches ? t('hero_tap_again') : `${t('hero_register_btn')} →`}
                   </div>
                 </div>
               </motion.a>

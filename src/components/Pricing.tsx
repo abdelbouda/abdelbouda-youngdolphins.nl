@@ -56,8 +56,8 @@ export default function Pricing() {
     <section id="tarieven" className="py-24 bg-slate-50 overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-display font-black text-primary mb-6">Pakketten & Tarieven</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">Investeer in de veiligheid en het plezier van je kind in het water.</p>
+          <h2 className="text-4xl lg:text-5xl font-display font-black text-primary mb-6">{t('pricing_title')}</h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">{t('pricing_subtitle')}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
@@ -72,7 +72,7 @@ export default function Pricing() {
             >
               {plan.popular && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[12px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl whitespace-nowrap">
-                  Meest gekozen
+                   {t('hero_most_popular')}
                 </div>
               )}
 
@@ -80,7 +80,7 @@ export default function Pricing() {
                 <h3 className="text-2xl font-black mb-4 text-primary">{plan.name}</h3>
                 <div className="flex items-center justify-center gap-1 mb-4">
                   <span className="text-5xl font-black tracking-tight">{plan.price}</span>
-                  <span className="text-base font-bold opacity-70">{plan.name === 'Progress+' ? '/ maand' : '/ les'}</span>
+                  <span className="text-base font-bold opacity-70">{plan.name === 'Progress+' || plan.name === t('pricing_progress_title') ? t('hero_per_month') : t('hero_per_lesson')}</span>
                 </div>
                 <p className={`text-sm font-medium leading-relaxed min-h-[60px] ${plan.popular ? 'text-primary/90' : 'text-slate-500'}`}>
                   {plan.desc}

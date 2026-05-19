@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useLanguage } from '../lib/LanguageContext';
 
 interface LogoProps {
   className?: string;
@@ -7,6 +8,7 @@ interface LogoProps {
 }
 
 export default function Logo({ className = "", dark = false }: LogoProps) {
+  const { t } = useLanguage();
   return (
     <motion.div 
       whileHover="hover"
@@ -73,7 +75,7 @@ export default function Logo({ className = "", dark = false }: LogoProps) {
       
       {/* Amsterdam text below */}
       <span className={`text-[12px] font-black uppercase tracking-[0.5em] mt-2 ${dark ? 'text-white' : 'text-[#1B365D]'}`}>
-        Amsterdam
+        {t('logo_subtitle')}
       </span>
     </motion.div>
   );

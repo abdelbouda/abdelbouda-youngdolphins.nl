@@ -45,7 +45,7 @@ export default function InteractiveSignup() {
         body: JSON.stringify(formData),
       }).catch(err => {
         console.error('Fetch error:', err);
-        throw new Error(`Verbinding mislukt: ${err.message}`);
+        throw new Error(`${t('form_error_conn')}: ${err.message}`);
       });
 
       let data;
@@ -60,22 +60,22 @@ export default function InteractiveSignup() {
           }
         } catch (e: any) {
           console.error('JSON Parse error:', e);
-          throw new Error(`Ongeldig antwoord van server: ${e.message}`);
+          throw new Error(`${t('form_error_server')}: ${e.message}`);
         }
       } else {
         const text = await response.text();
         console.error('Non-JSON response:', text);
-        throw new Error(`Server fout (${response.status}): ${text.slice(0, 100)}...`);
+        throw new Error(`${t('form_error_server')} (${response.status}): ${text.slice(0, 100)}...`);
       }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Er is iets misgegaan bij het versturen van uw aanmelding.');
+        throw new Error(data.error || t('form_error_unknown'));
       }
 
       setSubmitted(true);
       setFormData({ name: '', phone: '', email: '', childInfo: '', package: 'Progress+' });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Een onbekende fout is opgetreden.');
+      setError(err instanceof Error ? err.message : t('form_error_unknown'));
     } finally {
       setIsLoading(false);
     }
@@ -104,7 +104,7 @@ export default function InteractiveSignup() {
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div className="lg:sticky lg:top-32">
             <h2 className="text-4xl lg:text-5xl font-display font-black mb-8 leading-[1.1] text-white">
-              Schrijf je <span className="text-secondary">direct in</span>
+              {t('contact_title')}
             </h2>
             <p className="text-xl text-slate-300 mb-16 max-w-md font-medium leading-relaxed">
               {t('contact_desc')}
@@ -115,14 +115,14 @@ export default function InteractiveSignup() {
                 <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">
                   <Phone size={24} />
                 </div>
-                <p className="text-sm font-black uppercase tracking-widest text-slate-500">Telefoon</p>
+                <p className="text-sm font-black uppercase tracking-widest text-slate-500">{t('form_phone_label')}</p>
                 <a href="tel:0628421354" className="text-lg font-bold hover:text-secondary transition-colors">06-28421354</a>
               </div>
               <div className="space-y-4">
                 <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">
                   <Mail size={24} />
                 </div>
-                <p className="text-sm font-black uppercase tracking-widest text-slate-500">Email</p>
+                <p className="text-sm font-black uppercase tracking-widest text-slate-500">{t('form_email_label')}</p>
                 <a href="mailto:info@youngdolphins.nl" className="text-lg font-bold hover:text-secondary transition-colors">info@youngdolphins.nl</a>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function InteractiveSignup() {
                 </div>
                 <div>
                    <p className="font-black text-secondary uppercase tracking-wider text-sm">Join the Dolphins</p>
-                   <p className="text-sm font-bold text-slate-400">1200+ diploma's uitgereikt</p>
+                   <p className="text-sm font-bold text-slate-400">{t('form_diplomas')}</p>
                 </div>
             </div>
           </div>
@@ -175,14 +175,14 @@ export default function InteractiveSignup() {
                   onClick={() => setSubmitted(false)}
                   className="px-8 py-4 bg-primary text-white rounded-2xl font-black shadow-premium hover:bg-secondary transition-all"
                 >
-                  Terug naar formulier
+                  {t('form_back')}
                 </button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                     <DolphinIcon className="w-5 h-5" color="#5AC1E6" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Direct aanmelden</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{t('form_direct_register')}</span>
                 </div>
                 
                 {error && (
@@ -201,7 +201,7 @@ export default function InteractiveSignup() {
                       value={formData.name}
                       onChange={handleInputChange}
                       type="text" 
-                      placeholder="Bijv. Mark de Vries"
+                      placeholder={t('form_placeholder_parent')}
                       className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                     />
                   </div>
@@ -214,7 +214,7 @@ export default function InteractiveSignup() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       type="tel" 
-                      placeholder="06 12345678"
+                      placeholder={t('form_placeholder_phone')}
                       className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                     />
                   </div>
@@ -230,7 +230,7 @@ export default function InteractiveSignup() {
                       value={formData.email}
                       onChange={handleInputChange}
                       type="email" 
-                      placeholder="naam@voorbeeld.nl"
+                      placeholder={t('form_placeholder_email')}
                       className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                     />
                   </div>
@@ -259,7 +259,7 @@ export default function InteractiveSignup() {
                     value={formData.childInfo}
                     onChange={handleInputChange}
                     type="text" 
-                    placeholder="Bijv. Liam (5 jaar)"
+                    placeholder={t('form_placeholder_child')}
                     className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
                   />
                 </div>
@@ -280,7 +280,7 @@ export default function InteractiveSignup() {
                 </button>
                 
                 <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                   Geen inschrijfkosten • Direct antwoord
+                   {t('form_footer')}
                 </p>
               </form>
             )}

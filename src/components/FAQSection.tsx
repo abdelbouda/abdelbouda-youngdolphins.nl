@@ -5,7 +5,7 @@ import { useLanguage } from '../lib/LanguageContext';
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   const faqs = [
     {
@@ -43,9 +43,11 @@ export default function FAQSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-display font-black text-primary mb-6">
-                Veelgestelde <span className="text-secondary">vragen</span>
+                {t('faq_title').split(' ').map((word, i) => (
+                  word === 'vragen' || word === 'questions' ? <span key={i} className="text-secondary ml-1">{word}</span> : (i === 0 ? word : ` ${word}`)
+                ))}
             </h2>
-            <p className="text-lg text-slate-500 font-medium italic">Alles wat je moet weten over zwemles bij Young Dolphins.</p>
+            <p className="text-lg text-slate-500 font-medium italic">{t('faq_subtitle')}</p>
         </div>
 
         <div className="space-y-4">

@@ -4,7 +4,7 @@ import { useLanguage } from '../lib/LanguageContext';
 import Logo from './Logo';
 
 export default function Footer() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -16,9 +16,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Logo className="w-32 mb-8 !items-start" dark />
             <p className="text-slate-400 mb-10 max-w-sm leading-relaxed font-medium">
-              {language === 'nl' 
-                ? "Professionele zwemschool die bouwt aan plezier en veiligheid in het water. Direct starten zonder wachttijd in Monnickendam."
-                : "Professional swimming school that builds on fun and safety in the water. Start immediately without a waiting list in Monnickendam."}
+              {t('footer_desc')}
             </p>
             <div className="flex gap-4">
               {[
@@ -31,7 +29,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white hover:bg-secondary transition-all shadow-sm border border-white/10"
-                  aria-label={`Volg ons op ${item.label}`}
+                  aria-label={`${t('footer_follow')} ${item.label}`}
                 >
                   <item.Icon size={24} aria-hidden="true" />
                 </a>
@@ -40,12 +38,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">Lessen</h4>
+            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">{t('footer_lessons')}</h4>
             <ul className="space-y-5">
-              {['A-B-C Diploma', 'Privé / Duo', 'Monnickendam Specials'].map((item) => (
-                <li key={item}>
+              {[
+                { nl: 'A-B-C Diploma', en: 'A-B-C Diploma' }, 
+                { nl: 'Privé / Duo', en: 'Private / Duo' }, 
+                { nl: 'Monnickendam Specials', en: 'Monnickendam Specials' }
+              ].map((item) => (
+                <li key={item[language]}>
                   <a href="#lessen" className="text-slate-300 hover:text-secondary transition-colors font-bold flex items-center gap-2 group">
-                    {item}
+                    {item[language]}
                     <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>
@@ -54,12 +56,17 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">Navigatie</h4>
+            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">{t('footer_nav')}</h4>
             <ul className="space-y-5">
-              {['Home', 'Locaties', 'Over ons', 'Tarieven'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-300 hover:text-secondary transition-colors font-bold">
-                    {item}
+              {[
+                { key: 'nav_home', href: 'home' },
+                { key: 'nav_locations', href: 'locaties' },
+                { key: 'nav_about', href: 'over-ons' },
+                { key: 'nav_pricing', href: 'tarieven' }
+              ].map((item) => (
+                <li key={item.key}>
+                  <a href={`#${item.href}`} className="text-slate-300 hover:text-secondary transition-colors font-bold">
+                    {t(item.key)}
                   </a>
                 </li>
               ))}
@@ -67,29 +74,31 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50 text-center lg:text-left">Regio Amsterdam</h4>
+            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50 text-center lg:text-left">{t('footer_regio')}</h4>
             <div className="flex flex-wrap lg:flex-col gap-x-4 gap-y-3 justify-center lg:justify-start">
-              {['Amsterdam Noord', 'Amsterdam Oost', 'Amsterdam Zuid', 'Amsterdam West', 'Amsterdam Centrum', 'Zuidoost'].map((area) => (
+              {[
+                'area_noord', 'area_oost', 'area_zuid', 'area_west', 'area_centrum', 'area_zuidoost'
+              ].map((key) => (
                 <a 
-                  key={area} 
+                  key={key} 
                   href="#signup-form" 
                   className="text-slate-300 hover:text-secondary transition-colors font-bold text-xs uppercase tracking-widest whitespace-nowrap"
                 >
-                  {area}
+                  {t(key)}
                 </a>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">Contact</h4>
+            <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">{t('footer_contact')}</h4>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
                 <div className="mt-1 flex-shrink-0 w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-secondary">
                     <Phone size={20} />
                 </div>
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Telefoon Pool</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{t('footer_phone_pool')}</p>
                     <a href="tel:0628421354" className="text-lg font-black">06-28421354</a>
                 </div>
               </li>
@@ -98,7 +107,7 @@ export default function Footer() {
                     <Mail size={20} />
                 </div>
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Direct contact</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{t('footer_direct_contact')}</p>
                     <a href="mailto:info@youngdolphins.nl" className="text-lg font-black">info@youngdolphins.nl</a>
                 </div>
               </li>
@@ -108,12 +117,12 @@ export default function Footer() {
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-xs font-black text-slate-500 uppercase tracking-[0.2em]">
-            © {currentYear} Young Dolphins Zwemschool. Built for speed.
+            © {currentYear} {t('footer_built')}
           </p>
           <div className="flex gap-10 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Voorwaarden</a>
-            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer_privacy')}</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer_terms')}</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer_cookies')}</a>
           </div>
         </div>
       </div>

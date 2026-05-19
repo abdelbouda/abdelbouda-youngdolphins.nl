@@ -58,7 +58,7 @@ export default function Navbar() {
             <button 
               onClick={() => setLanguage(language === 'nl' ? 'en' : 'nl')}
               className="flex items-center gap-2 text-xs font-bold text-primary/60 hover:text-secondary uppercase tracking-widest transition-all"
-              aria-label={language === 'nl' ? 'Switch to English' : 'Wissel naar Nederlands'}
+              aria-label={language === 'nl' ? t('en') : t('nl')}
             >
               <Globe size={14} aria-hidden="true" />
               {language === 'nl' ? 'English' : 'Nederlands'}
@@ -84,7 +84,7 @@ export default function Navbar() {
             <button 
               onClick={() => setIsOpen(!isOpen)} 
               className="p-2 text-primary"
-              aria-label={isOpen ? 'Sluit menu' : 'Open menu'}
+              aria-label={isOpen ? (language === 'nl' ? 'Sluit menu' : 'Close menu') : (language === 'nl' ? 'Open menu' : 'Open menu')}
             >
               {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
