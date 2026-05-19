@@ -95,11 +95,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-xs sm:text-sm font-black uppercase tracking-widest mb-4 shadow-sm border border-secondary/20"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-white text-xs sm:text-sm font-black uppercase tracking-widest mb-4 shadow-md border border-secondary/20"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
             {t('hero_badge')}
           </motion.div>
@@ -160,23 +160,23 @@ export default function Hero() {
                 
                 {/* Default content - hidden when active (hover/tap) */}
                 <div className={`flex flex-col items-center transition-all duration-300 ${activeCard === i ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
-                  <span className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-70">{card.title}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-primary">{card.title}</span>
                   <div className="flex items-baseline gap-0.5">
                     <span className="text-xl font-black tracking-tight">{card.price}</span>
-                    <span className="text-[10px] font-bold opacity-60">{card.unit}</span>
+                    <span className="text-[10px] font-bold text-primary/80">{card.unit}</span>
                   </div>
-                  <div className={`mt-2 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-all ${card.popular ? 'bg-white text-secondary' : 'bg-secondary text-white'}`}>
+                  <div className={`mt-2 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-all ${card.popular ? 'bg-white text-primary' : 'bg-primary text-white'}`}>
                     Inschrijven
                   </div>
                 </div>
 
                 {/* Info content - visible when active (hover/tap) */}
                 <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${activeCard === i ? 'opacity-100 translate-y-0 z-20' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-                  <span className="text-[9px] font-black uppercase tracking-widest mb-1 opacity-50">{card.title}</span>
-                  <p className="text-[10px] leading-tight font-bold px-1 text-inherit">
+                  <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-primary/80">{card.title}</span>
+                  <p className="text-[11px] leading-tight font-bold px-1 text-primary">
                     {card.desc}
                   </p>
-                  <div className="mt-2 text-[10px] font-black underline underline-offset-2">
+                  <div className="mt-2 text-[10px] font-black underline underline-offset-2 text-primary">
                     {window.matchMedia("(max-width: 640px)").matches ? 'Tik nogmaals' : 'Inschrijven →'}
                   </div>
                 </div>

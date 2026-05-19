@@ -39,7 +39,7 @@ export default function StickyCTA() {
         >
           <div className="glass-card rounded-[2rem] p-3 sm:p-4 flex items-center justify-between gap-4 border-white/40">
             <div className="hidden sm:block ml-4">
-              <p className="text-[10px] font-black text-primary/40 uppercase tracking-widest mb-0.5">Young Dolphins</p>
+              <p className="text-[10px] font-black text-primary/60 uppercase tracking-widest mb-0.5">Young Dolphins</p>
               <p className="text-sm font-bold text-primary truncate">{t('sticky_bar_text')}</p>
             </div>
             <a

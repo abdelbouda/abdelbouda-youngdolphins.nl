@@ -11,6 +11,35 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Canonical Redirects Middleware (WWW -> Non-WWW, Trailing Slash Removal, Force HTTPS)
+app.use((req, res, next) => {
+  const host = req.headers.host || "";
+  const url = req.url;
+  
+  // 1. Force HTTPS in production
+  if (process.env.NODE_ENV === "production" && req.headers["x-forwarded-proto"] !== "https") {
+    return res.redirect(301, `https://${host}${url}`);
+  }
+
+  // 2. Redirect WWW to Non-WWW
+  if (host.startsWith("www.")) {
+    const newHost = host.replace("www.", "");
+    return res.redirect(301, `https://${newHost}${url}`);
+  }
+
+  // 3. Remove Trailing Slash (except for root)
+  if (url.length > 1 && url.endsWith("/") && !url.includes("?")) {
+    return res.redirect(301, url.slice(0, -1));
+  }
+
+  // 3. Optional: Redirect index.html to /
+  if (url === "/index.html") {
+    return res.redirect(301, "/");
+  }
+
+  next();
+});
+
 // Log all requests to help debugging
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
@@ -20,12 +49,13 @@ app.use((req, res, next) => {
 // Sitemap route for SEO
 app.get("/sitemap.xml", (req, res) => {
   res.header("Content-Type", "application/xml");
+  res.header("X-Robots-Tag", "noindex"); // Don't index the sitemap itself
   res.send(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://youngdolphins.nl/</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 </urlset>`);
@@ -36,6 +66,7 @@ app.get("/robots.txt", (req, res) => {
   res.header("Content-Type", "text/plain");
   res.send(`User-agent: *
 Allow: /
+Disallow: /api/
 
 Sitemap: https://youngdolphins.nl/sitemap.xml`);
 });
@@ -158,6 +189,7 @@ async function startServer() {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
+      res.setHeader("Link", `<https://youngdolphins.nl${req.path === "/" ? "/" : ""}>; rel="canonical"`);
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

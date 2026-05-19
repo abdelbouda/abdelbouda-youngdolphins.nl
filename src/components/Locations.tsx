@@ -150,7 +150,7 @@ export default function Locations() {
               
               <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 p-6 sm:p-8 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20">
                   <p className="text-secondary font-black text-lg sm:text-xl mb-1">Sportfondsen Monnickendam</p>
-                  <p className="text-primary/50 text-[10px] font-black uppercase tracking-widest">Hoofdlocatie</p>
+                  <p className="text-primary/70 text-[10px] font-black uppercase tracking-widest leading-none">Hoofdlocatie</p>
               </div>
             </div>
           </div>
