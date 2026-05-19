@@ -46,11 +46,12 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative pt-8 pb-4 lg:pt-16 lg:pb-8 overflow-hidden scroll-mt-24 bg-aquatic">
+    <section id="hero" className="relative pt-6 pb-2 lg:pt-8 lg:pb-4 overflow-hidden scroll-mt-24 bg-aquatic">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         {[...Array(6)].map((_, i) => (
           <motion.div
+            id={`bubble-${i}`}
             key={i}
             className="absolute rounded-full bg-secondary/10"
             initial={{ 
@@ -88,12 +89,13 @@ export default function Hero() {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-4xl mx-auto py-4 lg:py-4">
+        <div className="text-center max-w-4xl mx-auto py-2 lg:py-4">
           <motion.div
+            id="hero-badge"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-xs sm:text-sm font-black uppercase tracking-widest mb-6 shadow-sm border border-secondary/20"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-xs sm:text-sm font-black uppercase tracking-widest mb-4 shadow-sm border border-secondary/20"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
@@ -103,10 +105,11 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1
+            id="hero-title"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-display font-black text-primary leading-[1.05] mb-4 drop-shadow-sm"
+            className="text-3xl sm:text-5xl lg:text-6xl font-display font-black text-primary leading-[1.1] mb-2 drop-shadow-sm"
           >
             {t('hero_title').split(':').map((part, i) => (
               <span key={i} className={i === 1 ? 'block text-secondary' : ''}>
@@ -116,18 +119,20 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
+            id="hero-subtitle"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed font-medium"
+            className="text-lg sm:text-xl text-slate-600 mb-4 max-w-2xl mx-auto leading-relaxed font-medium"
           >
             {t('hero_subtitle')}
           </motion.p>
 
           {/* Small Pricing Cards as CTA */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+          <div id="hero-pricing-grid" className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 max-w-3xl mx-auto">
             {pricingCards.map((card, i) => (
               <motion.a 
+                id={`hero-card-${i}`}
                 key={i}
                 href="#signup-form"
                 onClick={(e) => handleCardClick(e, i)}
@@ -143,7 +148,7 @@ export default function Hero() {
                   opacity: { duration: 0.5, delay: 0.25 + (i * 0.1) },
                   scale: { duration: 0.2 }
                 }}
-                className={`${card.color} ${card.text} p-4 sm:p-6 rounded-2xl shadow-premium border border-slate-100 transition-all flex flex-col items-center group relative cursor-pointer overflow-hidden min-h-[140px]`}
+                className={`${card.color} ${card.text} p-4 rounded-xl shadow-premium border border-slate-100 transition-all flex flex-col items-center group relative cursor-pointer overflow-hidden min-h-[120px]`}
                 onMouseEnter={() => setActiveCard(i)}
                 onMouseLeave={() => setActiveCard(null)}
               >
@@ -160,19 +165,19 @@ export default function Hero() {
                     <span className="text-xl font-black tracking-tight">{card.price}</span>
                     <span className="text-[10px] font-bold opacity-60">{card.unit}</span>
                   </div>
-                  <div className={`mt-3 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-all ${card.popular ? 'bg-white text-secondary' : 'bg-secondary text-white'}`}>
+                  <div className={`mt-2 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-all ${card.popular ? 'bg-white text-secondary' : 'bg-secondary text-white'}`}>
                     Inschrijven
                   </div>
                 </div>
 
                 {/* Info content - visible when active (hover/tap) */}
                 <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${activeCard === i ? 'opacity-100 translate-y-0 z-20' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-                  <span className="text-[9px] font-black uppercase tracking-widest mb-2 opacity-50">{card.title}</span>
-                  <p className="text-[10px] sm:text-[11px] leading-tight font-bold px-1 text-inherit">
+                  <span className="text-[9px] font-black uppercase tracking-widest mb-1 opacity-50">{card.title}</span>
+                  <p className="text-[10px] leading-tight font-bold px-1 text-inherit">
                     {card.desc}
                   </p>
                   <div className="mt-2 text-[10px] font-black underline underline-offset-2">
-                    {window.matchMedia("(max-width: 640px)").matches ? 'Tik nogmaals voor aanmelden →' : 'Direct aanmelden →'}
+                    {window.matchMedia("(max-width: 640px)").matches ? 'Tik nogmaals' : 'Inschrijven →'}
                   </div>
                 </div>
               </motion.a>
@@ -180,14 +185,16 @@ export default function Hero() {
           </div>
 
           <motion.div
+            id="hero-ctas"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
             <a
+              id="hero-cta-main"
               href="#signup-form"
-              className="group relative w-full sm:w-auto px-10 py-5 bg-primary text-white rounded-[2rem] font-black text-lg transition-all shadow-premium gradient-shine flex items-center justify-center gap-3 overflow-hidden"
+              className="group relative w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-[2rem] font-black text-lg transition-all shadow-premium gradient-shine flex items-center justify-center gap-3 overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <span className="relative z-10">{t('cta_register')}</span>
@@ -195,15 +202,17 @@ export default function Hero() {
             </a>
             
             <a
+              id="hero-cta-phone"
               href="tel:0628421354"
-              className="w-full sm:w-auto flex items-center justify-center gap-3 text-primary font-black text-lg transition-colors px-10 py-5"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 text-primary font-black text-lg transition-colors px-10 py-4"
             >
-              <div className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center transition-colors">
-                <Phone size={20} className="fill-primary text-primary transition-colors" />
+              <div className="w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center transition-colors">
+                <Phone size={18} className="fill-primary text-primary transition-colors" />
               </div>
               {t('cta_contact')}
             </a>
           </motion.div>
+
         </div>
       </div>
     </section>

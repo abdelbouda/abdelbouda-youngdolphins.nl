@@ -148,9 +148,9 @@ export default function Locations() {
             <div className="aspect-[4/5] bg-primary rounded-[4rem] relative overflow-hidden shadow-[0_50px_100px_rgba(0,31,63,0.2)] pricing-card-3d">
               <MapDisplay inView={inView} />
               
-              <div className="absolute bottom-10 left-10 right-10 p-8 glass-morphism rounded-3xl">
-                  <p className="text-white font-black text-xl mb-1">Sportfondsen Monnickendam</p>
-                  <p className="text-white/70 text-xs font-black uppercase tracking-widest">Hoofdlocatie</p>
+              <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 p-6 sm:p-8 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20">
+                  <p className="text-secondary font-black text-lg sm:text-xl mb-1">Sportfondsen Monnickendam</p>
+                  <p className="text-primary/50 text-[10px] font-black uppercase tracking-widest">Hoofdlocatie</p>
               </div>
             </div>
           </div>
