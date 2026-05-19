@@ -11,6 +11,12 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Log all requests to help debugging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
 // Sitemap route for SEO
 app.get("/sitemap.xml", (req, res) => {
   res.header("Content-Type", "application/xml");
@@ -35,6 +41,10 @@ Sitemap: https://youngdolphins.nl/sitemap.xml`);
 });
 
 // API route for signup
+app.get("/api/signup", (req, res) => {
+  res.json({ message: "Signup API is active. Use POST to submit data." });
+});
+
 app.post("/api/signup", async (req, res) => {
   const { name, phone, email, childInfo, package: selectedPackage } = req.body;
 
@@ -132,6 +142,11 @@ Deze gegevens zijn verstuurd naar info@youngdolphins.nl en een kopie is gestuurd
   }
 });
 
+// JSON fallback for unmatched API routes
+app.all("/api/*", (req, res) => {
+  res.status(404).json({ error: `API route ${req.method} ${req.url} not found` });
+});
+
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -151,5 +166,11 @@ async function startServer() {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }
+
+// Global error handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error("Global Express Error:", err);
+  res.status(500).json({ error: "Server Error", details: err.message });
+});
 
 startServer();

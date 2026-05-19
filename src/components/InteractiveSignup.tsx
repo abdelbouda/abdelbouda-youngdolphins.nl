@@ -35,15 +35,38 @@ export default function InteractiveSignup() {
     setError(null);
 
     try {
+      console.log('Sending signup data:', formData);
       const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+      }).catch(err => {
+        console.error('Fetch error:', err);
+        throw new Error(`Verbinding mislukt: ${err.message}`);
       });
 
-      const data = await response.json();
+      let data;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          const text = await response.text();
+          if (!text) {
+            data = { error: 'Empty JSON response' };
+          } else {
+            data = JSON.parse(text);
+          }
+        } catch (e: any) {
+          console.error('JSON Parse error:', e);
+          throw new Error(`Ongeldig antwoord van server: ${e.message}`);
+        }
+      } else {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error(`Server fout (${response.status}): ${text.slice(0, 100)}...`);
+      }
 
       if (!response.ok) {
         throw new Error(data.error || 'Er is iets misgegaan bij het versturen van uw aanmelding.');
