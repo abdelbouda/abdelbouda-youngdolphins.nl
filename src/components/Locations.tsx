@@ -116,13 +116,13 @@ export default function Locations() {
                 >
                   <div className="flex items-start gap-6 relative z-10">
                     <div className={`p-4 rounded-2xl shadow-lg transition-transform duration-500 ${loc.isActive ? 'bg-secondary text-white' : 'bg-slate-100 text-slate-400'}`}>
-                      <MapPin size={28} />
+                      <MapPin size={28} aria-hidden="true" />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-2xl font-black text-primary mb-1">{t(loc.city)}</h3>
                       <p className="font-extrabold text-secondary text-lg mb-2">{loc.pool}</p>
                       <p className="text-slate-500 text-sm mb-4 font-bold flex items-center gap-2">
-                        <MapIcon size={16} /> {t(loc.address)}
+                        <MapIcon size={16} aria-hidden="true" /> {t(loc.address)}
                       </p>
                       <div className="flex items-center justify-between">
                         {loc.isActive && (

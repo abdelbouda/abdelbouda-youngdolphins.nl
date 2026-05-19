@@ -48,7 +48,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative pt-32 pb-2 lg:pt-40 lg:pb-4 overflow-hidden scroll-mt-24 bg-aquatic">
       {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
         {[...Array(6)].map((_, i) => (
           <motion.div
             id={`bubble-${i}`}
@@ -97,7 +97,7 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-white text-xs sm:text-sm font-black uppercase tracking-widest mb-4 shadow-md border border-secondary/20"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
@@ -205,9 +205,10 @@ export default function Hero() {
               id="hero-cta-phone"
               href="tel:0628421354"
               className="w-full sm:w-auto flex items-center justify-center gap-3 text-primary font-black text-lg transition-colors px-10 py-4"
+              aria-label="Bel ons op 06-28421354"
             >
               <div className="w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center transition-colors">
-                <Phone size={18} className="fill-primary text-primary transition-colors" />
+                <Phone size={18} className="fill-primary text-primary transition-colors" aria-hidden="true" />
               </div>
               {t('cta_contact')}
             </a>

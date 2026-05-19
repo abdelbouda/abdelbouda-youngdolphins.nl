@@ -19,6 +19,8 @@ export default function Logo({ className = "", dark = false }: LogoProps) {
         className="w-full h-auto drop-shadow-sm" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Young Dolphins Zwemschool Logo"
       >
         {/* Main Oval Background - slightly tilted and dynamic */}
         <motion.ellipse 

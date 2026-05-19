@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           <div className="lg:col-span-1">
             <Logo className="w-32 mb-8 !items-start" dark />
-            <p className="text-slate-400 mb-10 max-w-sm leading-relaxed font-medium">
+            <p className="text-slate-200 mb-10 max-w-sm leading-relaxed font-medium">
               {t('footer_desc')}
             </p>
             <div className="flex gap-4">
@@ -98,8 +98,8 @@ export default function Footer() {
                     <Phone size={20} />
                 </div>
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{t('footer_phone_pool')}</p>
-                    <a href="tel:0628421354" className="text-lg font-black">06-28421354</a>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-1">{t('footer_phone_pool')}</p>
+                    <a href="tel:0628421354" className="text-lg font-black text-white hover:text-secondary transition-colors">06-28421354</a>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -107,8 +107,8 @@ export default function Footer() {
                     <Mail size={20} />
                 </div>
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{t('footer_direct_contact')}</p>
-                    <a href="mailto:info@youngdolphins.nl" className="text-lg font-black">info@youngdolphins.nl</a>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-300 mb-1">{t('footer_direct_contact')}</p>
+                    <a href="mailto:info@youngdolphins.nl" className="text-lg font-black text-white hover:text-secondary transition-colors">info@youngdolphins.nl</a>
                 </div>
               </li>
             </ul>
@@ -116,10 +116,10 @@ export default function Footer() {
         </div>
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-xs font-black text-slate-500 uppercase tracking-[0.2em]">
+          <p className="text-xs font-black text-slate-300 uppercase tracking-[0.2em]">
             © {currentYear} {t('footer_built')}
           </p>
-          <div className="flex gap-10 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
+          <div className="flex gap-10 text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">
             <a href="#" className="hover:text-white transition-colors">{t('footer_privacy')}</a>
             <a href="#" className="hover:text-white transition-colors">{t('footer_terms')}</a>
             <a href="#" className="hover:text-white transition-colors">{t('footer_cookies')}</a>
