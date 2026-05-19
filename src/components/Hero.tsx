@@ -1,9 +1,49 @@
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
 import { Phone, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   const { t } = useLanguage();
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
+  const pricingCards = [
+    { 
+      title: t('pricing_starter_title'), 
+      price: '€25', 
+      unit: '/ les', 
+      color: 'bg-white', 
+      text: 'text-primary',
+      desc: t('pricing_starter_desc')
+    },
+    { 
+      title: t('pricing_progress_title'), 
+      price: '€170', 
+      unit: '/ maand', 
+      color: 'bg-secondary', 
+      text: 'text-white', 
+      popular: true,
+      desc: t('pricing_progress_desc')
+    },
+    { 
+      title: t('pricing_private_title'), 
+      price: '€50', 
+      unit: '/ les', 
+      color: 'bg-white', 
+      text: 'text-primary',
+      desc: t('pricing_private_desc')
+    }
+  ];
+
+  const handleCardClick = (e: React.MouseEvent, index: number) => {
+    // If it's a touch device and the card isn't active yet, just show info
+    if (window.matchMedia("(max-width: 640px)").matches) {
+      if (activeCard !== index) {
+        e.preventDefault();
+        setActiveCard(index);
+      }
+    }
+  };
 
   return (
     <section id="hero" className="relative pt-8 pb-4 lg:pt-16 lg:pb-8 overflow-hidden scroll-mt-24">
@@ -48,49 +88,27 @@ export default function Hero() {
           </motion.p>
 
           {/* Small Pricing Cards as CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto"
-          >
-            {[
-              { 
-                title: t('pricing_starter_title'), 
-                price: '€25', 
-                unit: '/ les', 
-                color: 'bg-white', 
-                text: 'text-primary',
-                desc: t('pricing_starter_desc')
-              },
-              { 
-                title: t('pricing_progress_title'), 
-                price: '€170', 
-                unit: '/ maand', 
-                color: 'bg-secondary', 
-                text: 'text-white', 
-                popular: true,
-                desc: t('pricing_progress_desc')
-              },
-              { 
-                title: t('pricing_private_title'), 
-                price: '€50', 
-                unit: '/ les', 
-                color: 'bg-white', 
-                text: 'text-primary',
-                desc: t('pricing_private_desc')
-              }
-            ].map((card, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+            {pricingCards.map((card, i) => (
               <motion.a 
                 key={i}
                 href="#signup-form"
-                animate={{ y: [0, -5, 0] }}
+                onClick={(e) => handleCardClick(e, i)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: [0, -5, 0],
+                }}
                 whileHover={{ y: -10, scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ 
                   y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+                  opacity: { duration: 0.5, delay: 0.25 + (i * 0.1) },
                   scale: { duration: 0.2 }
                 }}
                 className={`${card.color} ${card.text} p-4 sm:p-6 rounded-2xl shadow-premium border border-slate-100 transition-all flex flex-col items-center group relative cursor-pointer overflow-hidden min-h-[140px]`}
+                onMouseEnter={() => setActiveCard(i)}
+                onMouseLeave={() => setActiveCard(null)}
               >
                 {card.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest leading-none z-10 whitespace-nowrap">
@@ -98,8 +116,8 @@ export default function Hero() {
                   </div>
                 )}
                 
-                {/* Default content */}
-                <div className="flex flex-col items-center transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-4">
+                {/* Default content - hidden when active (hover/tap) */}
+                <div className={`flex flex-col items-center transition-all duration-300 ${activeCard === i ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
                   <span className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-70">{card.title}</span>
                   <div className="flex items-baseline gap-0.5">
                     <span className="text-xl font-black tracking-tight">{card.price}</span>
@@ -110,19 +128,19 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Hover content (hidden by default) */}
-                <div className="absolute inset-0 p-4 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0 bg-inherit z-20">
+                {/* Info content - visible when active (hover/tap) */}
+                <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${activeCard === i ? 'opacity-100 translate-y-0 z-20' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
                   <span className="text-[9px] font-black uppercase tracking-widest mb-2 opacity-50">{card.title}</span>
-                  <p className="text-[10px] sm:text-[11px] leading-tight font-bold px-1">
+                  <p className="text-[10px] sm:text-[11px] leading-tight font-bold px-1 text-inherit">
                     {card.desc}
                   </p>
                   <div className="mt-2 text-[10px] font-black underline underline-offset-2">
-                    Direct aanmelden →
+                    {window.matchMedia("(max-width: 640px)").matches ? 'Tik nogmaals voor aanmelden →' : 'Direct aanmelden →'}
                   </div>
                 </div>
               </motion.a>
             ))}
-          </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
