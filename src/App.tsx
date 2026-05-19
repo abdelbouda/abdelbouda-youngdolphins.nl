@@ -1,17 +1,20 @@
+import React, { Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import BentoFeatures from './components/BentoFeatures';
-import Locations from './components/Locations';
 import USPSection from './components/USPSection';
-import About from './components/About';
-import FAQSection from './components/FAQSection';
-import InteractiveSignup from './components/InteractiveSignup';
-import Footer from './components/Footer';
-import Pricing from './components/Pricing';
 import SEO from './components/SEO';
-import ServiceAreas from './components/ServiceAreas';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
+
+// Lazy load non-critical components
+const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
+const Locations = lazy(() => import('./components/Locations'));
+const About = lazy(() => import('./components/About'));
+const FAQSection = lazy(() => import('./components/FAQSection'));
+const InteractiveSignup = lazy(() => import('./components/InteractiveSignup'));
+const Footer = lazy(() => import('./components/Footer'));
+const Pricing = lazy(() => import('./components/Pricing'));
+const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
 
 function AppContent() {
   const { language } = useLanguage();
@@ -33,16 +36,22 @@ function AppContent() {
       <main>
         <Hero />
         <USPSection />
-        <BentoFeatures />
-        <ServiceAreas />
-        <Pricing />
-        <About />
-        <Locations />
-        <FAQSection />
-        <InteractiveSignup />
+        
+        <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div></div>}>
+          <BentoFeatures />
+          <ServiceAreas />
+          <Pricing />
+          <About />
+          <Locations />
+          <FAQSection />
+          <InteractiveSignup />
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+      
       <StickyCTA />
       <WhatsAppWidget />
     </div>

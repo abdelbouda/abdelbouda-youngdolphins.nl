@@ -12,14 +12,23 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://youngdolphins.nl/" />
     
-    <!-- PageSpeed Optimizations: Preconnect to external origins -->
+    <!-- PageSpeed Optimizations -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://maps.googleapis.com">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://maps.googleapis.com" />
     <link rel="preconnect" href="https://maps.gstatic.com" />
     
-    <!-- Preload critical fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <style>
+      /* Critical CSS to prevent layout shift and show important colors early */
+      body { background-color: #ffffff; color: #1B365D; }
+      #root { min-height: 100vh; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

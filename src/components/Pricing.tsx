@@ -11,10 +11,11 @@ export default function Pricing() {
       price: t('pricing_starter_price'),
       desc: t('pricing_starter_desc'),
       features: [
-        { nl: '1 les per week (45 min)', en: '1 lesson per week (45 min)' },
-        { nl: 'Groep van max. 8 kinderen', en: 'Group of max. 8 children' },
-        { nl: 'Focus op watervrij maken', en: 'Focus on water confidence' },
-        { nl: 'Maandelijkse voortgang', en: 'Monthly progress check' }
+        { nl: '1 les van 45 min per week', en: '1 lesson of 45 min per week' },
+        { nl: 'Kleine groep (max. 8 kinderen)', en: 'Small group (max. 8 children)' },
+        { nl: 'Gevestigde methode (A/B/C)', en: 'Established method (A/B/C)' },
+        { nl: 'Directe start mogelijk', en: 'Immediate start possible' },
+        { nl: 'Reguliere vorderingscontrole', en: 'Regular progress check' }
       ],
       cta: t('cta_register'),
       popular: false
@@ -25,10 +26,10 @@ export default function Pricing() {
       desc: t('pricing_progress_desc'),
       features: [
         { nl: '2 lessen per week (90 min totaal)', en: '2 lessons per week (90 min total)' },
-        { nl: 'Snelweg naar A/B/C diploma', en: 'Fast track to A/B/C diploma' },
-        { nl: 'Kleine groepen (max 6)', en: 'Small groups (max 6)' },
-        { nl: 'Wekelijkse persoonlijke feedback', en: 'Weekly personal feedback' },
-        { nl: 'Inhaalopties bij afwezigheid', en: 'Make-up options for absence' }
+        { nl: 'Versneld diplomagarantie plan', en: 'Accelerated diploma guarantee plan' },
+        { nl: 'Zeer kleine groepen (max 5-6)', en: 'Very small groups (max 5-6)' },
+        { nl: 'Wekelijkse persoonlijke app-update', en: 'Weekly personal app update' },
+        { nl: 'Gratis inhaallessen bij ziekte', en: 'Free make-up lessons when sick' }
       ],
       cta: t('cta_register'),
       popular: true
@@ -38,11 +39,11 @@ export default function Pricing() {
       price: t('pricing_private_price'),
       desc: t('pricing_private_desc'),
       features: [
-        { nl: '1-op-1 aandacht van expert', en: '1-on-1 expert attention' },
-        { nl: 'Maatwerk voor elk kind', en: 'Tailored for each child' },
-        { nl: 'Ideaal bij watervrees/angst', en: 'Ideal for water fear/anxiety' },
-        { nl: 'Bepaal je eigen lestijden', en: 'Choose your own lesson times' },
-        { nl: 'Maximale progressie per les', en: 'Maximum progress per lesson' }
+        { nl: '1-op-1 privé-begeleiding', en: '1-on-1 private guidance' },
+        { nl: 'Volledig aangepast tempo', en: 'Fully adjusted pace' },
+        { nl: 'Zelf lestijden inplannen', en: 'Schedule your own lesson times' },
+        { nl: 'Gecertificeerde top-instructeur', en: 'Certified top-instructor' },
+        { nl: 'Gespecialiseerd in watervrees', en: 'Specialized in water fear' }
       ],
       cta: t('cta_register'),
       popular: false
@@ -54,12 +55,12 @@ export default function Pricing() {
   return (
     <section id="tarieven" className="py-24 bg-slate-50 overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-display font-black text-primary mb-6">Pakketten & Tarieven</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">Kies het traject dat het beste bij de behoeften van jouw kind past.</p>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">Investeer in de veiligheid en het plezier van je kind in het water.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -67,32 +68,32 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`pricing-card-3d relative rounded-[2.5rem] p-6 lg:p-8 flex flex-col ${plan.popular ? 'bg-secondary text-primary shadow-3xl scale-102 z-10' : 'bg-white text-primary shadow-premium'}`}
+              className={`pricing-card-3d relative rounded-[3rem] p-8 lg:p-10 flex flex-col transition-all duration-300 ${plan.popular ? 'bg-secondary text-primary shadow-2xl scale-105 z-10' : 'bg-white text-primary shadow-premium hover:shadow-2xl hover:-translate-y-1'}`}
             >
               {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-xl">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[12px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl whitespace-nowrap">
                   Meest gekozen
                 </div>
               )}
 
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-black mb-3 text-primary">{plan.name}</h3>
-                <div className="flex items-center justify-center gap-1 mb-2">
-                  <span className="text-4xl font-black">{plan.price}</span>
-                  <span className="text-sm font-bold opacity-70">{plan.name === 'Progress+' ? '/ maand' : '/ les'}</span>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-black mb-4 text-primary">{plan.name}</h3>
+                <div className="flex items-center justify-center gap-1 mb-4">
+                  <span className="text-5xl font-black tracking-tight">{plan.price}</span>
+                  <span className="text-base font-bold opacity-70">{plan.name === 'Progress+' ? '/ maand' : '/ les'}</span>
                 </div>
-                <p className={`text-xs font-medium leading-relaxed px-2 ${plan.popular ? 'text-primary/80' : 'text-slate-500'}`}>
+                <p className={`text-sm font-medium leading-relaxed min-h-[60px] ${plan.popular ? 'text-primary/90' : 'text-slate-500'}`}>
                   {plan.desc}
                 </p>
               </div>
 
-              <div className="space-y-3 mb-8 flex-grow">
+              <div className="space-y-4 mb-10 flex-grow">
                 {plan.features.map((feat, idx) => (
-                  <div key={idx} className="flex items-start gap-2">
-                    <div className={`mt-1 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${plan.popular ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-secondary text-white'}`}>
-                      <Check size={10} strokeWidth={4} aria-hidden="true" />
+                  <div key={idx} className="flex items-start gap-3">
+                    <div className={`mt-1 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${plan.popular ? 'bg-primary text-white shadow-sm' : 'bg-secondary/10 text-secondary'}`}>
+                      <Check size={12} strokeWidth={4} aria-hidden="true" />
                     </div>
-                    <span className={`text-xs font-bold ${plan.popular ? 'text-primary' : 'text-slate-700'}`}>
+                    <span className={`text-sm font-bold leading-tight ${plan.popular ? 'text-primary' : 'text-slate-700'}`}>
                       {feat[language]}
                     </span>
                   </div>
@@ -101,7 +102,7 @@ export default function Pricing() {
 
               <a
                 href="#signup-form"
-                className={`w-full py-4 rounded-xl font-black text-base transition-all shadow-xl text-center flex items-center justify-center ${plan.popular ? 'bg-primary text-white hover:bg-secondary' : 'bg-secondary text-white hover:bg-primary shadow-secondary/20'}`}
+                className={`w-full py-5 rounded-2xl font-black text-lg transition-all shadow-xl text-center flex items-center justify-center ${plan.popular ? 'bg-primary text-white hover:bg-primary/90 hover:scale-[1.02]' : 'bg-secondary text-white hover:bg-secondary/90 hover:scale-[1.02] shadow-secondary/20'}`}
               >
                 {plan.cta}
               </a>

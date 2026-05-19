@@ -55,31 +55,70 @@ export default function Hero() {
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto"
           >
             {[
-              { title: t('pricing_starter_title'), price: '€25', unit: '/ les', color: 'bg-white', text: 'text-primary' },
-              { title: t('pricing_progress_title'), price: '€170', unit: '/ maand', color: 'bg-secondary', text: 'text-white', popular: true },
-              { title: t('pricing_private_title'), price: '€50', unit: '/ les', color: 'bg-white', text: 'text-primary' }
+              { 
+                title: t('pricing_starter_title'), 
+                price: '€25', 
+                unit: '/ les', 
+                color: 'bg-white', 
+                text: 'text-primary',
+                desc: t('pricing_starter_desc')
+              },
+              { 
+                title: t('pricing_progress_title'), 
+                price: '€170', 
+                unit: '/ maand', 
+                color: 'bg-secondary', 
+                text: 'text-white', 
+                popular: true,
+                desc: t('pricing_progress_desc')
+              },
+              { 
+                title: t('pricing_private_title'), 
+                price: '€50', 
+                unit: '/ les', 
+                color: 'bg-white', 
+                text: 'text-primary',
+                desc: t('pricing_private_desc')
+              }
             ].map((card, i) => (
               <motion.a 
                 key={i}
                 href="#signup-form"
                 animate={{ y: [0, -5, 0] }}
+                whileHover={{ y: -10, scale: 1.05 }}
                 transition={{ 
                   y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+                  scale: { duration: 0.2 }
                 }}
-                className={`${card.color} ${card.text} p-4 rounded-2xl shadow-premium border border-slate-100 transition-all flex flex-col items-center group relative cursor-pointer`}
+                className={`${card.color} ${card.text} p-4 sm:p-6 rounded-2xl shadow-premium border border-slate-100 transition-all flex flex-col items-center group relative cursor-pointer overflow-hidden min-h-[140px]`}
               >
                 {card.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest leading-none z-10">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest leading-none z-10 whitespace-nowrap">
                     Meest gekozen
                   </div>
                 )}
-                <span className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-70">{card.title}</span>
-                <div className="flex items-baseline gap-0.5">
-                  <span className="text-xl font-black">{card.price}</span>
-                  <span className="text-[10px] font-bold opacity-60">{card.unit}</span>
+                
+                {/* Default content */}
+                <div className="flex flex-col items-center transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-4">
+                  <span className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-70">{card.title}</span>
+                  <div className="flex items-baseline gap-0.5">
+                    <span className="text-xl font-black tracking-tight">{card.price}</span>
+                    <span className="text-[10px] font-bold opacity-60">{card.unit}</span>
+                  </div>
+                  <div className={`mt-3 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-all ${card.popular ? 'bg-white text-secondary' : 'bg-secondary text-white'}`}>
+                    Inschrijven
+                  </div>
                 </div>
-                <div className={`mt-2 px-3 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-wider transition-colors ${card.popular ? 'bg-white text-secondary' : 'bg-secondary text-white'}`}>
-                  Inschrijven
+
+                {/* Hover content (hidden by default) */}
+                <div className="absolute inset-0 p-4 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0 bg-inherit z-20">
+                  <span className="text-[9px] font-black uppercase tracking-widest mb-2 opacity-50">{card.title}</span>
+                  <p className="text-[10px] sm:text-[11px] leading-tight font-bold px-1">
+                    {card.desc}
+                  </p>
+                  <div className="mt-2 text-[10px] font-black underline underline-offset-2">
+                    Direct aanmelden →
+                  </div>
                 </div>
               </motion.a>
             ))}
