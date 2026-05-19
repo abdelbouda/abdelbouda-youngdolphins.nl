@@ -148,6 +148,24 @@ const translations: Translations = {
   footer_built: { nl: 'Young Dolphins Zwemschool. Gebouwd voor snelheid.', en: 'Young Dolphins Swim School. Built for speed.' },
   logo_subtitle: { nl: 'Amsterdam', en: 'Amsterdam' },
 
+  // Hero extra highlights
+  hero_title_1: { nl: 'Zwemles in', en: 'Swimming lessons in' },
+  hero_title_2: { nl: 'Amsterdam &', en: 'Amsterdam &' },
+  hero_title_3: { nl: 'Monnickendam', en: 'Monnickendam' },
+  hero_desc_start: { nl: 'Bij Young Dolphins kun je', en: 'At Young Dolphins you can' },
+  hero_desc_highlight: { nl: 'direct starten', en: 'start immediately' },
+  hero_desc_waitlist: { nl: 'zonder wachtlijst', en: 'without a waiting list' },
+  hero_desc_end: { nl: 'Wij bieden professionele zwemlessen in heel Amsterdam en Waterland.', en: 'We offer professional swimming lessons throughout Amsterdam and Waterland.' },
+
+  // Bento extra highlights
+  bento_title: { nl: 'Geen wachtlijst, direct resultaat', en: 'No waiting list, immediate results' },
+  bento_text_school: { nl: 'zwemschool in Amsterdam', en: 'swim school in Amsterdam' },
+  bento_text_instructors: { nl: 'instructeurs', en: 'instructors' },
+  bento_card_diploma: { nl: 'Diploma Zwemmen', en: 'Diploma Swimming' },
+  bento_card_direct: { nl: 'Direct', en: 'Direct' },
+  bento_card_start: { nl: 'STARTEN', en: 'START' },
+  bento_notif_new: { nl: 'Nieuwe groepen starten in Monnickendam!', en: 'New groups starting in Monnickendam!' },
+
   // Long descriptive texts
   footer_desc: {
     nl: 'Professionele zwemschool die bouwt aan plezier en veiligheid in het water. Direct starten zonder wachttijd in Monnickendam.',

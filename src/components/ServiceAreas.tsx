@@ -3,7 +3,7 @@ import { useLanguage } from '../lib/LanguageContext';
 import { MapPin } from 'lucide-react';
 
 export default function ServiceAreas() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const areas = [
     'area_monnickendam',
@@ -20,11 +20,11 @@ export default function ServiceAreas() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-display font-black text-primary mb-6">
-            Zwemles in Amsterdam & <span className="text-secondary">Monnickendam</span>
+            {t('hero_title_1')} {t('hero_title_2')} <span className="text-secondary">{t('hero_title_3')}</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
-            Bij Young Dolphins kun je <strong>direct starten</strong> zonder <strong>wachtlijst</strong>. 
-            Wij bieden professionele zwemlessen in heel Amsterdam en Waterland.
+            {t('hero_desc_start')} <strong>{t('hero_desc_highlight')}</strong> {t('hero_desc_waitlist')}. 
+            {t('hero_desc_end')}
           </p>
         </div>
 
@@ -49,41 +49,49 @@ export default function ServiceAreas() {
         <div className="mt-16 bg-white p-8 lg:p-12 rounded-[3rem] shadow-premium border border-slate-100">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-display font-black text-primary mb-6">Geen wachtlijst, direct resultaat</h3>
+              <h3 className="text-2xl font-display font-black text-primary mb-6">{t('bento_title')}</h3>
               <p className="text-slate-600 leading-relaxed mb-6">
-                Waarom maanden wachten als je kind vandaag nog kan beginnen? Bij onze zwemschool in Amsterdam 
-                staan plezier en veiligheid voorop. Onze instructeurs zijn gespecialiseerd in het watervrij maken 
-                en het opleiden voor het ABC-diploma. Of je nu in <strong>Amsterdam Noord</strong>, <strong>Oost</strong>, 
-                <strong>Zuid</strong> of <strong>West</strong> woont, er is altijd een locatie in de buurt.
+                {language === 'nl' 
+                  ? 'Waarom maanden wachten als je kind vandaag nog kan beginnen? Bij onze zwemschool in Amsterdam staan plezier en veiligheid voorop. Onze instructeurs zijn gespecialiseerd in het watervrij maken en het opleiden voor het ABC-diploma.'
+                  : 'Why wait months when your child can start today? At our swim school in Amsterdam, fun and safety come first. Our instructors are specialized in making children water-confident and training for the ABC diploma.'}
+                {' '}
+                {language === 'nl'
+                  ? 'Of je nu in Amsterdam Noord, Oost, Zuid of West woont, er is altijd een locatie in de buurt.'
+                  : 'Whether you live in Amsterdam North, East, South, or West, there is always a location nearby.'}
               </p>
               <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-widest">ABC-Diploma</span>
-                <span className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-widest">Privéles</span>
-                <span className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-widest">Amsterdam Monnickendam</span>
+                <span className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-widest">{t('feature_abc_title')}</span>
+                <span className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-widest">{t('feature_private_title')}</span>
+                <span className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-widest">{t('footer_regio')} {t('area_monnickendam')}</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <div className="h-40 bg-secondary/10 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/20">
-                   <p className="text-2xl font-display font-black text-primary leading-tight">Diploma<br/>Zwemmen</p>
+                   <p className="text-2xl font-display font-black text-primary leading-tight">
+                    {t('bento_card_diploma').split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 ? <br/> : ''}</React.Fragment>)}
+                   </p>
                 </div>
                 <div className="h-32 bg-secondary rounded-3xl p-6 flex flex-col justify-end text-primary">
                   <p className="text-2xl font-black">100%</p>
-                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">Gediplomeerd</p>
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">{language === 'nl' ? 'Gediplomeerd' : 'Certified'}</p>
                 </div>
               </div>
               <div className="space-y-4 pt-8">
                 <div className="h-32 bg-primary rounded-3xl p-6 flex flex-col justify-end text-white">
-                  <p className="text-2xl font-black">Direct</p>
-                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">Starten</p>
+                  <p className="text-2xl font-black">{t('bento_card_direct')}</p>
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">{t('bento_card_start')}</p>
                 </div>
                 <div className="h-40 bg-secondary/10 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/20">
-                   <p className="text-2xl font-display font-black text-primary leading-tight">Geen<br/>Wachtlijst</p>
+                   <p className="text-2xl font-display font-black text-primary leading-tight">
+                    {t('no_waiting_list').split(' - ')[0].split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 ? <br/> : ''}</React.Fragment>)}
+                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
