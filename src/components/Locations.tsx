@@ -111,7 +111,7 @@ export default function Locations() {
             <div className="space-y-6">
               {locations.map((loc) => (
                 <motion.div 
-                  key={typeof loc.city === 'string' ? loc.city : loc.city.en}
+                  key={loc.city}
                   className={`p-8 rounded-[2.5rem] border-2 shadow-soft transition-all duration-500 relative overflow-hidden ${loc.isActive ? 'border-secondary bg-secondary/5' : 'border-slate-50 bg-white opacity-60'}`}
                 >
                   <div className="flex items-start gap-6 relative z-10">

@@ -46,7 +46,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative pt-6 pb-2 lg:pt-8 lg:pb-4 overflow-hidden scroll-mt-24 bg-aquatic">
+    <section id="hero" className="relative pt-32 pb-2 lg:pt-40 lg:pb-4 overflow-hidden scroll-mt-24 bg-aquatic">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         {[...Array(6)].map((_, i) => (
