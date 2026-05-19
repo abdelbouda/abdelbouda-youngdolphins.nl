@@ -37,14 +37,14 @@ export default function USPSection() {
                   className="flex items-start gap-4 group justify-center"
                 >
                   <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-secondary text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                    <CheckCircle2 size={18} />
+                    <CheckCircle2 size={18} aria-hidden="true" />
                   </div>
                   <p className="text-lg lg:text-xl text-white/90 font-bold leading-relaxed">{point[language]}</p>
                 </motion.div>
               ))}
             </div>
 
-            <div className="mt-16 bg-coral text-white p-6 lg:p-8 rounded-3xl font-black text-xl lg:text-3xl shadow-premium border-4 border-white inline-flex items-center gap-4">
+            <div className="mt-16 bg-coral text-primary p-6 lg:p-8 rounded-3xl font-black text-xl lg:text-3xl shadow-premium border-4 border-white inline-flex items-center gap-4">
                🚀 {t('no_waiting_list')}
             </div>
           </div>

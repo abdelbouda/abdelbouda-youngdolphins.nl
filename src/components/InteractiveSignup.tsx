@@ -43,8 +43,10 @@ export default function InteractiveSignup() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Er is iets misgegaan bij het versturen van uw aanmelding.');
+        throw new Error(data.error || 'Er is iets misgegaan bij het versturen van uw aanmelding.');
       }
 
       setSubmitted(true);
@@ -77,7 +79,7 @@ export default function InteractiveSignup() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
-          <div className="sticky top-32">
+          <div className="lg:sticky lg:top-32">
             <h2 className="text-4xl lg:text-5xl font-display font-black mb-8 leading-[1.1] text-white">
               Schrijf je <span className="text-secondary">direct in</span>
             </h2>
@@ -123,20 +125,17 @@ export default function InteractiveSignup() {
 
           <motion.div 
             id="signup-form"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ 
-              rotateY: -2,
-              rotateX: 2,
               scale: 1.01,
-              boxShadow: "0 60px 120px rgba(0,0,0,0.4)"
+              boxShadow: "0 40px 80px rgba(0,0,0,0.2)"
             }}
             viewport={{ once: true }}
-            style={{ perspective: "1000px" }}
-            className="bg-white rounded-[2.5rem] p-6 lg:p-10 shadow-[0_40px_80px_rgba(0,0,0,0.3)] text-primary relative overflow-hidden max-w-lg mx-auto lg:ml-auto transition-all duration-500 scroll-mt-24"
+            className="bg-white rounded-[2.5rem] p-6 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] text-primary relative overflow-hidden max-w-lg mx-auto lg:ml-auto transition-all duration-500 scroll-mt-24"
           >
             {/* Glassmorphism accent */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-3xl rounded-full"></div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-3xl rounded-full pointer-events-none"></div>
             
             {submitted ? (
               <motion.div 
@@ -171,8 +170,9 @@ export default function InteractiveSignup() {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
+                    <label htmlFor="name-input" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
                     <input 
+                      id="name-input"
                       required
                       name="name"
                       value={formData.name}
@@ -183,8 +183,9 @@ export default function InteractiveSignup() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_phone')}</label>
+                    <label htmlFor="phone-input" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_phone')}</label>
                     <input 
+                      id="phone-input"
                       required
                       name="phone"
                       value={formData.phone}
@@ -198,8 +199,9 @@ export default function InteractiveSignup() {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
+                    <label htmlFor="email-input" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
                     <input 
+                      id="email-input"
                       required
                       name="email"
                       value={formData.email}
@@ -210,8 +212,9 @@ export default function InteractiveSignup() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
+                    <label htmlFor="package-select" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
                     <select
+                      id="package-select"
                       name="package"
                       value={formData.package}
                       onChange={handleInputChange}
@@ -225,8 +228,9 @@ export default function InteractiveSignup() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_child_info')}</label>
+                  <label htmlFor="child-info-input" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_child_info')}</label>
                   <input 
+                    id="child-info-input"
                     required
                     name="childInfo"
                     value={formData.childInfo}
@@ -240,7 +244,7 @@ export default function InteractiveSignup() {
                 <button 
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 bg-secondary text-white rounded-2xl font-black text-lg shadow-premium shadow-secondary/30 transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-secondary text-white rounded-2xl font-black text-lg shadow-premium shadow-secondary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <div className="w-5 h-5 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>

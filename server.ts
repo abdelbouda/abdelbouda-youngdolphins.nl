@@ -116,11 +116,19 @@ Deze gegevens zijn verstuurd naar info@youngdolphins.nl en een kopie is gestuurd
       `,
     };
 
-    await transporter.sendMail(mailOptions);
-    res.json({ success: true, message: "Aanmelding succesvol verzonden." });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ error: "Fout bij het versturen van de mail." });
+    try {
+      await transporter.sendMail(mailOptions);
+      res.json({ success: true, message: "Aanmelding succesvol verzonden." });
+    } catch (sendError: any) {
+      console.error("Nodemailer Error Details:", sendError);
+      return res.status(500).json({ 
+        error: `Fout bij het versturen: ${sendError.message || "Onbekende SMTP fout"}`,
+        details: sendError.code
+      });
+    }
+  } catch (error: any) {
+    console.error("General Error in /api/signup:", error);
+    res.status(500).json({ error: error.message || "Interne server fout." });
   }
 });
 

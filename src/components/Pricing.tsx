@@ -67,7 +67,7 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`pricing-card-3d relative rounded-[2.5rem] p-6 lg:p-8 flex flex-col ${plan.popular ? 'bg-secondary text-white shadow-3xl scale-102 z-10' : 'bg-white text-primary shadow-premium'}`}
+              className={`pricing-card-3d relative rounded-[2.5rem] p-6 lg:p-8 flex flex-col ${plan.popular ? 'bg-secondary text-primary shadow-3xl scale-102 z-10' : 'bg-white text-primary shadow-premium'}`}
             >
               {plan.popular && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-xl">
@@ -76,12 +76,12 @@ export default function Pricing() {
               )}
 
               <div className="text-center mb-6">
-                <h3 className={`text-xl font-black mb-3 ${plan.popular ? 'text-white' : 'text-primary'}`}>{plan.name}</h3>
+                <h3 className="text-xl font-black mb-3 text-primary">{plan.name}</h3>
                 <div className="flex items-center justify-center gap-1 mb-2">
                   <span className="text-4xl font-black">{plan.price}</span>
-                  <span className={`text-sm font-bold opacity-70`}>{plan.name === 'Progress+' ? '/ maand' : '/ les'}</span>
+                  <span className="text-sm font-bold opacity-70">{plan.name === 'Progress+' ? '/ maand' : '/ les'}</span>
                 </div>
-                <p className={`text-xs font-medium leading-relaxed px-2 ${plan.popular ? 'text-white/80' : 'text-slate-500'}`}>
+                <p className={`text-xs font-medium leading-relaxed px-2 ${plan.popular ? 'text-primary/80' : 'text-slate-500'}`}>
                   {plan.desc}
                 </p>
               </div>
@@ -89,10 +89,10 @@ export default function Pricing() {
               <div className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <div className={`mt-1 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${plan.popular ? 'bg-white/20 text-white' : 'bg-secondary text-white'}`}>
-                      <Check size={10} strokeWidth={4} />
+                    <div className={`mt-1 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${plan.popular ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-secondary text-white'}`}>
+                      <Check size={10} strokeWidth={4} aria-hidden="true" />
                     </div>
-                    <span className={`text-xs font-bold ${plan.popular ? 'text-white' : 'text-slate-700'}`}>
+                    <span className={`text-xs font-bold ${plan.popular ? 'text-primary' : 'text-slate-700'}`}>
                       {feat[language]}
                     </span>
                   </div>
@@ -101,7 +101,7 @@ export default function Pricing() {
 
               <a
                 href="#signup-form"
-                className={`w-full py-4 rounded-xl font-black text-base transition-all shadow-xl text-center flex items-center justify-center ${plan.popular ? 'bg-white text-secondary hover:bg-primary hover:text-white' : 'bg-secondary text-white hover:bg-primary shadow-secondary/20'}`}
+                className={`w-full py-4 rounded-xl font-black text-base transition-all shadow-xl text-center flex items-center justify-center ${plan.popular ? 'bg-primary text-white hover:bg-secondary' : 'bg-secondary text-white hover:bg-primary shadow-secondary/20'}`}
               >
                 {plan.cta}
               </a>

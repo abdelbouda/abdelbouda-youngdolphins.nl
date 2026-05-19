@@ -56,7 +56,7 @@ export default function StickyCTA() {
 }
 
 export function WhatsAppWidget() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
@@ -84,10 +84,11 @@ export function WhatsAppWidget() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="block w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl relative mb-4"
+        aria-label={language === 'nl' ? 'WhatsApp ons' : 'WhatsApp us'}
       >
         <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-25"></div>
         <div className="relative z-10 w-full h-full flex items-center justify-center">
-          <MessageSquare size={28} />
+          <MessageSquare size={28} aria-hidden="true" />
         </div>
       </motion.a>
 
@@ -96,9 +97,10 @@ export function WhatsAppWidget() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="block w-14 h-14 bg-secondary text-white rounded-full shadow-2xl relative"
+        aria-label={language === 'nl' ? 'Stuur een e-mail' : 'Send an email'}
       >
         <div className="relative z-10 w-full h-full flex items-center justify-center">
-          <Mail size={28} />
+          <Mail size={28} aria-hidden="true" />
         </div>
       </motion.a>
     </div>

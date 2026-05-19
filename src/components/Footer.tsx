@@ -21,13 +21,19 @@ export default function Footer() {
                 : "Professional swimming school that builds on fun and safety in the water. Start immediately without a waiting list in Monnickendam."}
             </p>
             <div className="flex gap-4">
-              {[Instagram, Facebook].map((Icon, i) => (
+              {[
+                { Icon: Instagram, label: 'Instagram', href: 'https://instagram.com' },
+                { Icon: Facebook, label: 'Facebook', href: 'https://facebook.com' }
+              ].map((item, i) => (
                 <a 
                   key={i} 
-                  href="#" 
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white hover:bg-secondary transition-all shadow-sm border border-white/10"
+                  aria-label={`Volg ons op ${item.label}`}
                 >
-                  <Icon size={24} />
+                  <item.Icon size={24} aria-hidden="true" />
                 </a>
               ))}
             </div>

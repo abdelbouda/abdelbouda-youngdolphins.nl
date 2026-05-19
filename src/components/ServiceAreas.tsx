@@ -64,10 +64,10 @@ export default function ServiceAreas() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="h-40 bg-secondary/5 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/10">
-                   <p className="text-2xl font-display font-black text-secondary leading-tight">Diploma<br/>Zwemmen</p>
+                <div className="h-40 bg-secondary/10 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/20">
+                   <p className="text-2xl font-display font-black text-primary leading-tight">Diploma<br/>Zwemmen</p>
                 </div>
-                <div className="h-32 bg-secondary rounded-3xl p-6 flex flex-col justify-end text-white">
+                <div className="h-32 bg-secondary rounded-3xl p-6 flex flex-col justify-end text-primary">
                   <p className="text-2xl font-black">100%</p>
                   <p className="text-xs font-bold uppercase tracking-widest opacity-80">Gediplomeerd</p>
                 </div>
@@ -77,8 +77,8 @@ export default function ServiceAreas() {
                   <p className="text-2xl font-black">Direct</p>
                   <p className="text-xs font-bold uppercase tracking-widest opacity-80">Starten</p>
                 </div>
-                <div className="h-40 bg-secondary/5 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/10">
-                   <p className="text-2xl font-display font-black text-secondary leading-tight">Geen<br/>Wachtlijst</p>
+                <div className="h-40 bg-secondary/10 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/20">
+                   <p className="text-2xl font-display font-black text-primary leading-tight">Geen<br/>Wachtlijst</p>
                 </div>
               </div>
             </div>

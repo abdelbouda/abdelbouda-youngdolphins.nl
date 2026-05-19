@@ -63,7 +63,7 @@ export default function BentoFeatures() {
               className={`${f.size || ''} relative overflow-hidden rounded-[2.5rem] bg-white border border-slate-100 p-8 shadow-premium transition-all duration-500`}
             >
               <div className={`${f.color} w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm`}>
-                <f.icon size={28} />
+                <f.icon size={28} aria-hidden="true" />
               </div>
               
               <h3 className="text-2xl font-bold text-primary mb-4">{f.title}</h3>
