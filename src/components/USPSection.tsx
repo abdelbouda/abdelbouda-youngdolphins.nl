@@ -6,11 +6,11 @@ export default function USPSection() {
   const { t, language } = useLanguage();
 
   const points = [
-    { nl: "Direct starten met zwemles - geen wachttijd", en: "Start swimming lessons immediately - no waiting list" },
-    { nl: "Kleine groepen voor maximale aandacht", en: "Small groups for maximum attention" },
-    { nl: "Gediplomeerde en ervaren instructeurs", en: "Certified and experienced instructors" },
-    { nl: "Warme en veilige zwembaden in Monnickendam", en: "Warm and safe pools in Monnickendam" },
-    { nl: "Plezier en vertrouwen staan centraal", en: "Fun and trust are central" }
+    'usp_point_1',
+    'usp_point_2',
+    'usp_point_3',
+    'usp_point_4',
+    'usp_point_5'
   ];
 
   return (
@@ -53,7 +53,7 @@ export default function USPSection() {
                   <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-secondary text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                     <CheckCircle2 size={18} aria-hidden="true" />
                   </div>
-                  <p className="text-lg lg:text-xl text-white/90 font-bold leading-relaxed">{point[language]}</p>
+                  <p className="text-lg lg:text-xl text-white/90 font-bold leading-relaxed">{t(point)}</p>
                 </motion.div>
               ))}
             </div>

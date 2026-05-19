@@ -17,18 +17,14 @@ const Pricing = lazy(() => import('./components/Pricing'));
 const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
 
 function AppContent() {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title={language === 'nl' 
-          ? "Zwemles Amsterdam & Monnickendam | Direct Starten - Geen Wachtlijst | Young Dolphins"
-          : "Swimming Lessons Amsterdam & Monnickendam | Start Immediately - No Waiting List | Young Dolphins"}
-        description={language === 'nl'
-          ? "Zoek je zwemles in Amsterdam (Noord, Oost, Zuid, West) of Monnickendam? Bij Young Dolphins kun je direct starten zonder wachtlijst. Professionele ABC-diploma zwemlessen in kleine groepen."
-          : "Looking for swimming lessons in Amsterdam or Monnickendam? At Young Dolphins you can start immediately without a waiting list. Professional ABC diploma swimming lessons in small groups."}
-        keywords="zwemles Amsterdam, zwemles Monnickendam, direct starten zwemles, geen wachtlijst zwemles, ABC diploma Amsterdam, zwemles Amsterdam Noord, zwemles Amsterdam Oost, zwemles Amsterdam Zuid, zwemles Amsterdam West"
+        title={t('seo_title')}
+        description={t('seo_description')}
+        keywords={t('seo_keywords')}
       />
 
       <Navbar />

@@ -9,32 +9,20 @@ export default function FAQSection() {
 
   const faqs = [
     {
-      question: { nl: "Hoe lang duurt het om een zwemdiploma te halen?", en: "How long does it take to get a swimming diploma?" },
-      answer: { 
-        nl: "Dit hangt af van leeftijd, zelfvertrouwen en lesfrequentie. De meeste kinderen halen diploma A in ongeveer 12–18 maanden met wekelijkse lessen.",
-        en: "This depends on age, self-confidence, and lesson frequency. Most children get diploma A in about 12-18 months with weekly lessons."
-      }
+      question: 'faq_q1',
+      answer: 'faq_a1'
     },
     {
-      question: { nl: "Wat moet mijn kind meenemen naar de eerste les?", en: "What should my child bring to the first lesson?" },
-      answer: { 
-        nl: "Een badpak of zwembroek, handdoek en slippers zijn voldoende. Wij zorgen voor alle drijfmaterialen en veiligheidsmiddelen.",
-        en: "A swimsuit or swim trunks, towel, and flip-flops are enough. We provide all float materials and safety equipment."
-      }
+      question: 'faq_q2',
+      answer: 'faq_a2'
     },
     {
-      question: { nl: "Kan ik direct starten met zwemles in Monnickendam?", en: "Can I start swimming lessons in Monnickendam immediately?" },
-      answer: { 
-        nl: "Ja! Bij Young Dolphins in Monnickendam kan je kind direct starten met zwemles. We hebben geen wachtlijsten bij Sportfondsen Monnickendam.",
-        en: "Yes! At Young Dolphins in Monnickendam, your child can start swimming lessons immediately. We have no waiting lists at Sportfondsen Monnickendam."
-      }
+      question: 'faq_q3',
+      answer: 'faq_a3'
     },
     {
-      question: { nl: "Mogen ouders de lessen bekijken?", en: "Can parents watch the lessons?" },
-      answer: { 
-        nl: "Ja! Alle zwembaden hebben kijkruimtes waar ouders comfortabel kunnen meekijken naar de vorderingen van hun kind.",
-        en: "Yes! All pools have viewing areas where parents can comfortably watch their child's progress."
-      }
+      question: 'faq_q4',
+      answer: 'faq_a4'
     }
   ];
 
@@ -61,7 +49,7 @@ export default function FAQSection() {
                 className="w-full flex items-center justify-between p-8 text-left outline-none"
               >
                 <span className="text-lg lg:text-xl font-bold text-primary group-hover:text-secondary transition-colors">
-                    {faq.question[language]}
+                    {t(faq.question)}
                 </span>
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${openIndex === index ? 'bg-secondary text-white rotate-180' : 'bg-slate-50 text-secondary'}`}>
                     <ChevronDown size={24} />
@@ -74,7 +62,7 @@ export default function FAQSection() {
                   className="px-8 pb-8"
                 >
                   <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                    {faq.answer[language]}
+                    {t(faq.answer)}
                   </p>
                 </motion.div>
               )}

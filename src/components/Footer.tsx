@@ -41,13 +41,13 @@ export default function Footer() {
             <h4 className="font-black text-white mb-8 uppercase text-xs tracking-[0.3em] opacity-50">{t('footer_lessons')}</h4>
             <ul className="space-y-5">
               {[
-                { nl: 'A-B-C Diploma', en: 'A-B-C Diploma' }, 
-                { nl: 'Privé / Duo', en: 'Private / Duo' }, 
-                { nl: 'Monnickendam Specials', en: 'Monnickendam Specials' }
-              ].map((item) => (
-                <li key={item[language]}>
+                'footer_link_abc', 
+                'footer_link_private', 
+                'footer_link_specials'
+              ].map((key) => (
+                <li key={key}>
                   <a href="#lessen" className="text-slate-300 hover:text-secondary transition-colors font-bold flex items-center gap-2 group">
-                    {item[language]}
+                    {t(key)}
                     <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>

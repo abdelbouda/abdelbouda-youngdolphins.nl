@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
 import { MapPin } from 'lucide-react';
@@ -74,7 +75,7 @@ export default function ServiceAreas() {
                 </div>
                 <div className="h-32 bg-secondary rounded-3xl p-6 flex flex-col justify-end text-primary">
                   <p className="text-2xl font-black">100%</p>
-                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">{language === 'nl' ? 'Gediplomeerd' : 'Certified'}</p>
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-80">{t('bento_certified')}</p>
                 </div>
               </div>
               <div className="space-y-4 pt-8">
@@ -84,7 +85,7 @@ export default function ServiceAreas() {
                 </div>
                 <div className="h-40 bg-secondary/10 rounded-3xl flex items-center justify-center p-6 text-center shadow-sm border border-secondary/20">
                    <p className="text-2xl font-display font-black text-primary leading-tight">
-                    {t('no_waiting_list').split(' - ')[0].split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 ? <br/> : ''}</React.Fragment>)}
+                    {t('bento_no_waitlist').split(' ').map((word, i) => <React.Fragment key={i}>{word}{i === 0 ? <br/> : ''}</React.Fragment>)}
                    </p>
                 </div>
               </div>

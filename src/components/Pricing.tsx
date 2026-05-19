@@ -11,11 +11,11 @@ export default function Pricing() {
       price: t('pricing_starter_price'),
       desc: t('pricing_starter_desc'),
       features: [
-        { nl: '1 les van 45 min per week', en: '1 lesson of 45 min per week' },
-        { nl: 'Kleine groep (max. 8 kinderen)', en: 'Small group (max. 8 children)' },
-        { nl: 'Gevestigde methode (A/B/C)', en: 'Established method (A/B/C)' },
-        { nl: 'Directe start mogelijk', en: 'Immediate start possible' },
-        { nl: 'Reguliere vorderingscontrole', en: 'Regular progress check' }
+        'price_feat_starter_1',
+        'price_feat_starter_2',
+        'price_feat_starter_3',
+        'price_feat_starter_4',
+        'price_feat_starter_5'
       ],
       cta: t('cta_register'),
       popular: false
@@ -25,11 +25,11 @@ export default function Pricing() {
       price: t('pricing_progress_price'),
       desc: t('pricing_progress_desc'),
       features: [
-        { nl: '2 lessen per week (90 min totaal)', en: '2 lessons per week (90 min total)' },
-        { nl: 'Versneld diplomagarantie plan', en: 'Accelerated diploma guarantee plan' },
-        { nl: 'Zeer kleine groepen (max 5-6)', en: 'Very small groups (max 5-6)' },
-        { nl: 'Wekelijkse persoonlijke app-update', en: 'Weekly personal app update' },
-        { nl: 'Gratis inhaallessen bij ziekte', en: 'Free make-up lessons when sick' }
+        'price_feat_progress_1',
+        'price_feat_progress_2',
+        'price_feat_progress_3',
+        'price_feat_progress_4',
+        'price_feat_progress_5'
       ],
       cta: t('cta_register'),
       popular: true
@@ -39,11 +39,11 @@ export default function Pricing() {
       price: t('pricing_private_price'),
       desc: t('pricing_private_desc'),
       features: [
-        { nl: '1-op-1 privé-begeleiding', en: '1-on-1 private guidance' },
-        { nl: 'Volledig aangepast tempo', en: 'Fully adjusted pace' },
-        { nl: 'Zelf lestijden inplannen', en: 'Schedule your own lesson times' },
-        { nl: 'Gecertificeerde top-instructeur', en: 'Certified top-instructor' },
-        { nl: 'Gespecialiseerd in watervrees', en: 'Specialized in water fear' }
+        'price_feat_private_1',
+        'price_feat_private_2',
+        'price_feat_private_3',
+        'price_feat_private_4',
+        'price_feat_private_5'
       ],
       cta: t('cta_register'),
       popular: false
@@ -94,7 +94,7 @@ export default function Pricing() {
                       <Check size={12} strokeWidth={4} aria-hidden="true" />
                     </div>
                     <span className={`text-sm font-bold leading-tight ${plan.popular ? 'text-primary' : 'text-slate-700'}`}>
-                      {feat[language]}
+                      {t(feat)}
                     </span>
                   </div>
                 ))}

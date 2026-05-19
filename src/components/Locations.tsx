@@ -19,9 +19,9 @@ function MapDisplay({ inView }: { inView: boolean }) {
         </p>
         <div className="text-xs text-left bg-white/5 p-6 rounded-3xl border border-white/10 space-y-3 font-medium">
           <p>1. Open <strong>Settings</strong> (⚙️ gear icon)</p>
-          <p>2. Selecteer <strong>Secrets</strong></p>
-          <p>3. Voeg <code className="bg-white/10 px-1 rounded text-secondary">GOOGLE_MAPS_PLATFORM_KEY</code> toe</p>
-          <p>4. Plak je API key en druk op Enter</p>
+          <p>{t('loc_step_2')}</p>
+          <p>{t('loc_step_3')}</p>
+          <p>{t('loc_step_4')}</p>
         </div>
       </div>
     );
@@ -80,23 +80,16 @@ export default function Locations() {
 
   const locations = [
     {
-      city: { nl: 'Monnickendam - Direct Start', en: 'Monnickendam - Start now' },
+      city: 'loc_monnickendam_title',
       pool: 'Sportfondsen Monnickendam',
       address: 'Wilhelminalaan 54, 1141 CW Monnickendam',
-      details: { nl: 'De ideale locatie voor zwemmen in Waterland. Geen wachtlijst!', en: 'The ideal location for swimming in Waterland. No waiting list!' },
-      usps: [
-        { nl: 'Sporten & Fit blijven', en: 'Sports & Staying Fit' },
-        { nl: 'Ontspannen & Eigen tempo', en: 'Relaxing & Own pace' },
-        { nl: 'Leren & Nieuwe vaardigheden', en: 'Learning & New skills' },
-        { nl: 'Spik en span faciliteiten', en: 'Clean and tidy facilities' }
-      ],
+      details: 'loc_monnickendam_desc',
       isActive: true
     },
     {
-      city: { nl: 'Amsterdam Regio', en: 'Amsterdam Region' },
+      city: 'loc_amsterdam_title',
       pool: 'De Mirandabad / Sloterparkbad',
-      address: { nl: 'Diverse locaties in Amsterdam', en: 'Various locations in Amsterdam' },
-      usps: [],
+      address: 'loc_amsterdam_address',
       isActive: false
     }
   ];
@@ -126,10 +119,10 @@ export default function Locations() {
                       <MapPin size={28} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-2xl font-black text-primary mb-1">{loc.city[language]}</h3>
+                      <h3 className="text-2xl font-black text-primary mb-1">{t(loc.city)}</h3>
                       <p className="font-extrabold text-secondary text-lg mb-2">{loc.pool}</p>
                       <p className="text-slate-500 text-sm mb-4 font-bold flex items-center gap-2">
-                        <MapIcon size={16} /> {typeof loc.address === 'string' ? loc.address : loc.address[language]}
+                        <MapIcon size={16} /> {t(loc.address)}
                       </p>
                       <div className="flex items-center justify-between">
                         {loc.isActive && (

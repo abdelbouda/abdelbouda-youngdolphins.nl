@@ -164,9 +164,68 @@ const translations: Translations = {
   bento_card_diploma: { nl: 'Diploma Zwemmen', en: 'Diploma Swimming' },
   bento_card_direct: { nl: 'Direct', en: 'Direct' },
   bento_card_start: { nl: 'STARTEN', en: 'START' },
-  bento_notif_new: { nl: 'Nieuwe groepen starten in Monnickendam!', en: 'New groups starting in Monnickendam!' },
+  usp_point_1: { nl: "Direct starten met zwemles - geen wachttijd", en: "Start swimming lessons immediately - no waiting list" },
+  usp_point_2: { nl: "Kleine groepen voor maximale aandacht", en: "Small groups for maximum attention" },
+  usp_point_3: { nl: "Gediplomeerde en ervaren instructeurs", en: "Certified and experienced instructors" },
+  usp_point_4: { nl: "Warme en veilige zwembaden in Monnickendam", en: "Warm and safe pools in Monnickendam" },
+  usp_point_5: { nl: "Plezier en vertrouwen staan centraal", en: "Fun and trust are central" },
+  bento_certified: { nl: "Gediplomeerd", en: "Certified" },
+  bento_no_waitlist: { nl: "Geen Wachtlijst", en: "No Waiting List" },
+
+  price_feat_starter_1: { nl: '1 les van 45 min per week', en: '1 lesson of 45 min per week' },
+  price_feat_starter_2: { nl: 'Kleine groep (max. 8 kinderen)', en: 'Small group (max. 8 children)' },
+  price_feat_starter_3: { nl: 'Gevestigde methode (A/B/C)', en: 'Established method (A/B/C)' },
+  price_feat_starter_4: { nl: 'Directe start mogelijk', en: 'Immediate start possible' },
+  price_feat_starter_5: { nl: 'Reguliere vorderingscontrole', en: 'Regular progress check' },
+  price_feat_progress_1: { nl: '2 lessen per week (90 min totaal)', en: '2 lessons per week (90 min total)' },
+  price_feat_progress_2: { nl: 'Versneld diplomagarantie plan', en: 'Accelerated diploma guarantee plan' },
+  price_feat_progress_3: { nl: 'Zeer kleine groepen (max 5-6)', en: 'Very small groups (max 5-6)' },
+  price_feat_progress_4: { nl: 'Wekelijkse persoonlijke app-update', en: 'Weekly personal app update' },
+  price_feat_progress_5: { nl: 'Gratis inhaallessen bij ziekte', en: 'Free make-up lessons when sick' },
+  price_feat_private_1: { nl: '1-op-1 privé-begeleiding', en: '1-on-1 private guidance' },
+  price_feat_private_2: { nl: 'Volledig aangepast tempo', en: 'Fully adjusted pace' },
+  price_feat_private_3: { nl: 'Zelf lestijden inplannen', en: 'Schedule your own lesson times' },
+  price_feat_private_4: { nl: 'Gecertificeerde top-instructeur', en: 'Certified top-instructor' },
+  price_feat_private_5: { nl: 'Gespecialiseerd in watervrees', en: 'Specialized in water fear' },
+  nav_switch_en: { nl: 'Switch to English', en: 'Wissel naar Nederlands' },
+  nav_open_menu: { nl: 'Open menu', en: 'Open menu' },
+  nav_close_menu: { nl: 'Sluit menu', en: 'Close menu' },
+  nav_lang_name: { nl: 'English', en: 'Nederlands' },
+
+  faq_q1: { nl: "Hoe lang duurt het om een zwemdiploma te halen?", en: "How long does it take to get a swimming diploma?" },
+  faq_a1: { nl: "Dit hangt af van leeftijd, zelfvertrouwen en lesfrequentie. De meeste kinderen halen diploma A in ongeveer 12–18 maanden met wekelijkse lessen.", en: "This depends on age, self-confidence, and lesson frequency. Most children get diploma A in about 12-18 months with weekly lessons." },
+  faq_q2: { nl: "Wat moet mijn kind meenemen naar de eerste les?", en: "What should my child bring to the first lesson?" },
+  faq_a2: { nl: "Een badpak of zwembroek, handdoek en slippers zijn voldoende. Wij zorgen voor alle drijfmaterialen en veiligheidsmiddelen.", en: "A swimsuit or swim trunks, towel, and flip-flops are enough. We provide all float materials and safety equipment." },
+  faq_q3: { nl: "Kan ik direct starten met zwemles in Monnickendam?", en: "Can I start swimming lessons in Monnickendam immediately?" },
+  faq_a3: { nl: "Ja! Bij Young Dolphins in Monnickendam kan je kind direct starten met zwemles. We hebben geen wachtlijsten bij Sportfondsen Monnickendam.", en: "Yes! At Young Dolphins in Monnickendam, your child can start swimming lessons immediately. We have no waiting lists at Sportfondsen Monnickendam." },
+  faq_q4: { nl: "Mogen ouders de lessen bekijken?", en: "Can parents watch the lessons?" },
+  faq_a4: { nl: "Ja! Alle zwembaden hebben kijkruimtes waar ouders comfortabel kunnen meekijken naar de vorderingen van hun kind.", en: "Yes! All pools have viewing areas where parents can comfortably watch their child's progress." },
+
+  loc_step_2: { nl: '2. Selecteer Secrets', en: '2. Select Secrets' },
+  loc_step_3: { nl: '3. Voeg GOOGLE_MAPS_PLATFORM_KEY toe', en: '3. Add GOOGLE_MAPS_PLATFORM_KEY' },
+  loc_step_4: { nl: '4. Plak je API key en druk op Enter', en: '4. Paste your API key and press Enter' },
+  loc_monnickendam_title: { nl: 'Monnickendam - Direct Start', en: 'Monnickendam - Start now' },
+  loc_monnickendam_desc: { nl: 'De ideale locatie voor zwemmen in Waterland. Geen wachtlijst!', en: 'The ideal location for swimming in Waterland. No waiting list!' },
+  loc_amsterdam_title: { nl: 'Amsterdam Regio', en: 'Amsterdam Region' },
+  loc_amsterdam_address: { nl: 'Diverse locaties in Amsterdam', en: 'Various locations in Amsterdam' },
+
+  seo_title: {
+    nl: "Zwemles Amsterdam & Monnickendam | Direct Starten - Geen Wachtlijst | Young Dolphins",
+    en: "Swimming Lessons Amsterdam & Monnickendam | Start Immediately - No Waiting List | Young Dolphins"
+  },
+  seo_description: {
+    nl: "Zoek je zwemles in Amsterdam (Noord, Oost, Zuid, West) of Monnickendam? Bij Young Dolphins kun je direct starten zonder wachtlijst. Professionele ABC-diploma zwemlessen in kleine groepen.",
+    en: "Looking for swimming lessons in Amsterdam or Monnickendam? At Young Dolphins you can start immediately without a waiting list. Professional ABC diploma swimming lessons in small groups."
+  },
+  seo_keywords: {
+    nl: "zwemles Amsterdam, zwemles Monnickendam, direct starten zwemles, geen wachtlijst zwemles, ABC diploma Amsterdam, zwemles Amsterdam Noord, zwemles Amsterdam Oost, zwemles Amsterdam Zuid, zwemles Amsterdam West",
+    en: "swimming lessons Amsterdam, swimming lessons Monnickendam, start swimming lessons immediately, no waiting list swimming lessons, ABC diploma Amsterdam, swimming lessons Amsterdam North, swimming lessons Amsterdam East, swimming lessons Amsterdam South, swimming lessons Amsterdam West"
+  },
 
   // Long descriptive texts
+  footer_link_abc: { nl: 'A-B-C Diploma', en: 'A-B-C Diploma' },
+  footer_link_private: { nl: 'Privé / Duo', en: 'Private / Duo' },
+  footer_link_specials: { nl: 'Monnickendam Specials', en: 'Monnickendam Specials' },
   footer_desc: {
     nl: 'Professionele zwemschool die bouwt aan plezier en veiligheid in het water. Direct starten zonder wachttijd in Monnickendam.',
     en: 'Professional swimming school that builds on fun and safety in the water. Start immediately without a waiting list in Monnickendam.'
