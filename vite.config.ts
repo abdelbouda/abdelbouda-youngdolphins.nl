@@ -12,21 +12,25 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      cssCodeSplit: false, // Forceert alle CSS in één enkel bestand
+      cssCodeSplit: false, // Houdt de CSS-bundel perfect gecentraliseerd
       minify: 'esbuild',
       modulePreload: {
-        polyfill: false // Geen onnodige JavaScript overhead voor preloading
+        polyfill: false // Geen onnodige JavaScript runtime wrapper overhead
       },
       rollupOptions: {
         output: {
-          // Dit trekt alle asynchrone / lazy chunks gegarandeerd samen in de hoofdbundel
-          inlineDynamicImports: true, 
+          inlineDynamicImports: true, // Garandeert de strakke, platgeslagen netwerkboom
           assetFileNames: 'assets/[name]-[hash][extname]',
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
         },
       },
-      chunkSizeWarningLimit: 2000,
+      chunkSizeWarningLimit: 2500,
+    },
+    esbuild: {
+      // Verwijdert alle console logs en debuggers in productie om mobiele CPU-cycles te besparen
+      drop: mode === 'production' ? ['console', 'debugger'] : [],
+      legalComments: 'none',
     },
     resolve: {
       alias: {
