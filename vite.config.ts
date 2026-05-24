@@ -12,19 +12,18 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      // Optimaliseert de polyfills voor moderne browsers, wat extra kb's scheelt bij de initiële load
+      // Dit zorgt ervoor dat Vite de modulepreload tags zélf genereert op basis van de gebouwde dist bestanden
       modulePreload: {
         polyfill: true
       },
-      // Zorgt voor een efficiënte opsplitsing van de CSS-bestanden per chunk
       cssCodeSplit: true,
-      chunkSizeWarningLimit: 600,
+      chunkSizeWarningLimit: 800,
       rollupOptions: {
         output: {
+          // Gestroomlijnde verdeling van zware libraries om de main-bundel vederlicht te houden
           manualChunks: {
-            'vendor-react': ['react', 'react-dom'],
-            'vendor-motion': ['motion'],
-            'vendor-icons': ['lucide-react'],
+            'vendor-core': ['react', 'react-dom'],
+            'vendor-ui': ['motion', 'lucide-react'],
             'vendor-maps': ['@vis.gl/react-google-maps'],
           },
         },
