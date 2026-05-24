@@ -7,6 +7,7 @@ import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
 import Privacy from './components/Privacy';
 import Voorwaarden from './components/Voorwaarden';
+import Cookies from './components/Cookies';
 
 // Lazy load non-critical components
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
@@ -47,6 +48,7 @@ function AppContent() {
           {/* Juridische secties die getarget worden vanuit de footer */}
           <Privacy />
           <Voorwaarden />
+          <Cookies />
         </Suspense>
       </main>
 
