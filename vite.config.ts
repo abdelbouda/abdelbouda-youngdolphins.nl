@@ -12,21 +12,20 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      // Schakel handmatige splitsing volledig uit om netwerkoverhead op mobiel te voorkomen
-      cssCodeSplit: false,
+      cssCodeSplit: false, // Houdt de hoofd-CSS compact bij elkaar om extra requests te voorkomen
       modulePreload: {
-        polyfill: false
+        polyfill: false // Elimineert onnodige legacy JavaScript-overhead in moderne browsers
       },
+      minify: 'esbuild', // Zorgt voor de meest agressieve compressie van je code
       rollupOptions: {
         output: {
-          // Forceert alles in één hoofdbundel voor een directe, lineaire laadtijd
           manualChunks: undefined,
-          assetFileNames: 'assets/[name]-[hash][extname]',
+          assetFileNames: 'assets/style-[hash][extname]',
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
         },
       },
-      chunkSizeWarningLimit: 1500,
+      chunkSizeWarningLimit: 1200,
     },
     resolve: {
       alias: {
