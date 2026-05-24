@@ -43,6 +43,10 @@ function AppContent() {
           <Locations />
           <FAQSection />
           <InteractiveSignup />
+          
+          {/* Juridische secties die getarget worden vanuit de footer */}
+          <Privacy />
+          <Voorwaarden />
         </Suspense>
       </main>
 
