@@ -12,35 +12,25 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      cssCodeSplit: true, // Zorgt ervoor dat CSS van componenten buiten het scherm de Hero niet blokkeert
+      // Schakel CSS splitting volledig uit
+      cssCodeSplit: false,
       minify: 'esbuild',
       modulePreload: {
-        polyfill: false,
-        resolveDependencies: (filename, deps, { container }) => {
-          // Voorkomt dat er diepe, blokkerende netwerkketens ontstaan op mobiel
-          return [];
-        }
+        polyfill: false // Voorkomt extra overhead links in de HTML head
       },
       rollupOptions: {
         output: {
-          inlineDynamicImports: false,
-          manualChunks: (id) => {
-            // Breng de rust terug in de netwerkboom door externe libraries compact te groeperen
-            if (id.includes('node_modules')) {
-              if (id.includes('react')) return 'vendor-framework';
-              if (id.includes('motion') || id.includes('lucide')) return 'vendor-ui';
-              if (id.includes('@vis.gl')) return 'vendor-maps';
-              return 'vendor-utils';
-            }
-          },
+          // Forceer ALLES (inclusief dynamische componenten) in één enkele bundel
+          inlineDynamicImports: true,
           assetFileNames: 'assets/[name]-[hash][extname]',
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
         },
       },
-      chunkSizeWarningLimit: 1200,
+      chunkSizeWarningLimit: 3000,
     },
     esbuild: {
+      // Verwijdert alle overhead aan logjes in productie om CPU te sparen
       drop: mode === 'production' ? ['console', 'debugger'] : [],
       legalComments: 'none',
     },
@@ -50,7 +40,10 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
+      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
