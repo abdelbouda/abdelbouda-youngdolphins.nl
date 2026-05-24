@@ -10,6 +10,7 @@ import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
 
 // Lazy load non-critical components
+const RegioSEO = lazy(() => import('./components/RegioSEO')); // <-- NIEUW ingeladen
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
 const Locations = lazy(() => import('./components/Locations'));
 const About = lazy(() => import('./components/About'));
@@ -37,6 +38,7 @@ function AppContent() {
         <USPSection />
         
         <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div></div>}>
+          <RegioSEO /> {/* <-- NIEUW: Hier direct onder de USPs geplaatst */}
           <BentoFeatures />
           <ServiceAreas />
           <Pricing />
