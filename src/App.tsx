@@ -5,6 +5,8 @@ import Hero from './components/Hero';
 import USPSection from './components/USPSection';
 import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
+import Privacy from './components/Privacy';
+import Voorwaarden from './components/Voorwaarden';
 
 // Lazy load non-critical components
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
