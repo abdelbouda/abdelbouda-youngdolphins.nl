@@ -138,9 +138,9 @@ export default function Footer() {
             © {currentYear} {t('footer_built')}
           </p>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
-            <a href="#privacy" className="hover:text-secondary transition-colors">{t('footer_privacy')}</a>
-            <a href="#voorwaarden" className="hover:text-secondary transition-colors">{t('footer_terms')}</a>
-            <a href="#cookies" className="hover:text-secondary transition-colors">{t('footer_cookies')}</a>
+            <a href="/#privacy" className="hover:text-secondary transition-colors">{t('footer_privacy')}</a>
+            <a href="/#voorwaarden" className="hover:text-secondary transition-colors">{t('footer_terms')}</a>
+            <a href="/#cookies" className="hover:text-secondary transition-colors">{t('footer_cookies')}</a>
           </div>
         </div>
 
