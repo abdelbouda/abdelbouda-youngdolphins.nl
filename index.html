@@ -7,7 +7,7 @@
     <meta name="description" content="Zoek je zwemles in Amsterdam of Monnickendam? Bij Young Dolphins kun je direct starten zonder wachtlijst. Professionele zwemlessen voor kinderen in kleine groepen." />
     <meta name="keywords" content="zwemles, Amsterdam, Monnickendam, direct starten, geen wachtlijst, ABC diploma, privéles, Noord, Oost, Zuid, West, Centrum" />
     <meta property="og:title" content="Zwemles Amsterdam & Monnickendam | Direct Starten | Young Dolphins" />
-    <meta property="og:description" content="Start direct met zwemles in Amsterdam of Monnickendam. Kleine groepen, persoonlijke aandacht and snel resultaat." />
+    <meta property="og:description" content="Start direct met zwemles in Amsterdam of Monnickendam. Kleine groepen, persoonlijke aandacht en snel resultaat." />
     <meta property="og:type" content="website" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://youngdolphins.nl/" />
@@ -21,11 +21,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
     
     <style>
-      /* Critical CSS om Layout Shifts te voorkomen en de huisstijl direct te tonen */
-      body { background-color: #ffffff; color: #1B365D; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+      /* Critical CSS: Zorgt ervoor dat er geen Layout Shifts (CLS) zijn en dat de basis-layout direct staat */
+      body { background-color: #ffffff; color: #1B365D; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; display: block !important; }
       #root { min-height: 100vh; }
     </style>
   </head>
