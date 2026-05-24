@@ -1,6 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Waves } from 'lucide-react';
+import { Waves } from 'lucide-react'; // of ShieldCheck voor voorwaarden
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'nl' } },
+    { params: { lang: 'en' } }
+  ];
+}
 ---
 
 <Layout title="Privacyverklaring - Young Dolphins">
