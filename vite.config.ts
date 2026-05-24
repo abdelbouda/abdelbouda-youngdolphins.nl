@@ -12,23 +12,29 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      cssCodeSplit: false, // Houdt de CSS-bundel perfect gecentraliseerd
+      cssCodeSplit: true, // Zorgt ervoor dat de CSS van zware componenten pas laadt als ze nodig zijn
       minify: 'esbuild',
       modulePreload: {
-        polyfill: false // Geen onnodige JavaScript runtime wrapper overhead
+        polyfill: false
       },
       rollupOptions: {
         output: {
-          inlineDynamicImports: true, // Garandeert de strakke, platgeslagen netwerkboom
+          // Geen inlineDynamicImports meer om de server-overhead (302ms) te elimineren
+          inlineDynamicImports: false,
+          manualChunks: {
+            // We isoleren de zware jongens die NIET in de Hero-sectie staan
+            'vendor-maps': ['@vis.gl/react-google-maps'],
+            'vendor-libs': ['motion', 'lucide-react'],
+            'vendor-react': ['react', 'react-dom']
+          },
           assetFileNames: 'assets/[name]-[hash][extname]',
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
         },
       },
-      chunkSizeWarningLimit: 2500,
+      chunkSizeWarningLimit: 1000,
     },
     esbuild: {
-      // Verwijdert alle console logs en debuggers in productie om mobiele CPU-cycles te besparen
       drop: mode === 'production' ? ['console', 'debugger'] : [],
       legalComments: 'none',
     },
