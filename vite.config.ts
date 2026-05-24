@@ -12,12 +12,21 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      // Laat Vite de modulepreload tags automatisch en foutloos genereren voor productie
+      // Schakel handmatige splitsing volledig uit om netwerkoverhead op mobiel te voorkomen
+      cssCodeSplit: false,
       modulePreload: {
-        polyfill: false // Schakelt overhead uit voor moderne browsers
+        polyfill: false
       },
-      cssCodeSplit: false, // Bundelt de CSS compact samen voor een snellere initiële weergave
-      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          // Forceert alles in één hoofdbundel voor een directe, lineaire laadtijd
+          manualChunks: undefined,
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js',
+        },
+      },
+      chunkSizeWarningLimit: 1500,
     },
     resolve: {
       alias: {
