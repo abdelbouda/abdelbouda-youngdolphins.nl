@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Waves } from 'lucide-react'; // of ShieldCheck voor voorwaarden
+import { Waves } from 'lucide-react';
 
 export function getStaticPaths() {
   return [
@@ -12,13 +12,10 @@ export function getStaticPaths() {
 
 <Layout title="Privacyverklaring - Young Dolphins">
   <main className="bg-slate-50 pt-32 pb-24 relative overflow-hidden">
-    {/* Subtiel achtergrond-effect voor diepte */}
     <div className="absolute top-0 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
     <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl pointer-events-none"></div>
 
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
-      {/* Header van de pagina */}
       <div className="text-center mb-16">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-md text-secondary mb-6 border border-slate-100">
           <Waves size={32} />
@@ -31,59 +28,46 @@ export function getStaticPaths() {
         </p>
       </div>
 
-      {/* Content Card met Pseudo-3D Bento uitstraling */}
-      <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_20px_50px_rgba(8,_112,_184,_0.04)] border border-slate-100/80 prose prose-slate max-w-none prose-headings:text-primary prose-headings:font-black prose-h2:uppercase prose-h2:text-xs prose-h2:tracking-[0.2em] prose-h2:opacity-60 prose-h2:border-b prose-h2:border-slate-100 prose-h2:pb-3 prose-strong:text-primary font-medium text-slate-600 leading-relaxed">
-        
+      <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_20px_50px_rgba(8,_112,_184,_0.04)] border border-slate-100/80 prose prose-slate max-w-none prose-headings:text-primary prose-headings:font-black prose-strong:text-primary font-medium text-slate-600 leading-relaxed">
         <p>
-          Zwemschool Young Dolphins (hierna: "Young Dolphins", "wij", "ons" of "onze") is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring. Wij respecteren de privacy van onze websitebezoekers, ouders en leerlingen en zorgen ervoor dat de persoonlijke informatie die u ons verschaft vertrouwelijk en conform de Algemene Verordening Gegevensbescherming (AVG) wordt behandeld.
+          Zwemschool Young Dolphins is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring. Wij respecteren de privacy van onze websitebezoekers, ouders en leerlingen en zorgen ervoor dat de persoonlijke informatie die u ons verschaft vertrouwelijk en conform de Algemene Verordening Gegevensbescherming (AVG) wordt behandeld.
         </p>
 
-        <h2>1. Persoonsgegevens die wij verwerken</h2>
+        <h2 className="text-lg font-bold mt-8 mb-4">1. Persoonsgegevens die wij verwerken</h2>
         <p>
           Wanneer u gebruikmaakt van onze website, het inschrijfformulier invult of contact met ons opneemt via WhatsApp, kunnen wij de volgende persoonsgegevens verwerken:
         </p>
-        <ul>
+        <ul className="list-disc pl-6 my-4">
           <li><strong>Gegevens van de ouder/verzorger:</strong> Voor- en achternaam, adresgegevens, telefoonnummer, e-mailadres.</li>
           <li><strong>Gegevens van de leerling (het kind):</strong> Voor- en achternaam, geboortedatum (noodzakelijk voor de groepsindeling en diplomering).</li>
           <li><strong>Technische gegevens:</strong> IP-adres, browsertype, locatiegegevens en interactiegegevens via onze hostingpartij (Vercel).</li>
         </ul>
 
-        <h2>2. Doel en grondslag van de gegevensverwerking</h2>
+        <h2 className="text-lg font-bold mt-8 mb-4">2. Doel en grondslag van de gegevensverwerking</h2>
         <p>
           Young Dolphins verwerkt uw persoonsgegevens voor de volgende doelen:
         </p>
-        <ul>
-          <li>Om de inschrijving van uw kind voor zwemlessen in Monnickendam/regio Amsterdam administratief te verwerken (Uitvoering overeenkomst).</li>
-          <li>Om contact met u op te nemen via e-mail, telefoon of WhatsApp over lestijden, vorderingen en wijzigingen (Uitvoering overeenkomst).</li>
-          <li>Om wettelijke verplichtingen na te komen, zoals onze financiële administratie en belastingaangifte (Wettelijke verplichting).</li>
+        <ul className="list-disc pl-6 my-4">
+          <li>Om de inschrijving van uw kind voor zwemlessen in Monnickendam/regio Amsterdam administratief te verwerken.</li>
+          <li>Om contact met u op te nemen via e-mail (Resend), telefoon of WhatsApp over lestijden en wijzigingen.</li>
+          <li>Om wettelijke verplichtingen na te komen, zoals onze financiële administratie.</li>
         </ul>
 
-        <h2>3. Hoe lang we persoonsgegevens bewaren</h2>
+        <h2 className="text-lg font-bold mt-8 mb-4">3. Hoe lang we persoonsgegevens bewaren</h2>
         <p>
-          Wij bewaren uw persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor uw gegevens worden verzameld. Indien uw kind definitief geplaatst is en lessen volgt, bewaren we de gegevens gedurende de looptijd van de zwemopleiding en de wettelijke fiscale bewaartermijn van 7 jaar. Inschrijvingen die niet leiden tot een definitieve plaatsing worden binnen 12 maanden na het einde van het desbetreffende seizoen verwijderd.
+          Wij bewaren uw persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor uw gegevens worden verzameld. Indien uw kind lessen volgt, bewaren we de gegevens gedurende de looptijd van de zwemopleiding en de wettelijke fiscale bewaartermijn.
         </p>
 
-        <h2>4. Delen van persoonsgegevens met derden</h2>
+        <h2 className="text-lg font-bold mt-8 mb-4">4. Delen van persoonsgegevens met derden</h2>
         <p>
-          Young Dolphins verkoopt uw gegevens niet aan derden. Wij delen uw gegevens uitsluitend met betrouwbare verwerkers die noodzakelijk zijn voor onze bedrijfsvoering:
-        </p>
-        <ul>
-          <li><strong>Vercel:</strong> Voor de hosting en veilige performance van de website.</li>
-          <li><strong>Resend:</strong> Voor de veilige en snelle verzending van transactionele e-mails (zoals de bevestiging van uw inschrijving).</li>
-          <li><strong>Lokale zwembadlocaties:</strong> Indien strikt noodzakelijk voor de toegang of veiligheidsprotocollen ter plaatse.</li>
-        </ul>
-
-        <h2>5. Cookies en technologische infrastructuur</h2>
-        <p>
-          Onze website is gebouwd op basis van moderne, snelle statische technologie (Astro/Vercel) en maakt minimaal gebruik van trackingcookies om de laadsnelheid (performance) optimaal te houden. Wij gebruiken functionele en analytische cookies die geen inbreuk maken op uw privacy.
+          Young Dolphins verkoopt uw gegevens niet aan derden. Wij delen uw gegevens uitsluitend met betrouwbare verwerkers die noodzakelijk zijn voor onze bedrijfsvoering zoals Vercel en Resend.
         </p>
 
-        <h2>6. Uw rechten (Gegevens inzien, aanpassen of verwijderen)</h2>
+        <h2 className="text-lg font-bold mt-8 mb-4">5. Uw rechten</h2>
         <p>
-          U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Daarnaast heeft u het recht om uw eventuele toestemming voor de gegevensverwerking in te trekken. U kunt een verzoek tot inzage, correctie of verwijdering sturen naar <strong>info@youngdolphins.nl</strong>. Wij zullen zo snel mogelijk, maar uiterlijk binnen zeven werkdagen, op uw verzoek reageren.
+          U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. U kunt een verzoek sturen naar <strong>info@youngdolphins.nl</strong>. Wij zullen zo snel mogelijk, maar uiterlijk binnen zeven werkdagen, reageren.
         </p>
       </div>
-
     </div>
   </main>
 </Layout>
