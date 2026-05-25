@@ -44,23 +44,24 @@ export default function RegioSEO() {
                 )}
               </p>
               <div className="mb-6">
-                <h4 class="font-semibold text-[#00A3E0] mb-3 font-sora">
+                <h4 className="font-semibold text-[#00A3E0] mb-3 font-sora">
                   {isNl ? 'Ideaal bereikbaar voor:' : 'Perfectly accessible for:'}
                 </h4>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2 font-jakarta text-sm text-slate-700">
-                    <span class="text-[#00A3E0] font-bold">✓</span> {isNl ? 'Amsterdam Noord (vlakbij de Ring A10)' : 'Amsterdam North (near Ring A10)'}
+                    <span className="text-[#00A3E0] font-bold">✓</span> {isNl ? 'Amsterdam Noord (vlakbij de Ring A10)' : 'Amsterdam North (near Ring A10)'}
                   </li>
                   <li className="flex items-center gap-2 font-jakarta text-sm text-slate-700">
-                    <span class="text-[#00A3E0] font-bold">✓</span> {isNl ? 'Amsterdam Oost' : 'Amsterdam East'}
+                    <span className="text-[#00A3E0] font-bold">✓</span> {isNl ? 'Amsterdam Oost' : 'Amsterdam East'}
                   </li>
                   <li className="flex items-center gap-2 font-jakarta text-sm text-slate-700">
-                    <span class="text-[#00A3E0] font-bold">✓</span> {isNl ? 'Privélessen & kleine groepen' : 'Private lessons & small groups'}
+                    <span className="text-[#00A3E0] font-bold">✓</span> {isNl ? 'Privélessen & kleine groepen' : 'Private lessons & small groups'}
                   </li>
                 </ul>
               </div>
             </div>
-            <a href="#signup" className="inline-block text-center bg-[#1B365D] hover:bg-[#234373] text-white font-medium py-3 px-6 rounded-xl transition-colors w-full">
+            {/* Aangepaste link naar #signup-form */}
+            <a href="#signup-form" className="inline-block text-center bg-[#1B365D] hover:bg-[#234373] text-white font-medium py-3 px-6 rounded-xl transition-colors w-full">
               {isNl ? 'Meld je aan in Amsterdam' : 'Sign up in Amsterdam'}
             </a>
           </div>
@@ -84,23 +85,24 @@ export default function RegioSEO() {
                 )}
               </p>
               <div className="mb-6">
-                <h4 class="font-semibold text-[#00A3E0] mb-3 font-sora">
+                <h4 className="font-semibold text-[#00A3E0] mb-3 font-sora">
                   {isNl ? 'Regionale dekking:' : 'Regional coverage:'}
                 </h4>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2 font-jakarta text-sm text-slate-700">
-                    <span class="text-[#00A3E0] font-bold">✓</span> Monnickendam ({isNl ? 'Centrum & Wijken' : 'Center & Neighborhoods'})
+                    <span className="text-[#00A3E0] font-bold">✓</span> Monnickendam ({isNl ? 'Centrum & Wijken' : 'Center & Neighborhoods'})
                   </li>
                   <li className="flex items-center gap-2 font-jakarta text-sm text-slate-700">
-                    <span class="text-[#00A3E0] font-bold">✓</span> Broek in Waterland & Marken
+                    <span className="text-[#00A3E0] font-bold">✓</span> Broek in Waterland & Marken
                   </li>
                   <li className="flex items-center gap-2 font-jakarta text-sm text-slate-700">
-                    <span class="text-[#00A3E0] font-bold">✓</span> Volendam & Zuiderwoude
+                    <span className="text-[#00A3E0] font-bold">✓</span> Volendam & Zuiderwoude
                   </li>
                 </ul>
               </div>
             </div>
-            <a href="#signup" className="inline-block text-center bg-[#00A3E0] hover:bg-[#0082B3] text-white font-medium py-3 px-6 rounded-xl transition-colors w-full">
+            {/* Aangepaste link naar #signup-form */}
+            <a href="#signup-form" className="inline-block text-center bg-[#00A3E0] hover:bg-[#0082B3] text-white font-medium py-3 px-6 rounded-xl transition-colors w-full">
               {isNl ? 'Meld je aan in Monnickendam' : 'Sign up in Monnickendam'}
             </a>
           </div>
