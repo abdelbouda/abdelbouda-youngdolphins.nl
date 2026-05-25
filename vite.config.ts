@@ -12,39 +12,37 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      // Schakel CSS splitting volledig uit
-      cssCodeSplit: false,
+      // OMDRAAIING: CSS splitsen voor snellere 'first paint'
+      cssCodeSplit: true, 
       minify: 'esbuild',
       modulePreload: {
-        polyfill: false // Voorkomt extra overhead links in de HTML head
+        polyfill: false
       },
       rollupOptions: {
         output: {
-          // Forceer ALLES (inclusief dynamische componenten) in één enkele bundel
-          inlineDynamicImports: true,
+          // OMDRAAIING: Dynamische imports splitsen in aparte chunks
+          inlineDynamicImports: false, 
+          manualChunks(id) {
+            // Scheid React en zware libs van je eigen code voor betere caching
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+          },
           assetFileNames: 'assets/[name]-[hash][extname]',
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
         },
       },
-      chunkSizeWarningLimit: 3000,
+      chunkSizeWarningLimit: 1000, // Strengere limiet om te waken voor te grote chunks
     },
     esbuild: {
-      // Verwijdert alle overhead aan logjes in productie om CPU te sparen
       drop: mode === 'production' ? ['console', 'debugger'] : [],
       legalComments: 'none',
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(__dirname, './src'), // Aangepast naar ./src voor betere pad-resolutie
       },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
 });
