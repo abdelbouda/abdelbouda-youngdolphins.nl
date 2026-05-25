@@ -1,96 +1,66 @@
 @import "tailwindcss";
 
-/* 1. Lokale Font definities */
+/* 1. Lokale Font definities - Exacte paden naar jouw bestanden */
 @font-face {
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
-  font-weight: 300 800;
+  font-weight: 400;
   font-display: swap;
-  src: url('/assets/fonts/plus-jakarta-sans.woff2') format('woff2');
+  src: url('/assets/fonts/plus-jakarta-sans-v12-latin_latin-ext-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/plus-jakarta-sans-v12-latin_latin-ext-700.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Sora';
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 400;
   font-display: swap;
-  src: url('/assets/fonts/sora.woff2') format('woff2');
+  src: url('/assets/fonts/sora-v17-latin_latin-ext-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/sora-v17-latin_latin-ext-700.woff2') format('woff2');
 }
 
 /* 2. Theme Configuratie */
 @theme {
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-display: "Sora", sans-serif;
   
   --color-primary: #1B365D;
   --color-secondary: #5AC1E6;
   --color-accent: #F43F5E;
   --color-coral: #FF7F50;
-  --color-glass: rgba(255, 255, 255, 0.8);
   
   --shadow-premium: 0 20px 50px rgba(8, 112, 184, 0.07);
   --shadow-3d: 0 10px 30px -10px rgba(0, 31, 63, 0.3);
 }
 
-/* 3. Utilities en Base */
-@layer utilities {
-  .bg-aquatic {
-    background: radial-gradient(circle at 10% 20%, rgba(90, 193, 230, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(27, 54, 93, 0.03) 0%, transparent 40%);
-  }
-  
-  .glass-card {
-    @apply backdrop-blur-xl bg-white/40 border border-white/40 shadow-xl;
-  }
-  
-  .text-glow {
-    text-shadow: 0 0 30px rgba(90, 193, 230, 0.4);
-  }
-
-  .glass-morphism {
-    @apply backdrop-blur-md bg-white/80 border border-white/20;
-  }
-
-  .pricing-card-3d {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-3d;
-  }
-}
-
+/* 3. Base Styles */
 @layer base {
   body {
     @apply font-sans text-slate-900 bg-white selection:bg-secondary/30;
   }
-  
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold tracking-tight text-primary;
   }
 }
 
-/* 4. Custom Animaties */
-.gradient-shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.gradient-shine::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: rotate(45deg);
-  transition: 0.5s;
-}
-
-.gradient-shine:hover::after {
-  left: 100%;
-  top: 100%;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+/* 4. Utilities */
+@layer utilities {
+  .glass-morphism { @apply backdrop-blur-md bg-white/80 border border-white/20; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
 }
 
 @keyframes float {
