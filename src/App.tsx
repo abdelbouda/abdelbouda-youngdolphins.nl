@@ -1,24 +1,24 @@
 import React, { Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero'; // Boven de vouw: direct laden
-import USPSection from './components/USPSection'; // Boven de vouw: direct laden
+import Hero from './components/Hero';
+import USPSection from './components/USPSection';
 import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
-import Privacy from './components/Privacy';
-import Voorwaarden from './components/Voorwaarden';
-import Cookies from './components/Cookies';
 
-// Lazy load non-critical components (Below the fold)
+// Lazy load non-critical components
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
-const Locations = lazy(() => import('./components/Locations'));
+const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
+const Pricing = lazy(() => import('./components/Pricing'));
 const About = lazy(() => import('./components/About'));
+const Locations = lazy(() => import('./components/Locations'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
 const InteractiveSignup = lazy(() => import('./components/InteractiveSignup'));
+const Privacy = lazy(() => import('./components/Privacy'));
+const Voorwaarden = lazy(() => import('./components/Voorwaarden'));
+const Cookies = lazy(() => import('./components/Cookies'));
 const Footer = lazy(() => import('./components/Footer'));
-const Pricing = lazy(() => import('./components/Pricing'));
-const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
 
 function AppContent() {
   const { t } = useLanguage();
@@ -33,12 +33,12 @@ function AppContent() {
       <Navbar />
       
       <main>
-        {/* Deze twee laden direct, geen Suspense nodig */}
+        {/* Directe weergave voor de beste LCP score */}
         <Hero />
         <USPSection />
         
-        {/* Alles eronder is lazy, wat nu perfect werkt door je nieuwe vite.config.ts */}
-        <Suspense fallback={<div className="h-20"></div>}>
+        {/* We groeperen de rest in één Suspense boundary */}
+        <Suspense fallback={<div className="h-40" />}>
           <RegioSEO />
           <BentoFeatures />
           <ServiceAreas />
@@ -48,13 +48,14 @@ function AppContent() {
           <FAQSection />
           <InteractiveSignup />
           
+          {/* Deze staan nu veilig binnen de boundary */}
           <Privacy />
           <Voorwaarden />
           <Cookies />
         </Suspense>
       </main>
 
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="h-20" />}>
         <Footer />
       </Suspense>
       
