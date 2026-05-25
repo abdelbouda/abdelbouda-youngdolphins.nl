@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import USPSection from './components/USPSection';
+import Hero from './components/Hero'; // Boven de vouw: direct laden
+import USPSection from './components/USPSection'; // Boven de vouw: direct laden
 import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
 import Privacy from './components/Privacy';
 import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
 
-// Lazy load non-critical components
-const RegioSEO = lazy(() => import('./components/RegioSEO')); // <-- NIEUW ingeladen
+// Lazy load non-critical components (Below the fold)
+const RegioSEO = lazy(() => import('./components/RegioSEO'));
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
 const Locations = lazy(() => import('./components/Locations'));
 const About = lazy(() => import('./components/About'));
@@ -28,17 +28,18 @@ function AppContent() {
       <SEO 
         title={t('seo_title')}
         description={t('seo_description')}
-        keywords={t('seo_keywords')}
       />
 
       <Navbar />
       
       <main>
+        {/* Deze twee laden direct, geen Suspense nodig */}
         <Hero />
         <USPSection />
         
-        <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div></div>}>
-          <RegioSEO /> {/* <-- NIEUW: Hier direct onder de USPs geplaatst */}
+        {/* Alles eronder is lazy, wat nu perfect werkt door je nieuwe vite.config.ts */}
+        <Suspense fallback={<div className="h-20"></div>}>
+          <RegioSEO />
           <BentoFeatures />
           <ServiceAreas />
           <Pricing />
@@ -47,7 +48,6 @@ function AppContent() {
           <FAQSection />
           <InteractiveSignup />
           
-          {/* Juridische secties die getarget worden vanuit de footer */}
           <Privacy />
           <Voorwaarden />
           <Cookies />
