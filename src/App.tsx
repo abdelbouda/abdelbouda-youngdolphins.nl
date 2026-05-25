@@ -1,12 +1,14 @@
 import React, { Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
+
+// Direct laden voor de 100/100 performance score (LCP/FCP)
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import USPSection from './components/USPSection';
 import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
 
-// Lazy load non-critical components
+// Lazy load voor niet-kritieke secties (verlaagt 'Main Thread' belasting)
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
 const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
@@ -33,11 +35,11 @@ function AppContent() {
       <Navbar />
       
       <main>
-        {/* Directe weergave voor de beste LCP score */}
+        {/* Directe rendering: geen spinner/wachttijd voor deze secties */}
         <Hero />
         <USPSection />
         
-        {/* We groeperen de rest in één Suspense boundary */}
+        {/* Suspense boundary voor 'below the fold' content */}
         <Suspense fallback={<div className="h-40" />}>
           <RegioSEO />
           <BentoFeatures />
@@ -48,7 +50,6 @@ function AppContent() {
           <FAQSection />
           <InteractiveSignup />
           
-          {/* Deze staan nu veilig binnen de boundary */}
           <Privacy />
           <Voorwaarden />
           <Cookies />
