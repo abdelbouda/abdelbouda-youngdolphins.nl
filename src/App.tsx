@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
 import { useSettings } from './hooks/useFirestore';
 import Navbar from './components/Navbar';
@@ -9,6 +9,8 @@ import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
 import Privacy from './components/Privacy';
 import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
 
 // Lazy load non-critical components
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
@@ -70,6 +72,19 @@ function AppContent() {
 }
 
 export default function App() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const isAdminRoute = window.location.hash === '#admin';
+
+  if (isAdminRoute) {
+    return isAdmin ? (
+      <AdminDashboard />
+    ) : (
+      <LanguageProvider>
+        <AdminLogin onLogin={() => setIsAdmin(true)} />
+      </LanguageProvider>
+    );
+  }
+
   return (
     <LanguageProvider>
       <AppContent />
