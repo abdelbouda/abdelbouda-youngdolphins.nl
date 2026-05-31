@@ -27,8 +27,8 @@ export default function Navbar() {
     { name: t('nav_faq'), href: '#faq' },
   ];
 
-  // Alleen de CTA-tekst kan uit Firebase komen, anders valt die terug op vertaling
-  const ctaText = settings?.cta_button_text || t('cta_register');
+  // Tagline uit Firestore via LanguageContext, fallback naar standaard CTA
+  const tagline = settings?.tagline_key ? t(settings.tagline_key) : t('cta_register');
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-16 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg' : 'h-20 bg-transparent'}`}>
@@ -73,7 +73,7 @@ export default function Navbar() {
               href="#signup-form"
               className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-sm hover:bg-secondary transition-all shadow-premium gradient-shine"
             >
-              {ctaText}
+              {tagline}
             </a>
           </div>
 
@@ -122,7 +122,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium"
               >
-                {ctaText}
+                {tagline}
               </a>
             </div>
           </motion.div>
