@@ -28,19 +28,9 @@ export default function InteractiveSignup() {
     childInfo: '',
     package: 'Progress+',
     gewenstNiveau: '',
-    gewensteDagen: [] as string[],
+    tijdstip: '',
     notities: '',
   });
-
-  const dagen = [
-    { value: 'monday', key: 'dag_maandag' },
-    { value: 'tuesday', key: 'dag_dinsdag' },
-    { value: 'wednesday', key: 'dag_woensdag' },
-    { value: 'thursday', key: 'dag_donderdag' },
-    { value: 'friday', key: 'dag_vrijdag' },
-    { value: 'saturday', key: 'dag_zaterdag' },
-    { value: 'sunday', key: 'dag_zondag' },
-  ];
 
   const niveaus = [
     { value: 'niveau_1', key: 'niveau_1_naam' },
@@ -49,18 +39,14 @@ export default function InteractiveSignup() {
     { value: 'niveau_4', key: 'niveau_4_naam' },
   ];
 
+  const tijdstippen = [
+    { value: '16:00-17:00', label_nl: 'Zondag 16:00 - 17:00', label_en: 'Sunday 16:00 - 17:00' },
+    { value: '17:00-18:00', label_nl: 'Zondag 17:00 - 18:00', label_en: 'Sunday 17:00 - 18:00' },
+  ];
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleDagToggle = (dag: string) => {
-    setFormData(prev => ({
-      ...prev,
-      gewensteDagen: prev.gewensteDagen.includes(dag)
-        ? prev.gewensteDagen.filter(d => d !== dag)
-        : [...prev.gewensteDagen, dag]
-    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,7 +55,6 @@ export default function InteractiveSignup() {
     setError(null);
 
     try {
-      // 1. Opslaan in Firestore wachtlijst
       await addDoc(collection(db, 'wachtlijst'), {
         ouderNaam: formData.name,
         email: formData.email,
@@ -77,15 +62,15 @@ export default function InteractiveSignup() {
         kindNaam: formData.childInfo,
         gewenstePackage: formData.package,
         gewenstNiveau: formData.gewenstNiveau,
-        gewensteDagen: formData.gewensteDagen,
+        gewensteDagen: ['sunday'],
+        tijdstip: formData.tijdstip,
         voorkeurstaal: language,
         notities: formData.notities,
         inschrijfdatum: new Date(),
         status: 'nieuw'
       });
 
-      // 2. Verstuur emails via bestaande API
-      const response = await fetch('/api/signup', {
+      await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -97,13 +82,8 @@ export default function InteractiveSignup() {
         })
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || t('form_error_unknown'));
-      }
-
       setSubmitted(true);
-      setFormData({ name: '', phone: '', email: '', childInfo: '', package: 'Progress+', gewenstNiveau: '', gewensteDagen: [], notities: '' });
+      setFormData({ name: '', phone: '', email: '', childInfo: '', package: 'Progress+', gewenstNiveau: '', tijdstip: '', notities: '' });
     } catch (err) {
       setError(err instanceof Error ? err.message : t('form_error_unknown'));
     } finally {
@@ -133,16 +113,12 @@ export default function InteractiveSignup() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
               <div className="space-y-4">
-                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">
-                  <Phone size={24} />
-                </div>
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary"><Phone size={24} /></div>
                 <p className="text-sm font-black uppercase tracking-widest text-slate-500">{t('form_phone_label')}</p>
                 <a href="tel:0628421354" className="text-lg font-bold hover:text-secondary transition-colors">06-28421354</a>
               </div>
               <div className="space-y-4">
-                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">
-                  <Mail size={24} />
-                </div>
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary"><Mail size={24} /></div>
                 <p className="text-sm font-black uppercase tracking-widest text-slate-500">{t('form_email_label')}</p>
                 <a href="mailto:info@youngdolphins.nl" className="text-lg font-bold hover:text-secondary transition-colors">info@youngdolphins.nl</a>
               </div>
@@ -150,15 +126,9 @@ export default function InteractiveSignup() {
             
             <div className="mt-16 pt-16 border-t border-white/5 space-y-4">
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
-                  <Accessibility size={16} />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
-                  <Users size={16} />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
-                  <Globe size={16} />
-                </div>
+                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60"><Accessibility size={16} /></div>
+                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60"><Users size={16} /></div>
+                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60"><Globe size={16} /></div>
               </div>
               <div>
                 <p className="font-black text-secondary uppercase tracking-wider text-sm">Join the Dolphins</p>
@@ -178,25 +148,14 @@ export default function InteractiveSignup() {
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-3xl rounded-full pointer-events-none"></div>
             
             {submitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="py-6 text-center"
-              >
-                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <ShieldCheck size={40} />
-                </div>
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="py-6 text-center">
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-lg"><ShieldCheck size={40} /></div>
                 <h3 className="text-2xl font-display font-black mb-3">{t('success_title')}</h3>
                 <p className="text-base text-slate-600 font-medium mb-8">{t('success_desc')}</p>
-                <button 
-                  onClick={() => setSubmitted(false)}
-                  className="px-8 py-4 bg-primary text-white rounded-2xl font-black shadow-premium hover:bg-secondary transition-all"
-                >
-                  {t('form_back')}
-                </button>
+                <button onClick={() => setSubmitted(false)} className="px-8 py-4 bg-primary text-white rounded-2xl font-black shadow-premium hover:bg-secondary transition-all">{t('form_back')}</button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+              <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                   <DolphinIcon className="w-5 h-5" color="#5AC1E6" />
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{t('form_direct_register')}</span>
@@ -206,20 +165,20 @@ export default function InteractiveSignup() {
                   <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs font-bold border border-red-100">{error}</div>
                 )}
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
-                    <input required name="name" value={formData.name} onChange={handleInputChange} type="text" placeholder={t('form_placeholder_parent')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
-                  </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
+                  <input required name="name" value={formData.name} onChange={handleInputChange} type="text" placeholder={t('form_placeholder_parent')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_phone')}</label>
                     <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" placeholder={t('form_placeholder_phone')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
-                  <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder={t('form_placeholder_email')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
+                    <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder={t('form_placeholder_email')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -227,39 +186,43 @@ export default function InteractiveSignup() {
                   <input required name="childInfo" value={formData.childInfo} onChange={handleInputChange} type="text" placeholder={t('form_placeholder_child')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                 </div>
 
-                {/* Package (Starter/Progress+/Privé) */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
-                  <select name="package" value={formData.package} onChange={handleInputChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
-                    <option value="Starter">{t('package_starter')}</option>
-                    <option value="Progress+">{t('package_progress')}</option>
-                    <option value="Privé">{t('package_private')}</option>
-                  </select>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
+                    <select name="package" value={formData.package} onChange={handleInputChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
+                      <option value="Starter">{t('package_starter')}</option>
+                      <option value="Progress+">{t('package_progress')}</option>
+                      <option value="Privé">{t('package_private')}</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_select_level')}</label>
+                    <select name="gewenstNiveau" value={formData.gewenstNiveau} onChange={handleInputChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
+                      <option value="">{t('form_select_level')}</option>
+                      {niveaus.map(n => (<option key={n.value} value={n.value}>{t(n.key)}</option>))}
+                    </select>
+                  </div>
                 </div>
 
-                {/* Niveau */}
+                {/* Tijdstip zondag */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_select_level')}</label>
-                  <select name="gewenstNiveau" value={formData.gewenstNiveau} onChange={handleInputChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
-                    <option value="">{t('form_select_level')}</option>
-                    {niveaus.map(n => (<option key={n.value} value={n.value}>{t(n.key)}</option>))}
-                  </select>
-                </div>
-
-                {/* Gewenste dagen */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_days')}</label>
-                  <div className="flex flex-wrap gap-2">
-                    {dagen.map(dag => (
-                      <button key={dag.value} type="button" onClick={() => handleDagToggle(dag.value)}
-                        className={`px-3 py-2 rounded-xl text-xs font-bold transition ${formData.gewensteDagen.includes(dag.value) ? 'bg-secondary text-white shadow-premium shadow-secondary/30' : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'}`}>
-                        {t(dag.key)}
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                    {language === 'nl' ? 'Tijdstip zondag' : 'Sunday timeslot'}
+                  </label>
+                  <div className="flex gap-3">
+                    {tijdstippen.map(tijd => (
+                      <button key={tijd.value} type="button" onClick={() => setFormData(prev => ({ ...prev, tijdstip: tijd.value }))}
+                        className={`flex-1 px-4 py-3 rounded-xl text-xs font-bold transition ${
+                          formData.tijdstip === tijd.value
+                            ? 'bg-secondary text-white shadow-premium shadow-secondary/30'
+                            : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
+                        }`}>
+                        {language === 'nl' ? tijd.label_nl.split(' ').slice(1).join(' ') : tijd.label_en.split(' ').slice(1).join(' ')}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                {/* Notities */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_notes')}</label>
                   <textarea name="notities" value={formData.notities} onChange={handleInputChange} rows={2} placeholder={t('form_placeholder_notes')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm resize-none" />
