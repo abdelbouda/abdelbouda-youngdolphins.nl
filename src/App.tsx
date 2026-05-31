@@ -6,7 +6,6 @@ import Hero from './components/Hero';
 import USPSection from './components/USPSection';
 import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
-import ProeflesForm from './components/ProeflesForm';
 import Privacy from './components/Privacy';
 import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
@@ -52,10 +51,7 @@ function AppContent() {
           <About />
           <Locations />
           <FAQSection />
-          
-          {/* Beide formulieren behouden */}
           <InteractiveSignup />
-          <ProeflesForm />
           
           <Privacy />
           <Voorwaarden />
