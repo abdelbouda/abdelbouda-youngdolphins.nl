@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import USPSection from './components/USPSection';
 import SEO from './components/SEO';
 import StickyCTA, { WhatsAppWidget } from './components/ConversionWidgets';
+import ProeflesForm from './components/ProeflesForm';
 import Privacy from './components/Privacy';
 import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
@@ -33,7 +34,7 @@ function AppContent() {
     <div className="min-h-screen bg-white">
       <SEO 
         title={title}
-        description={settings?.tagline || t('seo_description')}
+        description={settings?.tagline_key ? t(settings.tagline_key) : t('seo_description')}
         keywords={t('seo_keywords')}
       />
 
@@ -51,7 +52,10 @@ function AppContent() {
           <About />
           <Locations />
           <FAQSection />
+          
+          {/* Beide formulieren behouden */}
           <InteractiveSignup />
+          <ProeflesForm />
           
           <Privacy />
           <Voorwaarden />

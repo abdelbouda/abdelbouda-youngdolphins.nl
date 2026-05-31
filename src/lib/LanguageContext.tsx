@@ -212,6 +212,26 @@ const translations: Translations = {
   package_private: { nl: 'Privé (1-op-1)', en: 'Private (1-on-1)' },
 
   // ============================================================
+  // FORM EXTRA (voor ProeflesForm)
+  // ============================================================
+  form_days: { nl: 'Gewenste dagen', en: 'Preferred days' },
+  form_notes: { nl: 'Bijzonderheden (optioneel)', en: 'Notes (optional)' },
+  form_select_level: { nl: 'Kies een niveau', en: 'Choose a level' },
+  form_placeholder_age: { nl: 'Leeftijd', en: 'Age' },
+  form_placeholder_notes: { nl: 'Bijv. watervrees, medische bijzonderheden...', en: 'e.g. water fear, medical notes...' },
+
+  // ============================================================
+  // DAGEN
+  // ============================================================
+  dag_maandag: { nl: 'Maandag', en: 'Monday' },
+  dag_dinsdag: { nl: 'Dinsdag', en: 'Tuesday' },
+  dag_woensdag: { nl: 'Woensdag', en: 'Wednesday' },
+  dag_donderdag: { nl: 'Donderdag', en: 'Thursday' },
+  dag_vrijdag: { nl: 'Vrijdag', en: 'Friday' },
+  dag_zaterdag: { nl: 'Zaterdag', en: 'Saturday' },
+  dag_zondag: { nl: 'Zondag', en: 'Sunday' },
+
+  // ============================================================
   // FOOTER
   // ============================================================
   footer_follow: { nl: 'Volg ons op', en: 'Follow us on' },
