@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
+import { useSettings } from './hooks/useFirestore';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import USPSection from './components/USPSection';
@@ -10,7 +11,7 @@ import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
 
 // Lazy load non-critical components
-const RegioSEO = lazy(() => import('./components/RegioSEO')); // <-- NIEUW ingeladen
+const RegioSEO = lazy(() => import('./components/RegioSEO'));
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
 const Locations = lazy(() => import('./components/Locations'));
 const About = lazy(() => import('./components/About'));
@@ -22,23 +23,28 @@ const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
 
 function AppContent() {
   const { t } = useLanguage();
+  const { settings } = useSettings();
+
+  const title = settings?.schoolName 
+    ? `${settings.schoolName} - ${t('seo_title')}` 
+    : t('seo_title');
 
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title={t('seo_title')}
-        description={t('seo_description')}
+        title={title}
+        description={settings?.tagline || t('seo_description')}
         keywords={t('seo_keywords')}
       />
 
-      <Navbar />
+      <Navbar settings={settings} />
       
       <main>
-        <Hero />
+        <Hero settings={settings} />
         <USPSection />
         
         <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div></div>}>
-          <RegioSEO /> {/* <-- NIEUW: Hier direct onder de USPs geplaatst */}
+          <RegioSEO />
           <BentoFeatures />
           <ServiceAreas />
           <Pricing />
@@ -47,7 +53,6 @@ function AppContent() {
           <FAQSection />
           <InteractiveSignup />
           
-          {/* Juridische secties die getarget worden vanuit de footer */}
           <Privacy />
           <Voorwaarden />
           <Cookies />
@@ -55,11 +60,11 @@ function AppContent() {
       </main>
 
       <Suspense fallback={null}>
-        <Footer />
+        <Footer settings={settings} />
       </Suspense>
       
-      <StickyCTA />
-      <WhatsAppWidget />
+      <StickyCTA settings={settings} />
+      <WhatsAppWidget settings={settings} />
     </div>
   );
 }
