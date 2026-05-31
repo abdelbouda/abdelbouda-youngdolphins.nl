@@ -260,8 +260,8 @@ const translations: Translations = {
   // FIRESTORE KEYS - SETTINGS
   // ============================================================
   tagline_school: {
-    nl: 'Internationale Zwemschool Amsterdam',
-    en: 'International Swim School Amsterdam'
+    nl: 'Schrijf je direct in !',
+    en: 'Register Now !'
   },
 
   // ============================================================
