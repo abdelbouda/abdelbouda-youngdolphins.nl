@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Waves, Menu, X, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
+import { useSettings } from '../hooks/useFirestore';
 
 import Logo from './Logo';
 
@@ -9,6 +10,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { settings } = useSettings();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -24,6 +26,9 @@ export default function Navbar() {
     { name: t('nav_about'), href: '#over-ons' },
     { name: t('nav_faq'), href: '#faq' },
   ];
+
+  // Alleen de CTA-tekst kan uit Firebase komen, anders valt die terug op vertaling
+  const ctaText = settings?.cta_button_text || t('cta_register');
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-16 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg' : 'h-20 bg-transparent'}`}>
@@ -68,7 +73,7 @@ export default function Navbar() {
               href="#signup-form"
               className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-sm hover:bg-secondary transition-all shadow-premium gradient-shine"
             >
-              {t('cta_register')}
+              {ctaText}
             </a>
           </div>
 
@@ -117,7 +122,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium"
               >
-                {t('cta_register')}
+                {ctaText}
               </a>
             </div>
           </motion.div>
