@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Send, Phone, Mail, Clock, ShieldCheck, Accessibility, Users, Globe } from 'lucide-react';
+import { Send, Phone, Mail, ShieldCheck, Accessibility, Users, Globe } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
 import { db } from '../firebase';
@@ -27,6 +27,7 @@ export default function ProeflesForm() {
     telefoon: '',
     kindNaam: '',
     kindLeeftijd: '',
+    selectedPackage: 'Progress+',
     gewenstNiveau: '',
     gewensteDagen: [] as string[],
     notities: '',
@@ -49,6 +50,12 @@ export default function ProeflesForm() {
     { value: 'niveau_4', key: 'niveau_4_naam' },
   ];
 
+  const packages = [
+    { value: 'Starter', key: 'package_starter' },
+    { value: 'Progress+', key: 'package_progress' },
+    { value: 'Privé', key: 'package_private' },
+  ];
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -69,13 +76,14 @@ export default function ProeflesForm() {
     setError(null);
 
     try {
-      // 1. Opslaan in Firestore
+      // 1. Opslaan in Firestore wachtlijst (MET package veld)
       await addDoc(collection(db, 'wachtlijst'), {
         ouderNaam: formData.ouderNaam,
         email: formData.email,
         telefoon: formData.telefoon,
         kindNaam: formData.kindNaam,
         kindLeeftijd: parseInt(formData.kindLeeftijd) || 0,
+        gewenstePackage: formData.selectedPackage,
         gewenstNiveau: formData.gewenstNiveau,
         gewensteDagen: formData.gewensteDagen,
         voorkeurstaal: language,
@@ -93,12 +101,12 @@ export default function ProeflesForm() {
           phone: formData.telefoon,
           email: formData.email,
           childInfo: `${formData.kindNaam} (${formData.kindLeeftijd} jaar)`,
-          package: formData.gewenstNiveau || 'Niet opgegeven'
+          package: formData.selectedPackage
         })
       });
 
       setSubmitted(true);
-      setFormData({ ouderNaam: '', email: '', telefoon: '', kindNaam: '', kindLeeftijd: '', gewenstNiveau: '', gewensteDagen: [], notities: '' });
+      setFormData({ ouderNaam: '', email: '', telefoon: '', kindNaam: '', kindLeeftijd: '', selectedPackage: 'Progress+', gewenstNiveau: '', gewensteDagen: [], notities: '' });
     } catch (err) {
       setError(err instanceof Error ? err.message : t('form_error_unknown'));
     } finally {
@@ -111,10 +119,7 @@ export default function ProeflesForm() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.1),transparent_50%)]"></div>
       
       <motion.div
-        animate={{ 
-          y: [0, 20, 0],
-          rotate: [0, -10, 0]
-        }}
+        animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
         className="absolute -top-10 -right-10 w-64 h-64 bg-secondary/5 rounded-full blur-[100px] pointer-events-none"
       />
@@ -128,35 +133,23 @@ export default function ProeflesForm() {
             <p className="text-xl text-slate-300 mb-16 max-w-md font-medium leading-relaxed">
               {t('contact_desc')}
             </p>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
               <div className="space-y-4">
-                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">
-                  <Phone size={24} />
-                </div>
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary"><Phone size={24} /></div>
                 <p className="text-sm font-black uppercase tracking-widest text-slate-500">{t('form_phone_label')}</p>
                 <a href="tel:0628421354" className="text-lg font-bold hover:text-secondary transition-colors">06-28421354</a>
               </div>
               <div className="space-y-4">
-                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary">
-                  <Mail size={24} />
-                </div>
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-secondary"><Mail size={24} /></div>
                 <p className="text-sm font-black uppercase tracking-widest text-slate-500">{t('form_email_label')}</p>
                 <a href="mailto:info@youngdolphins.nl" className="text-lg font-bold hover:text-secondary transition-colors">info@youngdolphins.nl</a>
               </div>
             </div>
-            
             <div className="mt-16 pt-16 border-t border-white/5 space-y-4">
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
-                  <Accessibility size={16} />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
-                  <Users size={16} />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60">
-                  <Globe size={16} />
-                </div>
+                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60"><Accessibility size={16} /></div>
+                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60"><Users size={16} /></div>
+                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/60"><Globe size={16} /></div>
               </div>
               <div>
                 <p className="font-black text-secondary uppercase tracking-wider text-sm">Join the Dolphins</p>
@@ -169,32 +162,18 @@ export default function ProeflesForm() {
             id="proefles-form"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ 
-              scale: 1.01,
-              boxShadow: "0 40px 80px rgba(0,0,0,0.2)"
-            }}
+            whileHover={{ scale: 1.01, boxShadow: "0 40px 80px rgba(0,0,0,0.2)" }}
             viewport={{ once: true }}
             className="bg-white rounded-[2.5rem] p-6 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] text-primary relative overflow-hidden max-w-lg mx-auto lg:ml-auto transition-all duration-500 scroll-mt-24"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-3xl rounded-full pointer-events-none"></div>
             
             {submitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="py-6 text-center"
-              >
-                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <ShieldCheck size={40} />
-                </div>
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="py-6 text-center">
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-lg"><ShieldCheck size={40} /></div>
                 <h3 className="text-2xl font-display font-black mb-3">{t('success_title')}</h3>
                 <p className="text-base text-slate-600 font-medium mb-8">{t('success_desc')}</p>
-                <button 
-                  onClick={() => setSubmitted(false)}
-                  className="px-8 py-4 bg-primary text-white rounded-2xl font-black shadow-premium hover:bg-secondary transition-all"
-                >
-                  {t('form_back')}
-                </button>
+                <button onClick={() => setSubmitted(false)} className="px-8 py-4 bg-primary text-white rounded-2xl font-black shadow-premium hover:bg-secondary transition-all">{t('form_back')}</button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
@@ -204,92 +183,58 @@ export default function ProeflesForm() {
                 </div>
                 
                 {error && (
-                  <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs font-bold border border-red-100">
-                    {error}
-                  </div>
+                  <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs font-bold border border-red-100">{error}</div>
                 )}
 
-                {/* Naam ouder */}
+                {/* Naam ouder + Telefoon */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_name_parent')}</label>
-                    <input 
-                      required
-                      name="ouderNaam"
-                      value={formData.ouderNaam}
-                      onChange={handleInputChange}
-                      type="text" 
-                      placeholder={t('form_placeholder_parent')}
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
-                    />
+                    <input required name="ouderNaam" value={formData.ouderNaam} onChange={handleInputChange} type="text" placeholder={t('form_placeholder_parent')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_phone')}</label>
-                    <input 
-                      required
-                      name="telefoon"
-                      value={formData.telefoon}
-                      onChange={handleInputChange}
-                      type="tel" 
-                      placeholder={t('form_placeholder_phone')}
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
-                    />
+                    <input required name="telefoon" value={formData.telefoon} onChange={handleInputChange} type="tel" placeholder={t('form_placeholder_phone')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_email')}</label>
-                  <input 
-                    required
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    type="email" 
-                    placeholder={t('form_placeholder_email')}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
-                  />
+                  <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder={t('form_placeholder_email')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                 </div>
 
                 {/* Kind + Leeftijd */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_child_info')}</label>
-                    <input 
-                      required
-                      name="kindNaam"
-                      value={formData.kindNaam}
-                      onChange={handleInputChange}
-                      type="text" 
-                      placeholder={t('form_placeholder_child')}
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
-                    />
+                    <input required name="kindNaam" value={formData.kindNaam} onChange={handleInputChange} type="text" placeholder={t('form_placeholder_child')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_placeholder_age')}</label>
-                    <input 
-                      required
-                      name="kindLeeftijd"
-                      value={formData.kindLeeftijd}
-                      onChange={handleInputChange}
-                      type="number"
-                      min="2"
-                      max="18"
-                      placeholder={t('form_placeholder_age')}
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm"
-                    />
+                    <input required name="kindLeeftijd" value={formData.kindLeeftijd} onChange={handleInputChange} type="number" min="2" max="18" placeholder={t('form_placeholder_age')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm" />
                   </div>
+                </div>
+
+                {/* PACKAGE (Starter/Progress+/Privé) - standaard Progress+ */}
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
+                  <select
+                    name="selectedPackage"
+                    value={formData.selectedPackage}
+                    onChange={handleInputChange}
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer"
+                  >
+                    {packages.map(pkg => (
+                      <option key={pkg.value} value={pkg.value}>{t(pkg.key)}</option>
+                    ))}
+                  </select>
                 </div>
 
                 {/* Niveau */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
-                  <select
-                    name="gewenstNiveau"
-                    value={formData.gewenstNiveau}
-                    onChange={handleInputChange}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer"
-                  >
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_select_level')}</label>
+                  <select name="gewenstNiveau" value={formData.gewenstNiveau} onChange={handleInputChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
                     <option value="">{t('form_select_level')}</option>
                     {niveaus.map(n => (
                       <option key={n.value} value={n.value}>{t(n.key)}</option>
@@ -302,16 +247,8 @@ export default function ProeflesForm() {
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_days')}</label>
                   <div className="flex flex-wrap gap-2">
                     {dagen.map(dag => (
-                      <button
-                        key={dag.value}
-                        type="button"
-                        onClick={() => handleDagToggle(dag.value)}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
-                          formData.gewensteDagen.includes(dag.value)
-                            ? 'bg-secondary text-white shadow-premium shadow-secondary/30'
-                            : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
-                        }`}
-                      >
+                      <button key={dag.value} type="button" onClick={() => handleDagToggle(dag.value)}
+                        className={`px-4 py-2 rounded-xl text-xs font-bold transition ${formData.gewensteDagen.includes(dag.value) ? 'bg-secondary text-white shadow-premium shadow-secondary/30' : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'}`}>
                         {t(dag.key)}
                       </button>
                     ))}
@@ -321,34 +258,19 @@ export default function ProeflesForm() {
                 {/* Notities */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_notes')}</label>
-                  <textarea
-                    name="notities"
-                    value={formData.notities}
-                    onChange={handleInputChange}
-                    rows={3}
-                    placeholder={t('form_placeholder_notes')}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm resize-none"
-                  />
+                  <textarea name="notities" value={formData.notities} onChange={handleInputChange} rows={3} placeholder={t('form_placeholder_notes')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm resize-none" />
                 </div>
                 
-                <button 
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-4 bg-secondary text-white rounded-2xl font-black text-lg shadow-premium shadow-secondary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <button type="submit" disabled={isLoading}
+                  className="w-full py-4 bg-secondary text-white rounded-2xl font-black text-lg shadow-premium shadow-secondary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed">
                   {isLoading ? (
                     <div className="w-5 h-5 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
-                    <>
-                      <Send size={20} />
-                      {t('form_submit')}
-                    </>
+                    <><Send size={20} />{t('form_submit')}</>
                   )}
                 </button>
                 
-                <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                  {t('form_footer')}
-                </p>
+                <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t('form_footer')}</p>
               </form>
             )}
           </motion.div>
