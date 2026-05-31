@@ -6,7 +6,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 // Hernoem het bestand naar "service-account.json" en zet het in /scripts/
 
 const serviceAccount = JSON.parse(
-  await import('fs').then(fs => fs.readFileSync('./service-account.json', 'utf-8'))
+  await import('fs').then(fs => fs.readFileSync('./scripts/service-account.json', 'utf-8'))
 );
 
 const app = initializeApp({
