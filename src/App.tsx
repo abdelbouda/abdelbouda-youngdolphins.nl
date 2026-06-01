@@ -13,6 +13,7 @@ import Voorwaarden from './components/Voorwaarden';
 import Cookies from './components/Cookies';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
+import ZwemlesAmsterdam from './components/ZwemlesAmsterdam';
 
 // Lazy load non-critical components
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
@@ -90,7 +91,18 @@ export default function App() {
   }, []);
 
   const isAdminRoute = typeof window !== 'undefined' && window.location.hash === '#admin';
+  const isZwemlesAmsterdam = typeof window !== 'undefined' && window.location.pathname === '/zwemles-amsterdam';
 
+  // Zwemles Amsterdam pagina
+  if (isZwemlesAmsterdam) {
+    return (
+      <LanguageProvider>
+        <ZwemlesAmsterdam />
+      </LanguageProvider>
+    );
+  }
+
+  // Admin route
   if (isAdminRoute) {
     if (checkingAuth) {
       return (
@@ -111,6 +123,7 @@ export default function App() {
     );
   }
 
+  // Normale site
   return (
     <LanguageProvider>
       <AppContent />
