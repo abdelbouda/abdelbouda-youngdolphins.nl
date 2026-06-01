@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /api/
-
 Sitemap: https://youngdolphins.nl/sitemap.xml
+
+# Blokkeer admin
+User-agent: *
+Disallow: /#admin
