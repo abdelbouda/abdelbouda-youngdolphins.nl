@@ -18,7 +18,7 @@ const DolphinIcon = ({ className = "w-5 h-5", color = "#5AC1E6" }: { className?:
   </svg>
 );
 
-export default function ZwemlesAmsterdam() {
+export default function ZwemlesMonnickendam() {
   const { language, t } = useLanguage();
   const { settings } = useSettings();
   const [submitted, setSubmitted] = useState(false);
@@ -45,15 +45,6 @@ export default function ZwemlesAmsterdam() {
   const tijdstippen = [
     { value: '16:00-17:00', label_nl: 'Zondag 16:00 - 17:00', label_en: 'Sunday 16:00 - 17:00' },
     { value: '17:00-18:00', label_nl: 'Zondag 17:00 - 18:00', label_en: 'Sunday 17:00 - 18:00' },
-  ];
-
-  const stadsdelen = [
-    { name: 'Noord', slug: 'amsterdam-noord' },
-    { name: 'Oost', slug: 'amsterdam-oost' },
-    { name: 'Zuid', slug: 'amsterdam-zuid' },
-    { name: 'West', slug: 'amsterdam-west' },
-    { name: 'Centrum', slug: 'amsterdam-centrum' },
-    { name: 'Zuidoost', slug: 'amsterdam-zuidoost' },
   ];
 
   useEffect(() => {
@@ -84,7 +75,7 @@ export default function ZwemlesAmsterdam() {
         notities: formData.notities,
         inschrijfdatum: new Date(),
         status: 'nieuw',
-        bron: 'zwemles-amsterdam'
+        bron: 'zwemles-monnickendam'
       });
 
       await fetch('/api/signup', {
@@ -113,7 +104,7 @@ export default function ZwemlesAmsterdam() {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEOZwemlesAmsterdam language={language} />
+      <SEOZwemlesMonnickendam language={language} />
 
       {/* Navbar met logo */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg h-16">
@@ -127,12 +118,12 @@ export default function ZwemlesAmsterdam() {
       {/* Hero */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white text-center">
         <h1 className="text-4xl lg:text-5xl font-black text-primary mb-6">
-          {language === 'nl' ? 'Zwemles Amsterdam' : 'Swimming Lessons Amsterdam'}
+          {language === 'nl' ? 'Zwemles Monnickendam' : 'Swimming Lessons Monnickendam'}
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
           {language === 'nl' 
-            ? 'Direct starten met zwemles in Amsterdam zonder wachtlijst. Professionele ABC-trajecten in kleine groepen. Ook in Monnickendam!'
-            : 'Start swimming lessons in Amsterdam immediately without a waiting list. Professional ABC tracks in small groups. Also in Monnickendam!'
+            ? 'Direct starten met zwemles in Monnickendam zonder wachtlijst. Professionele ABC-trajecten in kleine groepen. Dé zwemschool voor Waterland en Amsterdam!'
+            : 'Start swimming lessons in Monnickendam immediately without a waiting list. Professional ABC tracks in small groups. The swim school for Waterland and Amsterdam!'
           }
         </p>
         <a
@@ -143,19 +134,26 @@ export default function ZwemlesAmsterdam() {
         </a>
       </section>
 
-      {/* Stadsdelen */}
+      {/* USP's Monnickendam */}
       <section className="py-16 max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-black text-primary text-center mb-12">
-          {language === 'nl' ? 'Zwemles in alle stadsdelen' : 'Swimming lessons in all districts'}
+          {language === 'nl' ? 'Zwemles in Monnickendam en omgeving' : 'Swimming lessons in Monnickendam area'}
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
-          {stadsdelen.map(area => (
+          {[
+            { plaats: 'Monnickendam', slug: 'monnickendam' },
+            { plaats: 'Volendam', slug: 'volendam' },
+            { plaats: 'Edam', slug: 'edam' },
+            { plaats: 'Purmerend', slug: 'purmerend' },
+            { plaats: 'Broek in Waterland', slug: 'broek-in-waterland' },
+            { plaats: 'Watergang', slug: 'watergang' },
+          ].map(area => (
             <div key={area.slug} className="bg-blue-50 rounded-2xl p-6 text-center hover:shadow-lg transition">
-              <h3 className="text-xl font-bold text-primary mb-2">Amsterdam {area.name}</h3>
+              <h3 className="text-xl font-bold text-primary mb-2">{area.plaats}</h3>
               <p className="text-sm text-gray-600">
                 {language === 'nl'
-                  ? `Zwemles in Amsterdam ${area.name}. Kleine groepen, gediplomeerde instructeurs.`
-                  : `Swimming lessons in Amsterdam ${area.name}. Small groups, certified instructors.`
+                  ? `Zwemles in ${area.plaats}. Direct starten, kleine groepen.`
+                  : `Swimming lessons in ${area.plaats}. Start immediately, small groups.`
                 }
               </p>
             </div>
@@ -167,23 +165,23 @@ export default function ZwemlesAmsterdam() {
       <section className="py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-black text-primary text-center mb-12">
-            {language === 'nl' ? 'Waarom Young Dolphins?' : 'Why Young Dolphins?'}
+            {language === 'nl' ? 'Waarom Young Dolphins Monnickendam?' : 'Why Young Dolphins Monnickendam?'}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-4xl mb-4">⚡</div>
               <h3 className="font-bold text-lg mb-2">{language === 'nl' ? 'Direct Starten' : 'Start Immediately'}</h3>
-              <p className="text-sm text-gray-600">{language === 'nl' ? 'Geen wachtlijst, begin direct met zwemles.' : 'No waiting list, start lessons right away.'}</p>
+              <p className="text-sm text-gray-600">{language === 'nl' ? 'Geen wachtlijst in Monnickendam. Start vandaag nog.' : 'No waiting list in Monnickendam. Start today.'}</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-4">👨‍🏫</div>
-              <h3 className="font-bold text-lg mb-2">{language === 'nl' ? 'Gediplomeerd' : 'Certified'}</h3>
-              <p className="text-sm text-gray-600">{language === 'nl' ? 'Ervaren instructeurs met VOG en diploma.' : 'Experienced instructors with VOG and diploma.'}</p>
+              <div className="text-4xl mb-4">🏊‍♂️</div>
+              <h3 className="font-bold text-lg mb-2">{language === 'nl' ? 'Sportfondsenbad' : 'Sportfondsen Pool'}</h3>
+              <p className="text-sm text-gray-600">{language === 'nl' ? 'Warm en veilig zwembad in het hart van Monnickendam.' : 'Warm and safe pool in the heart of Monnickendam.'}</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-4">🏊</div>
-              <h3 className="font-bold text-lg mb-2">{language === 'nl' ? 'Kleine Groepen' : 'Small Groups'}</h3>
-              <p className="text-sm text-gray-600">{language === 'nl' ? 'Maximaal 8 kinderen per groep.' : 'Maximum 8 children per group.'}</p>
+              <div className="text-4xl mb-4">🚗</div>
+              <h3 className="font-bold text-lg mb-2">{language === 'nl' ? 'Goed Bereikbaar' : 'Easily Accessible'}</h3>
+              <p className="text-sm text-gray-600">{language === 'nl' ? 'Gratis parkeren, ook vanuit Amsterdam prima te doen.' : 'Free parking, also easily accessible from Amsterdam.'}</p>
             </div>
           </div>
         </div>
@@ -350,7 +348,7 @@ export default function ZwemlesAmsterdam() {
         </div>
       </section>
 
-      {/* Sticky contact bar onderaan */}
+      {/* Sticky contact bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg p-3">
         <div className="max-w-4xl mx-auto flex justify-center gap-6">
           <a href={`tel:${phoneNumber}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-primary/90 transition">
@@ -360,7 +358,7 @@ export default function ZwemlesAmsterdam() {
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             WhatsApp
           </a>
-          <a href="mailto:info@youngdolphins.nl" className="flex items-center gap-2 bg-secondary text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-secondary/90 transition">
+          <a href={`mailto:${emailAddress}`} className="flex items-center gap-2 bg-secondary text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-secondary/90 transition">
             <Mail size={16} /> {language === 'nl' ? 'Mail' : 'Email'}
           </a>
         </div>
@@ -369,16 +367,16 @@ export default function ZwemlesAmsterdam() {
   );
 }
 
-// SEO component specifiek voor deze pagina
-function SEOZwemlesAmsterdam({ language }: { language: 'nl' | 'en' }) {
+// SEO component
+function SEOZwemlesMonnickendam({ language }: { language: 'nl' | 'en' }) {
   useEffect(() => {
     const title = language === 'nl' 
-      ? 'Zwemles Amsterdam | Direct Starten Zonder Wachtlijst | Young Dolphins'
-      : 'Swimming Lessons Amsterdam | Start Immediately No Waiting List | Young Dolphins';
+      ? 'Zwemles Monnickendam | Direct Starten Zonder Wachtlijst | Young Dolphins'
+      : 'Swimming Lessons Monnickendam | Start Immediately No Waiting List | Young Dolphins';
     
     const description = language === 'nl'
-      ? 'Zoek je zwemles in Amsterdam? Bij Young Dolphins start je direct zonder wachtlijst. Zwemles in Noord, Oost, Zuid, West, Centrum en Zuidoost. Gratis proefles!'
-      : 'Looking for swimming lessons in Amsterdam? Start immediately at Young Dolphins without a waiting list. Swimming lessons in North, East, South, West, Center and Southeast. Free trial!';
+      ? 'Zoek je zwemles in Monnickendam? Bij Young Dolphins start je direct zonder wachtlijst. Zwemles voor Monnickendam, Volendam, Edam, Purmerend en Waterland. Gratis proefles!'
+      : 'Looking for swimming lessons in Monnickendam? Start immediately at Young Dolphins without a waiting list. Swimming lessons for Monnickendam, Volendam, Edam, Purmerend and Waterland. Free trial!';
 
     document.title = title;
 
@@ -401,7 +399,7 @@ function SEOZwemlesAmsterdam({ language }: { language: 'nl' | 'en' }) {
       element.setAttribute('content', tag.content);
     });
 
-    const scriptId = 'seo-schema-zwemles';
+    const scriptId = 'seo-schema-monnickendam';
     let script = document.getElementById(scriptId) as HTMLScriptElement;
     if (!script) {
       script = document.createElement('script');
@@ -412,14 +410,21 @@ function SEOZwemlesAmsterdam({ language }: { language: 'nl' | 'en' }) {
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SportsActivityLocation",
-      "name": "Young Dolphins Zwemschool Amsterdam",
+      "name": "Young Dolphins Zwemschool Monnickendam",
       "description": description,
-      "url": "https://youngdolphins.nl/zwemles-amsterdam",
+      "url": "https://youngdolphins.nl/zwemles-monnickendam",
       "telephone": "+31628421354",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Amsterdam",
+        "streetAddress": "Wilhelminalaan 54",
+        "addressLocality": "Monnickendam",
+        "postalCode": "1141 CW",
         "addressCountry": "NL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.4632,
+        "longitude": 5.0347
       }
     });
   }, [language]);

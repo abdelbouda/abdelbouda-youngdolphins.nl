@@ -14,6 +14,7 @@ import Cookies from './components/Cookies';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 import ZwemlesAmsterdam from './components/ZwemlesAmsterdam';
+import ZwemlesMonnickendam from './components/ZwemlesMonnickendam';
 
 // Lazy load non-critical components
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
@@ -90,14 +91,25 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
+  // Route checks
   const isAdminRoute = typeof window !== 'undefined' && window.location.hash === '#admin';
   const isZwemlesAmsterdam = typeof window !== 'undefined' && window.location.pathname === '/zwemles-amsterdam';
+  const isZwemlesMonnickendam = typeof window !== 'undefined' && window.location.pathname === '/zwemles-monnickendam';
 
-  // Zwemles Amsterdam pagina
+  // Zwemles Amsterdam landing page
   if (isZwemlesAmsterdam) {
     return (
       <LanguageProvider>
         <ZwemlesAmsterdam />
+      </LanguageProvider>
+    );
+  }
+
+  // Zwemles Monnickendam landing page
+  if (isZwemlesMonnickendam) {
+    return (
+      <LanguageProvider>
+        <ZwemlesMonnickendam />
       </LanguageProvider>
     );
   }
@@ -123,7 +135,7 @@ export default function App() {
     );
   }
 
-  // Normale site
+  // Default: normale site
   return (
     <LanguageProvider>
       <AppContent />

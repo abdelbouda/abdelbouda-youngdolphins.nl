@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/zwemles-amsterdam", "destination": "/index.html" }
+    { "source": "/zwemles-amsterdam", "destination": "/index.html" },
+    { "source": "/zwemles-monnickendam", "destination": "/index.html" }
   ]
 }

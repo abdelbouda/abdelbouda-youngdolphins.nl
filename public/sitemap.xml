@@ -1,45 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Hoofdpagina -->
   <url>
     <loc>https://youngdolphins.nl/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://youngdolphins.nl/?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://youngdolphins.nl/?lang=en" />
   </url>
+
+  <!-- SEO Landingspagina's -->
+  <url>
+    <loc>https://youngdolphins.nl/zwemles-amsterdam</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://youngdolphins.nl/zwemles-amsterdam?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://youngdolphins.nl/zwemles-amsterdam?lang=en" />
+  </url>
+
+  <url>
+    <loc>https://youngdolphins.nl/zwemles-monnickendam</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://youngdolphins.nl/zwemles-monnickendam?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://youngdolphins.nl/zwemles-monnickendam?lang=en" />
+  </url>
+
+  <!-- Hoofdsecties (anchors op homepagina) -->
   <url>
     <loc>https://youngdolphins.nl/#lessen</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <url>
+    <loc>https://youngdolphins.nl/#tarieven</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <url>
     <loc>https://youngdolphins.nl/#locaties</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://youngdolphins.nl/#tarieven</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
   <url>
     <loc>https://youngdolphins.nl/#over-ons</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
     <loc>https://youngdolphins.nl/#faq</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
     <loc>https://youngdolphins.nl/#signup-form</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
 </urlset>
