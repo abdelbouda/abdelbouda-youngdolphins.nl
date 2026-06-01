@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
-import { Phone, ArrowRight } from 'lucide-react';
+import { Phone, ArrowRight, MapPin } from 'lucide-react';
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -45,7 +45,6 @@ export default function Hero() {
   ], [t]);
 
   const handleCardClick = (e: React.MouseEvent, index: number) => {
-    // If it's a touch device and the card isn't active yet, just show info
     if (isMobile) {
       if (activeCard !== index) {
         e.preventDefault();
@@ -137,6 +136,31 @@ export default function Hero() {
             {t('hero_subtitle')}
           </motion.p>
 
+          {/* 🌍 Interne links naar landingspagina's */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
+            className="flex flex-wrap justify-center gap-3 mb-6"
+          >
+            <a
+              href="/zwemles-amsterdam"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-sm text-primary rounded-full font-bold text-sm shadow-md hover:shadow-lg hover:bg-white transition-all border border-slate-100"
+            >
+              <MapPin size={16} className="text-secondary" />
+              {language === 'nl' ? 'Zwemles Amsterdam' : 'Swimming Lessons Amsterdam'}
+              <ArrowRight size={14} className="opacity-50" />
+            </a>
+            <a
+              href="/zwemles-monnickendam"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-sm text-primary rounded-full font-bold text-sm shadow-md hover:shadow-lg hover:bg-white transition-all border border-slate-100"
+            >
+              <MapPin size={16} className="text-secondary" />
+              {language === 'nl' ? 'Zwemles Monnickendam' : 'Swimming Lessons Monnickendam'}
+              <ArrowRight size={14} className="opacity-50" />
+            </a>
+          </motion.div>
+
           {/* Small Pricing Cards as CTA */}
           <div id="hero-pricing-grid" className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 max-w-3xl mx-auto">
             {pricingCards.map((card, i) => (
@@ -167,7 +191,6 @@ export default function Hero() {
                   </div>
                 )}
                 
-                {/* Default content - hidden when active (hover/tap) */}
                 <div className={`flex flex-col items-center transition-all duration-300 ${activeCard === i ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
                   <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-primary">{card.title}</span>
                   <div className="flex items-baseline gap-0.5">
@@ -179,7 +202,6 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Info content - visible when active (hover/tap) */}
                 <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${activeCard === i ? 'opacity-100 translate-y-0 z-20' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
                   <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-primary/80">{card.title}</span>
                   <p className="text-[11px] leading-tight font-bold px-1 text-primary">
