@@ -9,7 +9,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-primary text-white pt-24 pb-12 overflow-hidden relative">
-      {/* Premium Gradient Top Border Accent */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary via-cyan-400 to-coral"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,7 +102,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Kolom 5: Direct Contact */}
+          {/* Kolom 5: Direct Contact - met gefixte e-mail weergave */}
           <div>
             <h4 className="font-black text-white mb-6 uppercase text-xs tracking-[0.25em] opacity-60">Contact</h4>
             <ul className="space-y-5">
@@ -122,7 +121,13 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Stuur een e-mail</p>
-                  <a href="mailto:info@youngdolphins.nl" className="text-base font-black text-white hover:text-secondary transition-colors break-all">info@youngdolphins.nl</a>
+                  {/* Fix: e-mailadres niet afbreken op rare plekken */}
+                  <a 
+                    href="mailto:info@youngdolphins.nl" 
+                    className="text-base font-black text-white hover:text-secondary transition-colors break-words whitespace-normal"
+                  >
+                    info@youngdolphins.nl
+                  </a>
                 </div>
               </li>
             </ul>
@@ -130,7 +135,7 @@ export default function Footer() {
 
         </div>
 
-        {/* Onderste Balk: Copyright & Juridische Links */}
+        {/* Onderste Balk */}
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] text-center md:text-left">
             © {currentYear} {t('footer_built')}
