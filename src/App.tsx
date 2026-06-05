@@ -23,7 +23,7 @@ import ZwemlesAmsterdamDiplomaKijkles from './pages/blog/ZwemlesAmsterdamDiploma
 import ZwemkledingChecklist from './pages/blog/ZwemkledingChecklist';
 import ZwemonderwijsPlanner from './pages/blog/ZwemonderwijsPlanner';
 
-// Lazy load non‑critical components
+// Lazy load non-critical components
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
 const Locations = lazy(() => import('./components/Locations'));
@@ -62,8 +62,8 @@ function AppContent() {
       <Navbar settings={settings} />
       
       <main>
-        <USPSection />                     {/* 👈 boven de Hero */}
-        <Hero settings={settings} />
+        <Hero settings={settings} />          {/* 👈 Hero eerst */}
+        <USPSection />                        {/* 👈 dan pas USPSection */}
         
         <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div></div>}>
           <RegioSEO />
