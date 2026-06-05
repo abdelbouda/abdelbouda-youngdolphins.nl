@@ -13,7 +13,6 @@ export default function Footer() {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary via-cyan-400 to-coral"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Grid veranderd naar 5 kolommen op grote schermen voor betere verdeling */}
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-20">
           
           {/* Kolom 1: Branding & Socials */}
@@ -83,7 +82,6 @@ export default function Footer() {
           <div>
             <h4 className="font-black text-white mb-6 uppercase text-xs tracking-[0.25em] opacity-60">{t('footer_regio')}</h4>
             <div className="flex flex-col gap-3.5">
-              {/* Lokale SEO Focus Hotspot */}
               <a 
                 href="#signup-form" 
                 className="text-secondary hover:text-cyan-300 transition-colors font-extrabold text-xs uppercase tracking-widest flex items-center gap-1.5"
@@ -107,14 +105,14 @@ export default function Footer() {
 
           {/* Kolom 5: Direct Contact */}
           <div>
-            <h4 className="font-black text-white mb-6 uppercase text-xs tracking-[0.25em] opacity-60">{t('footer_contact')}</h4>
+            <h4 className="font-black text-white mb-6 uppercase text-xs tracking-[0.25em] opacity-60">Contact</h4>
             <ul className="space-y-5">
               <li className="flex items-start gap-3">
                 <div className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-secondary border border-white/5">
                   <Phone size={16} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{t('footer_phone_pool')}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Bel ons direct</p>
                   <a href="tel:06-28421354" className="text-base font-black text-white hover:text-secondary transition-colors">06-28421354</a>
                 </div>
               </li>
@@ -123,7 +121,7 @@ export default function Footer() {
                   <Mail size={16} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{t('footer_direct_contact')}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Stuur een e-mail</p>
                   <a href="mailto:info@youngdolphins.nl" className="text-base font-black text-white hover:text-secondary transition-colors break-all">info@youngdolphins.nl</a>
                 </div>
               </li>
