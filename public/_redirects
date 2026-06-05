@@ -1,0 +1,9 @@
+# SEO landingspagina's - behoud URL structuur
+/zwemles-amsterdam    /index.html    200
+/zwemles-monnickendam /index.html    200
+
+# Blog posts (worden door React Router afgehandeld)
+/blog/*              /index.html    200
+
+# 404 pagina - stuur alle niet-bestaande routes naar index
+/*                   /index.html    404

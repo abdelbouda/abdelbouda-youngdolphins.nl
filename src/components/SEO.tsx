@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
+/// <reference types="react" />
 import { useLanguage } from '../lib/LanguageContext';
 
 interface SEOProps {
   title: string;
   description: string;
   keywords?: string;
+  pageType?: 'home' | 'amsterdam' | 'monnickendam' | 'blog';
 }
 
-export default function SEO({ title, description, keywords }: SEOProps) {
+export default function SEO({ title, description, keywords, pageType = 'home' }: SEOProps) {
   const { language } = useLanguage();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function SEO({ title, description, keywords }: SEOProps) {
       { name: 'description', content: description },
       { name: 'keywords', content: keywords || '' },
       { name: 'author', content: 'Young Dolphins Zwemschool' },
-      { name: 'theme-color', content: '#0ea5e9' },
+      { name: 'theme-color', content: '#1B365D' },
       { name: 'robots', content: 'index, follow' },
       { name: 'googlebot', content: 'index, follow' },
       
@@ -30,7 +32,7 @@ export default function SEO({ title, description, keywords }: SEOProps) {
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: siteUrl },
+      { property: 'og:url', content: pageType === 'amsterdam' ? `${siteUrl}/zwemles-amsterdam` : pageType === 'monnickendam' ? `${siteUrl}/zwemles-monnickendam` : siteUrl },
       { property: 'og:locale', content: language === 'nl' ? 'nl_NL' : 'en_US' },
       { property: 'og:locale:alternate', content: language === 'nl' ? 'en_US' : 'nl_NL' },
       { property: 'og:image', content: ogImage },
@@ -65,7 +67,7 @@ export default function SEO({ title, description, keywords }: SEOProps) {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', siteUrl);
+    canonical.setAttribute('href', pageType === 'amsterdam' ? `${siteUrl}/zwemles-amsterdam` : pageType === 'monnickendam' ? `${siteUrl}/zwemles-monnickendam` : siteUrl);
 
     // Alternate language links
     ['nl', 'en'].forEach(lang => {
@@ -138,6 +140,48 @@ export default function SEO({ title, description, keywords }: SEOProps) {
 
     script.text = JSON.stringify(schema);
 
+    // ============================================
+    // BREADCRUMB LIST Structured Data (nieuw!)
+    // ============================================
+    const breadcrumbId = 'structured-data-breadcrumb';
+    let breadcrumbScript = document.getElementById(breadcrumbId) as HTMLScriptElement;
+    if (!breadcrumbScript) {
+      breadcrumbScript = document.createElement('script');
+      breadcrumbScript.id = breadcrumbId;
+      breadcrumbScript.type = 'application/ld+json';
+      document.head.appendChild(breadcrumbScript);
+    }
+
+    let breadcrumbItems = [];
+    
+    if (pageType === 'amsterdam') {
+      breadcrumbItems = [
+        { position: 1, name: "Home", item: siteUrl },
+        { position: 2, name: language === 'nl' ? "Zwemles Amsterdam" : "Swimming Lessons Amsterdam", item: `${siteUrl}/zwemles-amsterdam` }
+      ];
+    } else if (pageType === 'monnickendam') {
+      breadcrumbItems = [
+        { position: 1, name: "Home", item: siteUrl },
+        { position: 2, name: language === 'nl' ? "Zwemles Monnickendam" : "Swimming Lessons Monnickendam", item: `${siteUrl}/zwemles-monnickendam` }
+      ];
+    } else {
+      breadcrumbItems = [
+        { position: 1, name: "Home", item: siteUrl }
+      ];
+    }
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbItems.map(item => ({
+        "@type": "ListItem",
+        "position": item.position,
+        "name": item.name,
+        "item": item.item
+      }))
+    };
+    breadcrumbScript.text = JSON.stringify(breadcrumbSchema);
+
     // FAQ Structured Data (als we op de FAQ sectie zijn)
     if (window.location.hash === '#faq') {
       const faqId = 'structured-data-faq';
@@ -168,13 +212,21 @@ export default function SEO({ title, description, keywords }: SEOProps) {
               "@type": "Answer",
               "text": language === 'nl' ? "Ja! Bij Young Dolphins in Monnickendam kan je kind direct starten met zwemles. We hebben geen wachtlijsten." : "Yes! At Young Dolphins in Monnickendam, your child can start swimming lessons immediately. We have no waiting lists."
             }
+          },
+          {
+            "@type": "Question",
+            "name": language === 'nl' ? "Wat kost zwemles bij Young Dolphins?" : "How much do swimming lessons cost at Young Dolphins?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": language === 'nl' ? "De tarieven starten bij €25 per les voor het Starter pakket. Bekijk onze prijspagina voor alle opties." : "Prices start at €25 per lesson for the Starter package. Check our pricing page for all options."
+            }
           }
         ]
       };
       faqScript.text = JSON.stringify(faqSchema);
     }
 
-  }, [title, description, keywords, language]);
+  }, [title, description, keywords, language, pageType]);
 
   return null;
 }

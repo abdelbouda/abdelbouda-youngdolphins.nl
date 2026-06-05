@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import TrustBadges from './TrustBadges';
 
 const DolphinIcon = ({ className = "w-5 h-5", color = "#5AC1E6" }: { className?: string; color?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
@@ -227,6 +228,9 @@ export default function InteractiveSignup() {
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_notes')}</label>
                   <textarea name="notities" value={formData.notities} onChange={handleInputChange} rows={2} placeholder={t('form_placeholder_notes')} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm resize-none" />
                 </div>
+                
+                {/* Trust Badges - toegevoegd tussen notities en submit button */}
+                <TrustBadges variant="form" className="py-2" />
                 
                 <button type="submit" disabled={isLoading}
                   className="w-full py-4 bg-secondary text-white rounded-2xl font-black text-lg shadow-premium shadow-secondary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed">

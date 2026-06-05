@@ -115,7 +115,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{t('footer_phone_pool')}</p>
-                  <a href="tel:0628421354" className="text-base font-black text-white hover:text-secondary transition-colors">06-28421354</a>
+                  <a href="tel:06-28421354" className="text-base font-black text-white hover:text-secondary transition-colors">06-28421354</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
