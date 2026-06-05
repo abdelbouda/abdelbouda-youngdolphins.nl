@@ -4,45 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Zwemles Amsterdam & Monnickendam | Direct Starten - Geen Wachtlijst | Young Dolphins</title>
+    
+    <!-- Meta tags -->
     <meta name="description" content="Zoek je zwemles in Amsterdam of Monnickendam? Bij Young Dolphins kun je direct starten zonder wachtlijst. Professionele ABC-zwemlessen voor kinderen in kleine groepen." />
     <meta name="keywords" content="zwemles Amsterdam, zwemles Monnickendam, zwemles Amsterdam Noord, zwemles Waterland, zwemles Volendam, zwemles Broek in Waterland, zwemles zonder wachtlijst, direct starten zwemles, ABC diploma, kleine groepen" />
+    <meta property="og:title" content="Zwemles Amsterdam & Monnickendam | Direct Starten | Young Dolphins" />
+    <meta property="og:description" content="Start direct met zwemles in Amsterdam of Monnickendam. Kleine groepen, persoonlijke aandacht en snel resultaat." />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://youngdolphins.nl/" />
     
-    <!-- Preconnect (alleen de meest kritieke) -->
+    <!-- Preconnect voor fonts en Firebase -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://youngdolphins-bdfb1.firebaseapp.com" />
     
-    <!-- Preload hero image -->
-    <link rel="preload" as="image" href="/favicon.svg" />
-    
-    <!-- Critical CSS (inline) -->
-    <style>
-      body {
-        background-color: #ffffff;
-        color: #1B365D;
-        margin: 0;
-        padding: 0;
-        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-        text-rendering: optimizeLegibility;
-      }
-      #root { min-height: 100vh; }
-      .bg-primary { background-color: #1B365D; }
-      .text-secondary { color: #0c8ec6; }
-      .btn-primary { background-color: #1B365D; color: white; }
-      .container { max-width: 1280px; margin: 0 auto; }
-      .text-center { text-align: center; }
-    </style>
-    
-    <!-- Deferred volledige CSS (media="print" truc) -->
-    <link rel="stylesheet" href="/assets/style.css" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="/assets/style.css" /></noscript>
-    
-    <!-- Fonts deferred -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" /></noscript>
-    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#1B365D" />
+    
+    <!-- Fonts (normaal laden, niet deferred) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS wordt door Vite automatisch toegevoegd – geen extra link nodig -->
+    <!-- De Vite build injecteert de juiste CSS-link via de HTML plugin -->
   </head>
   <body class="antialiased text-slate-800 bg-white">
     <div id="root"></div>
