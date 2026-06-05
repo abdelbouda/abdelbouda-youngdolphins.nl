@@ -11,7 +11,7 @@ export default function ExitIntentPopup({ onClose }: ExitIntentPopupProps) {
   const { t, language } = useLanguage();
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     
     const handleMouseLeave = (e: MouseEvent) => {
       // Als de muur de bovenkant van het scherm verlaat (exit intent)
