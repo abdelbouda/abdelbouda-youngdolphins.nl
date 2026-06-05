@@ -54,6 +54,7 @@ const translations: Translations = {
   nav_about: { nl: 'Over ons', en: 'About us' },
   nav_pricing: { nl: 'Tarieven', en: 'Pricing' },
   nav_faq: { nl: 'FAQ', en: 'FAQ' },
+  nav_blog: { nl: 'Blog', en: 'Blog' }, // ✅ Nieuw: blog link in navigatie
   nav_switch_en: { nl: 'Switch to English', en: 'Wissel naar Nederlands' },
   nav_open_menu: { nl: 'Open menu', en: 'Open menu' },
   nav_close_menu: { nl: 'Sluit menu', en: 'Close menu' },

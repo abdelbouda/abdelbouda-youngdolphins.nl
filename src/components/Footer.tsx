@@ -58,7 +58,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kolom 3: Navigatie */}
+          {/* Kolom 3: Navigatie (inclusief Blog link) */}
           <div>
             <h4 className="font-black text-white mb-6 uppercase text-xs tracking-[0.25em] opacity-60">{t('footer_nav')}</h4>
             <ul className="space-y-4">
@@ -74,6 +74,12 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              {/* Nieuwe blog link */}
+              <li>
+                <a href="/blog" className="text-slate-300 hover:text-secondary transition-colors font-bold text-sm">
+                  {t('nav_blog') || 'Blog'}
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -121,7 +127,6 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Stuur een e-mail</p>
-                  {/* Fix: e-mailadres niet afbreken op rare plekken */}
                   <a 
                     href="mailto:info@youngdolphins.nl" 
                     className="text-base font-black text-white hover:text-secondary transition-colors break-words whitespace-normal"

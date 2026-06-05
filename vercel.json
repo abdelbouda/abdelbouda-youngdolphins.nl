@@ -1,10 +1,14 @@
 {
   "rewrites": [
     { "source": "/zwemles-amsterdam", "destination": "/index.html" },
-    { "source": "/zwemles-monnickendam", "destination": "/index.html" }
+    { "source": "/zwemles-monnickendam", "destination": "/index.html" },
+    { "source": "/blog/:slug", "destination": "/index.html" },
+    { "source": "/blog", "destination": "/index.html" },
+    { "source": "/blog/", "destination": "/index.html" }
   ],
   "buildCommand": "npm install --legacy-peer-deps && npm run build",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "vite",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev"
 }

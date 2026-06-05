@@ -16,6 +16,13 @@ import AdminDashboard from './components/AdminDashboard';
 import ZwemlesAmsterdam from './components/ZwemlesAmsterdam';
 import ZwemlesMonnickendam from './components/ZwemlesMonnickendam';
 
+// Blog imports
+import BlogOverview from './components/BlogOverview';
+import ZwemlesMonnickendamWaterland from './pages/blog/ZwemlesMonnickendamWaterland';
+import ZwemlesAmsterdamDiplomaKijkles from './pages/blog/ZwemlesAmsterdamDiplomaKijkles';
+import ZwemkledingChecklist from './pages/blog/ZwemkledingChecklist';
+import ZwemonderwijsPlanner from './pages/blog/ZwemonderwijsPlanner';
+
 // Lazy load non-critical components
 const RegioSEO = lazy(() => import('./components/RegioSEO'));
 const BentoFeatures = lazy(() => import('./components/BentoFeatures'));
@@ -92,9 +99,14 @@ export default function App() {
   }, []);
 
   // Route checks
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const isAdminRoute = typeof window !== 'undefined' && window.location.hash === '#admin';
-  const isZwemlesAmsterdam = typeof window !== 'undefined' && window.location.pathname === '/zwemles-amsterdam';
-  const isZwemlesMonnickendam = typeof window !== 'undefined' && window.location.pathname === '/zwemles-monnickendam';
+  const isZwemlesAmsterdam = pathname === '/zwemles-amsterdam';
+  const isZwemlesMonnickendam = pathname === '/zwemles-monnickendam';
+  
+  // Blog routes
+  const isBlogOverview = pathname === '/blog' || pathname === '/blog/';
+  const isBlogPost = pathname.startsWith('/blog/') && !isBlogOverview;
 
   // Zwemles Amsterdam landing page
   if (isZwemlesAmsterdam) {
@@ -112,6 +124,53 @@ export default function App() {
         <ZwemlesMonnickendam />
       </LanguageProvider>
     );
+  }
+
+  // Blog overview
+  if (isBlogOverview) {
+    return (
+      <LanguageProvider>
+        <BlogOverview />
+      </LanguageProvider>
+    );
+  }
+
+  // Blog individual posts
+  if (isBlogPost) {
+    const slug = pathname.replace('/blog/', '').replace(/\/$/, '');
+    switch (slug) {
+      case 'zwemles-monnickendam-waterland':
+        return (
+          <LanguageProvider>
+            <ZwemlesMonnickendamWaterland />
+          </LanguageProvider>
+        );
+      case 'zwemles-amsterdam-diploma-kijkles':
+        return (
+          <LanguageProvider>
+            <ZwemlesAmsterdamDiplomaKijkles />
+          </LanguageProvider>
+        );
+      case 'zwemkleding-checklist':
+        return (
+          <LanguageProvider>
+            <ZwemkledingChecklist />
+          </LanguageProvider>
+        );
+      case 'planner-zwemonderwijs':
+        return (
+          <LanguageProvider>
+            <ZwemonderwijsPlanner />
+          </LanguageProvider>
+        );
+      default:
+        // Fallback naar blog overview als slug niet bestaat
+        return (
+          <LanguageProvider>
+            <BlogOverview />
+          </LanguageProvider>
+        );
+    }
   }
 
   // Admin route
