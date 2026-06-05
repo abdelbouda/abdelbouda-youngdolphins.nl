@@ -15,25 +15,22 @@ export default defineConfig(({ mode }) => {
     build: {
       cssCodeSplit: false,
       minify: 'esbuild',
-      // ✅ Verbeterd: Geen inlineDynamicImports meer!
-      // Splits in meerdere chunks voor betere performance
       rollupOptions: {
         output: {
           manualChunks: {
-            // Grote libraries apart bundelen
             'react-vendor': ['react', 'react-dom'],
-            'firebase-vendor': ['firebase'],
+            'firebase-vendor': ['firebase/app', 'firebase/firestore', 'firebase/auth'],
             'motion-vendor': ['motion', 'framer-motion'],
             'icon-vendor': ['lucide-react'],
-            'maps-vendor': ['@vis.gl/react-google-maps'],
           },
-          // Duidelijke chunk namen
-          chunkFileNames: 'assets/[name].[hash].js',
-          entryFileNames: 'assets/[name].[hash].js',
         },
       },
-      chunkSizeWarningLimit: 500, // Striktere limiet (was 3000)
-      target: 'es2020', // Modernere browsers
+      chunkSizeWarningLimit: 500,
+      target: 'es2020',
+      commonjsOptions: {
+        include: [/firebase/, /node_modules/],
+        transformMixedEsModules: true,
+      },
     },
     esbuild: {
       drop: mode === 'production' ? ['console', 'debugger'] : [],
@@ -43,17 +40,18 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+      dedupe: ['firebase', 'react', 'react-dom'],
     },
-    // ✅ Server optimalisaties
-    server: {
-      hmr: {
-        overlay: false, // Snellere HMR
+    optimizeDeps: {
+      include: ['firebase/app', 'firebase/firestore', 'firebase/auth', 'react', 'react-dom'],
+      esbuildOptions: {
+        target: 'es2020',
       },
     },
-    // ✅ Preview optimalisaties
-    preview: {
-      port: 4173,
-      strictPort: true,
+    server: {
+      hmr: {
+        overlay: false,
+      },
     },
   };
 });
