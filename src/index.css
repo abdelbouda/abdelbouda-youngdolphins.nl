@@ -158,3 +158,18 @@
     transform: none;
   }
 }
+
+/* Voorkom forced reflow door animerende elementen naar eigen layer te promoten */
+.animate-float,
+.motion-div,
+[class*="motion"] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Zorg dat hover animaties alleen transform gebruiken */
+.pricing-card-3d {
+  will-change: transform;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
