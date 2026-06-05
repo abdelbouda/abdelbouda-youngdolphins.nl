@@ -20,8 +20,6 @@ export default defineConfig(({ mode }) => {
           manualChunks: {
             'react-vendor': ['react', 'react-dom'],
             'firebase-vendor': ['firebase/app', 'firebase/firestore', 'firebase/auth'],
-            'motion-vendor': ['motion', 'framer-motion'],
-            'icon-vendor': ['lucide-react'],
           },
         },
       },
@@ -32,10 +30,6 @@ export default defineConfig(({ mode }) => {
         transformMixedEsModules: true,
       },
     },
-    esbuild: {
-      drop: mode === 'production' ? ['console', 'debugger'] : [],
-      legalComments: 'none',
-    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
@@ -43,14 +37,9 @@ export default defineConfig(({ mode }) => {
       dedupe: ['firebase', 'react', 'react-dom'],
     },
     optimizeDeps: {
-      include: ['firebase/app', 'firebase/firestore', 'firebase/auth', 'react', 'react-dom'],
+      include: ['react', 'react-dom', 'firebase/app', 'firebase/firestore', 'firebase/auth'],
       esbuildOptions: {
         target: 'es2020',
-      },
-    },
-    server: {
-      hmr: {
-        overlay: false,
       },
     },
   };
