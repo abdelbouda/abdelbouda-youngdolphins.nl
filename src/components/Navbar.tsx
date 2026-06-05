@@ -12,7 +12,7 @@ export default function Navbar({ settings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isBlogPage, setIsBlogPage] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -21,19 +21,17 @@ export default function Navbar({ settings }: NavbarProps) {
   }, []);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    // Controleer of de huidige route een blogpagina is
+    setIsBlogPage(window.location.pathname.startsWith('/blog'));
   }, []);
 
   const navLinks = [
-    { name: t('nav_home'), href: '#hero' },
-    { name: t('nav_lessons'), href: '#lessen' },
-    { name: t('nav_locations'), href: '#locaties' },
-    { name: t('nav_pricing'), href: '#tarieven' },
-    { name: t('nav_about'), href: '#over-ons' },
-    { name: t('nav_faq'), href: '#faq' },
+    { name: t('nav_home'), href: isBlogPage ? '/' : '#hero' },
+    { name: t('nav_lessons'), href: isBlogPage ? '/#lessen' : '#lessen' },
+    { name: t('nav_locations'), href: isBlogPage ? '/#locaties' : '#locaties' },
+    { name: t('nav_pricing'), href: isBlogPage ? '/#tarieven' : '#tarieven' },
+    { name: t('nav_about'), href: isBlogPage ? '/#over-ons' : '#over-ons' },
+    { name: t('nav_faq'), href: isBlogPage ? '/#faq' : '#faq' },
     { name: t('nav_blog'), href: '/blog' }
   ];
 
@@ -43,24 +41,11 @@ export default function Navbar({ settings }: NavbarProps) {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'h-16 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg' : 'h-20 bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex justify-between items-center h-full">
-          {/* Logo - alleen animatie op desktop */}
-          {!isMobile && (
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex items-center"
-            >
-              <Logo className="w-20 sm:w-24" />
-            </motion.div>
-          )}
-          {isMobile && (
-            <div className="flex items-center">
-              <Logo className="w-20 sm:w-24" />
-            </div>
-          )}
+          <div className="flex items-center">
+            <Logo className="w-20 sm:w-24" />
+          </div>
 
-          {/* Desktop Menu (blijft zoals het was) */}
+          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
             <div className="flex gap-6">
               {navLinks.map((link) => (
@@ -84,14 +69,14 @@ export default function Navbar({ settings }: NavbarProps) {
               {t('nav_lang_name')}
             </button>
             <a
-              href="#signup-form"
+              href={isBlogPage ? '/#signup-form' : '#signup-form'}
               className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-sm hover:bg-secondary transition-all shadow-premium gradient-shine"
             >
               {tagline}
             </a>
           </div>
 
-          {/* Mobiele knoppen (met aria-labels) */}
+          {/* Mobiele knoppen */}
           <div className="lg:hidden flex items-center gap-4">
             <button 
               onClick={() => setLanguage(language === 'nl' ? 'en' : 'nl')} 
@@ -112,7 +97,7 @@ export default function Navbar({ settings }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobiel menu - AnimatePresence alleen laten draaien als nodig */}
+      {/* Mobiel menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -134,7 +119,7 @@ export default function Navbar({ settings }: NavbarProps) {
                 </a>
               ))}
               <a
-                href="#signup-form"
+                href={isBlogPage ? '/#signup-form' : '#signup-form'}
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium"
               >
