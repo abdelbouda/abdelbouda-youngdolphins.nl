@@ -15,16 +15,11 @@ export default function StickyCTA({ settings }: StickyCTAProps) {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const contactSection = document.getElementById('contact');
-      
       let isVisibleValue = scrollY > 600;
-      
       if (contactSection) {
         const rect = contactSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          isVisibleValue = false;
-        }
+        if (rect.top < window.innerHeight - 100) isVisibleValue = false;
       }
-      
       setIsVisible(isVisibleValue);
     };
     window.addEventListener('scroll', handleScroll);
@@ -45,11 +40,7 @@ export default function StickyCTA({ settings }: StickyCTAProps) {
               <p className="text-[10px] font-black text-primary/60 uppercase tracking-widest mb-0.5">Young Dolphins</p>
               <p className="text-sm font-bold text-primary truncate">{t('sticky_bar_text')}</p>
             </div>
-            <a
-              href="#signup-form"
-              className="flex-1 sm:flex-none px-8 py-4 bg-primary text-white rounded-2xl font-black text-sm shadow-premium hover:bg-secondary transition-all active:scale-95 whitespace-nowrap text-center"
-              aria-label={t('cta_register')}
-            >
+            <a href="#signup-form" className="flex-1 sm:flex-none px-8 py-4 bg-primary text-white rounded-2xl font-black text-sm shadow-premium hover:bg-secondary transition-all active:scale-95 whitespace-nowrap text-center">
               🚀 {t('cta_register')}
             </a>
           </div>
@@ -78,7 +69,7 @@ export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
             className="absolute bottom-full right-0 mb-4 bg-primary text-white text-xs font-bold py-2 px-4 rounded-xl shadow-2xl whitespace-nowrap"
           >
             {t('whatsapp_tooltip')}
-            <div className="absolute top-full right-4 transform w-0 height-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-primary"></div>
+            <div className="absolute top-full right-4 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-primary"></div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -92,11 +83,10 @@ export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="block w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl relative mb-4"
-        aria-label={language === 'nl' ? 'WhatsApp ons' : 'WhatsApp us'}
       >
         <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-25"></div>
         <div className="relative z-10 w-full h-full flex items-center justify-center">
-          <MessageSquare size={28} aria-hidden="true" />
+          <MessageSquare size={28} />
         </div>
       </motion.a>
 
@@ -105,10 +95,9 @@ export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="block w-14 h-14 bg-secondary text-white rounded-full shadow-2xl relative"
-        aria-label={language === 'nl' ? 'Stuur een e-mail' : 'Send an email'}
       >
         <div className="relative z-10 w-full h-full flex items-center justify-center">
-          <Mail size={28} aria-hidden="true" />
+          <Mail size={28} />
         </div>
       </motion.a>
     </div>

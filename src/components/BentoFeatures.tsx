@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
-import { Award, Star, Shield, Users, Clock, Heart } from 'lucide-react';
+import { Award, Star, Users, Clock } from 'lucide-react';
 
 export default function BentoFeatures() {
   const { t } = useLanguage();
@@ -12,7 +12,6 @@ export default function BentoFeatures() {
       icon: Award,
       size: 'lg:col-span-2 lg:row-span-2',
       color: 'bg-secondary/10 text-secondary',
-      image: 'https://images.unsplash.com/photo-1570481662006-a3a1374699e8?auto=format&fit=crop&w=800&q=80'
     },
     {
       title: t('feature_groups_title'),

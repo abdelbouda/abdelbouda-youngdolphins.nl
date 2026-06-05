@@ -5,7 +5,7 @@ import { useLanguage } from '../lib/LanguageContext';
 import Logo from './Logo';
 
 interface NavbarProps {
-  settings?: any; // Settings van Firestore (optioneel)
+  settings?: any;
 }
 
 export default function Navbar({ settings }: NavbarProps) {
@@ -28,7 +28,6 @@ export default function Navbar({ settings }: NavbarProps) {
     { name: t('nav_faq'), href: '#faq' },
   ];
 
-  // Tagline uit settings (via props) of fallback
   const tagline = settings?.tagline_key ? t(settings.tagline_key) : t('cta_register');
 
   return (
@@ -57,19 +56,14 @@ export default function Navbar({ settings }: NavbarProps) {
                 </a>
               ))}
             </div>
-
             <div className="h-6 w-px bg-slate-200"></div>
-
-            {/* Language Switcher */}
             <button 
               onClick={() => setLanguage(language === 'nl' ? 'en' : 'nl')}
               className="flex items-center gap-2 text-xs font-bold text-primary/60 hover:text-secondary uppercase tracking-widest transition-all"
-              aria-label={t('nav_switch_en')}
             >
-              <Globe size={14} aria-hidden="true" />
+              <Globe size={14} />
               {t('nav_lang_name')}
             </button>
-
             <a
               href="#signup-form"
               className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-sm hover:bg-secondary transition-all shadow-premium gradient-shine"
@@ -80,25 +74,16 @@ export default function Navbar({ settings }: NavbarProps) {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <button 
-              onClick={() => setLanguage(language === 'nl' ? 'en' : 'nl')}
-              className="p-2 text-primary"
-              aria-label={t('nav_switch_en')}
-            >
-              <Globe size={20} aria-hidden="true" />
+            <button onClick={() => setLanguage(language === 'nl' ? 'en' : 'nl')} className="p-2 text-primary">
+              <Globe size={20} />
             </button>
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
-              className="p-2 text-primary"
-              aria-label={isOpen ? t('nav_close_menu') : t('nav_open_menu')}
-            >
-              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-primary">
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -109,20 +94,11 @@ export default function Navbar({ settings }: NavbarProps) {
           >
             <div className="p-6 space-y-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-lg font-bold text-primary/80 hover:text-secondary"
-                >
+                <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="block text-lg font-bold text-primary/80 hover:text-secondary">
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#signup-form"
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium"
-              >
+              <a href="#signup-form" onClick={() => setIsOpen(false)} className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium">
                 {tagline}
               </a>
             </div>

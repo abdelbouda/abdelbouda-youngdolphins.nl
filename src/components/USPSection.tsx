@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
-import { CheckCircle2, Waves, MapPin } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 export default function USPSection() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const points = [
     'usp_point_1',
