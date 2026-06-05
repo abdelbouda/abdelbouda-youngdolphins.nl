@@ -1,77 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <!-- Hoofdpagina -->
+
+  <!-- ================================ -->
+  <!-- Hoofdpagina's                   -->
+  <!-- ================================ -->
+
+  <!-- Homepage -->
   <url>
-    <loc>https://youngdolphins.nl/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/</loc>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://youngdolphins.nl/?lang=nl" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://youngdolphins.nl/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/?lang=en" />
   </url>
 
-  <!-- SEO Landingspagina's -->
+  <!-- Landingspagina Zwemles Amsterdam -->
   <url>
-    <loc>https://youngdolphins.nl/zwemles-amsterdam</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/zwemles-amsterdam</loc>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://youngdolphins.nl/zwemles-amsterdam?lang=nl" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://youngdolphins.nl/zwemles-amsterdam?lang=en" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/zwemles-amsterdam?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/zwemles-amsterdam?lang=en" />
   </url>
 
+  <!-- Landingspagina Zwemles Monnickendam -->
   <url>
-    <loc>https://youngdolphins.nl/zwemles-monnickendam</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/zwemles-monnickendam</loc>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://youngdolphins.nl/zwemles-monnickendam?lang=nl" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://youngdolphins.nl/zwemles-monnickendam?lang=en" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/zwemles-monnickendam?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/zwemles-monnickendam?lang=en" />
   </url>
 
-  <!-- Hoofdsecties (anchors op homepagina) -->
+  <!-- Blog overzicht -->
   <url>
-    <loc>https://youngdolphins.nl/#lessen</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/blog</loc>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://youngdolphins.nl/#tarieven</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://youngdolphins.nl/#locaties</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/blog?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/blog?lang=en" />
   </url>
 
+  <!-- ================================ -->
+  <!-- Blog artikelen                  -->
+  <!-- ================================ -->
+
+  <!-- Blog 1: Zwemles Monnickendam -->
   <url>
-    <loc>https://youngdolphins.nl/#over-ons</loc>
+    <loc>https://www.youngdolphins.nl/blog/zwemles-monnickendam-waterland</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/blog/zwemles-monnickendam-waterland?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/blog/zwemles-monnickendam-waterland?lang=en" />
   </url>
 
+  <!-- Blog 2: Zwemles Amsterdam diploma -->
   <url>
-    <loc>https://youngdolphins.nl/#faq</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/blog/zwemles-amsterdam-diploma-kijkles</loc>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/blog/zwemles-amsterdam-diploma-kijkles?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/blog/zwemles-amsterdam-diploma-kijkles?lang=en" />
   </url>
 
+  <!-- Blog 3: Zwemkleding checklist -->
   <url>
-    <loc>https://youngdolphins.nl/#signup-form</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://www.youngdolphins.nl/blog/zwemkleding-checklist</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/blog/zwemkleding-checklist?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/blog/zwemkleding-checklist?lang=en" />
+  </url>
+
+  <!-- Blog 4: Zwemonderwijs planner -->
+  <url>
+    <loc>https://www.youngdolphins.nl/blog/planner-zwemonderwijs</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/blog/planner-zwemonderwijs?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/blog/planner-zwemonderwijs?lang=en" />
+  </url>
+
+  <!-- ================================ -->
+  <!-- Belangrijke ankers (optioneel)  -->
+  ================================ -->
+
+  <!-- Lessen -->
+  <url>
+    <loc>https://www.youngdolphins.nl/#lessen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Tarieven -->
+  <url>
+    <loc>https://www.youngdolphins.nl/#tarieven</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Locaties -->
+  <url>
+    <loc>https://www.youngdolphins.nl/#locaties</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://www.youngdolphins.nl/#faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Contact / inschrijfformulier -->
+  <url>
+    <loc>https://www.youngdolphins.nl/#signup-form</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
 </urlset>

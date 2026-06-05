@@ -1,4 +1,3 @@
-# Alle robots mogen crawlen
 User-agent: *
 Allow: /
 Allow: /zwemles-amsterdam
@@ -6,13 +5,7 @@ Allow: /zwemles-monnickendam
 Allow: /blog/
 Disallow: /#admin
 Disallow: /api/
-Disallow: /admin-dashboard
-
-# Sitemap locatie
 Sitemap: https://www.youngdolphins.nl/sitemap.xml
-
 # Host (optioneel maar goed voor SEO)
 Host: https://www.youngdolphins.nl
 
-# Crawl delay (vriendelijk voor server)
-Crawl-delay: 1

@@ -26,6 +26,7 @@ export default function Navbar({ settings }: NavbarProps) {
     { name: t('nav_pricing'), href: '#tarieven' },
     { name: t('nav_about'), href: '#over-ons' },
     { name: t('nav_faq'), href: '#faq' },
+    { name: t('nav_blog'), href: '/blog' }      // 👈 Nieuw: Blog link
   ];
 
   const tagline = settings?.tagline_key ? t(settings.tagline_key) : t('cta_register');
@@ -94,11 +95,20 @@ export default function Navbar({ settings }: NavbarProps) {
           >
             <div className="p-6 space-y-4">
               {navLinks.map((link) => (
-                <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="block text-lg font-bold text-primary/80 hover:text-secondary">
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block text-lg font-bold text-primary/80 hover:text-secondary"
+                >
                   {link.name}
                 </a>
               ))}
-              <a href="#signup-form" onClick={() => setIsOpen(false)} className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium">
+              <a
+                href="#signup-form"
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-center px-6 py-4 bg-secondary text-white rounded-2xl font-bold text-lg shadow-premium"
+              >
                 {tagline}
               </a>
             </div>
