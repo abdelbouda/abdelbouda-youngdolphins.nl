@@ -1,16 +1,17 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Waves, Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
-import { useSettings } from '../hooks/useFirestore';
-
 import Logo from './Logo';
 
-export default function Navbar() {
+interface NavbarProps {
+  settings?: any; // Settings van Firestore (optioneel)
+}
+
+export default function Navbar({ settings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
-  const { settings } = useSettings();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -27,7 +28,7 @@ export default function Navbar() {
     { name: t('nav_faq'), href: '#faq' },
   ];
 
-  // Tagline uit Firestore via LanguageContext, fallback naar standaard CTA
+  // Tagline uit settings (via props) of fallback
   const tagline = settings?.tagline_key ? t(settings.tagline_key) : t('cta_register');
 
   return (

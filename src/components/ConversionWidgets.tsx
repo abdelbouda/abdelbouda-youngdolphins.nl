@@ -3,7 +3,11 @@ import { useLanguage } from '../lib/LanguageContext';
 import { useState, useEffect } from 'react';
 import { MessageSquare, Mail } from 'lucide-react';
 
-export default function StickyCTA() {
+interface StickyCTAProps {
+  settings?: any;
+}
+
+export default function StickyCTA({ settings }: StickyCTAProps) {
   const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -16,7 +20,6 @@ export default function StickyCTA() {
       
       if (contactSection) {
         const rect = contactSection.getBoundingClientRect();
-        // Hide if the contact section starts entering the viewport
         if (rect.top < window.innerHeight - 100) {
           isVisibleValue = false;
         }
@@ -56,7 +59,11 @@ export default function StickyCTA() {
   );
 }
 
-export function WhatsAppWidget() {
+interface WhatsAppWidgetProps {
+  settings?: any;
+}
+
+export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
   const { t, language } = useLanguage();
   const [showTooltip, setShowTooltip] = useState(false);
 

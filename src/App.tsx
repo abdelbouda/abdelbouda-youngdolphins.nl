@@ -34,9 +34,18 @@ const Footer = lazy(() => import('./components/Footer'));
 const Pricing = lazy(() => import('./components/Pricing'));
 const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
 
+// Definieer Settings type voor de props
+interface Settings {
+  schoolName?: string;
+  tagline_key?: string;
+  telefoon?: string;
+  email?: string;
+  [key: string]: any;
+}
+
 function AppContent() {
   const { t } = useLanguage();
-  const { settings } = useSettings();
+  const { settings } = useSettings() as { settings: Settings | null; loading: boolean };
 
   const title = settings?.schoolName 
     ? `${settings.schoolName} - ${t('seo_title')}` 
@@ -88,27 +97,19 @@ export default function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
+      setIsAdmin(!!user);
       setCheckingAuth(false);
     });
     return () => unsubscribe();
   }, []);
 
-  // Route checks
   const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const isAdminRoute = typeof window !== 'undefined' && window.location.hash === '#admin';
   const isZwemlesAmsterdam = pathname === '/zwemles-amsterdam';
   const isZwemlesMonnickendam = pathname === '/zwemles-monnickendam';
-  
-  // Blog routes
   const isBlogOverview = pathname === '/blog' || pathname === '/blog/';
   const isBlogPost = pathname.startsWith('/blog/') && !isBlogOverview;
 
-  // Zwemles Amsterdam landing page
   if (isZwemlesAmsterdam) {
     return (
       <LanguageProvider>
@@ -117,7 +118,6 @@ export default function App() {
     );
   }
 
-  // Zwemles Monnickendam landing page
   if (isZwemlesMonnickendam) {
     return (
       <LanguageProvider>
@@ -126,7 +126,6 @@ export default function App() {
     );
   }
 
-  // Blog overview
   if (isBlogOverview) {
     return (
       <LanguageProvider>
@@ -135,45 +134,22 @@ export default function App() {
     );
   }
 
-  // Blog individual posts
   if (isBlogPost) {
     const slug = pathname.replace('/blog/', '').replace(/\/$/, '');
     switch (slug) {
       case 'zwemles-monnickendam-waterland':
-        return (
-          <LanguageProvider>
-            <ZwemlesMonnickendamWaterland />
-          </LanguageProvider>
-        );
+        return <LanguageProvider><ZwemlesMonnickendamWaterland /></LanguageProvider>;
       case 'zwemles-amsterdam-diploma-kijkles':
-        return (
-          <LanguageProvider>
-            <ZwemlesAmsterdamDiplomaKijkles />
-          </LanguageProvider>
-        );
+        return <LanguageProvider><ZwemlesAmsterdamDiplomaKijkles /></LanguageProvider>;
       case 'zwemkleding-checklist':
-        return (
-          <LanguageProvider>
-            <ZwemkledingChecklist />
-          </LanguageProvider>
-        );
+        return <LanguageProvider><ZwemkledingChecklist /></LanguageProvider>;
       case 'planner-zwemonderwijs':
-        return (
-          <LanguageProvider>
-            <ZwemonderwijsPlanner />
-          </LanguageProvider>
-        );
+        return <LanguageProvider><ZwemonderwijsPlanner /></LanguageProvider>;
       default:
-        // Fallback naar blog overview als slug niet bestaat
-        return (
-          <LanguageProvider>
-            <BlogOverview />
-          </LanguageProvider>
-        );
+        return <LanguageProvider><BlogOverview /></LanguageProvider>;
     }
   }
 
-  // Admin route
   if (isAdminRoute) {
     if (checkingAuth) {
       return (
@@ -182,19 +158,10 @@ export default function App() {
         </div>
       );
     }
-
-    if (isAdmin) {
-      return <AdminDashboard />;
-    }
-
-    return (
-      <LanguageProvider>
-        <AdminLogin onLogin={() => setIsAdmin(true)} />
-      </LanguageProvider>
-    );
+    if (isAdmin) return <AdminDashboard />;
+    return <LanguageProvider><AdminLogin onLogin={() => setIsAdmin(true)} /></LanguageProvider>;
   }
 
-  // Default: normale site
   return (
     <LanguageProvider>
       <AppContent />

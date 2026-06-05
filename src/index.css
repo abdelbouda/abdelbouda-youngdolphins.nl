@@ -5,7 +5,7 @@
   --font-display: "Sora", sans-serif;
   
   --color-primary: #1B365D;
-  --color-secondary: #5AC1E6;
+  --color-secondary: #0c8ec6;    /* Donkerder voor beter contrast (was #5AC1E6) */
   --color-accent: #F43F5E;
   --color-coral: #FF7F50;
   --color-glass: rgba(255, 255, 255, 0.8);
@@ -25,7 +25,7 @@
   }
   
   .text-glow {
-    text-shadow: 0 0 30px rgba(90, 193, 230, 0.4);
+    text-shadow: 0 0 30px rgba(12, 142, 198, 0.4);
   }
 }
 
@@ -81,4 +81,18 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+/* Verbeterde contrast voor tekst op secundaire achtergrond */
+.bg-secondary {
+  background-color: #0c8ec6;
+}
+.bg-secondary\/10 {
+  background-color: rgba(12, 142, 198, 0.1);
+}
+.text-secondary {
+  color: #0c8ec6;
+}
+.hover\:text-secondary:hover {
+  color: #0c8ec6;
 }

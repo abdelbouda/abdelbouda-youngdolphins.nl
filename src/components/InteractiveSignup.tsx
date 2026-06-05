@@ -103,7 +103,7 @@ export default function InteractiveSignup() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
-          {/* Linker kolom (informatie) */}
+          {/* Linker kolom - blijft hetzelfde */}
           <div className="lg:sticky lg:top-32">
             <h2 className="text-4xl lg:text-5xl font-display font-black mb-8 leading-[1.1] text-white">
               {t('contact_title')}
@@ -138,7 +138,7 @@ export default function InteractiveSignup() {
             </div>
           </div>
 
-          {/* Rechter kolom: 3D formulier (compact + 3D effect) */}
+          {/* Rechter kolom: formulier */}
           <motion.div 
             id="signup-form"
             initial={{ opacity: 0, y: 20, rotateX: -15 }}
@@ -146,12 +146,10 @@ export default function InteractiveSignup() {
             whileHover={{ scale: 1.02, rotateY: 5, rotateX: 5 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="bg-white rounded-[2rem] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.3)] text-primary relative overflow-hidden max-w-lg mx-auto lg:ml-auto transition-all duration-500 scroll-mt-24 transform-gpu preserve-3d"
+            className="bg-white rounded-[2rem] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.3)] text-primary relative overflow-hidden max-w-lg mx-auto lg:ml-auto transition-all duration-500 transform-gpu"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            {/* Glanslaag voor extra 3D effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem]"></div>
-            
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-3xl rounded-full pointer-events-none"></div>
             
             {submitted ? (
@@ -197,7 +195,14 @@ export default function InteractiveSignup() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_package')}</label>
-                    <select name="package" value={formData.package} onChange={handleInputChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
+                    <select 
+                      id="package"
+                      name="package" 
+                      aria-label={t('form_package')}
+                      value={formData.package} 
+                      onChange={handleInputChange} 
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer"
+                    >
                       <option value="Starter">{t('package_starter')}</option>
                       <option value="Progress+">{t('package_progress')}</option>
                       <option value="Privé">{t('package_private')}</option>
@@ -205,7 +210,14 @@ export default function InteractiveSignup() {
                   </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{t('form_select_level')}</label>
-                    <select name="gewenstNiveau" value={formData.gewenstNiveau} onChange={handleInputChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer">
+                    <select 
+                      id="niveau"
+                      name="gewenstNiveau" 
+                      aria-label={t('form_select_level')}
+                      value={formData.gewenstNiveau} 
+                      onChange={handleInputChange} 
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold text-sm appearance-none cursor-pointer"
+                    >
                       <option value="">{t('form_select_level')}</option>
                       {niveaus.map(n => (<option key={n.value} value={n.value}>{t(n.key)}</option>))}
                     </select>
@@ -236,7 +248,7 @@ export default function InteractiveSignup() {
                   <textarea name="notities" value={formData.notities} onChange={handleInputChange} rows={2} placeholder={t('form_placeholder_notes')} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-4 focus:ring-secondary/10 focus:border-secondary outline-none transition-all font-bold placeholder:text-slate-300 text-sm resize-none" />
                 </div>
                 
-                {/* Nieuwe footer: Eenmalige inschrijfkosten + geen veilig betalen meer */}
+                {/* Eenmalige inschrijfkosten */}
                 <div className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest pt-2">
                   Eenmalige inschrijfkosten EUR 25,-
                 </div>

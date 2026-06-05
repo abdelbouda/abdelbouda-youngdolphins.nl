@@ -5,6 +5,7 @@ import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
+  const isProduction = mode === 'production';
   
   return {
     plugins: [react(), tailwindcss()],
@@ -14,13 +15,32 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       cssCodeSplit: false,
-      minify: 'esbuild',
+      minify: 'terser',  // betere compressie dan esbuild
+      terserOptions: {
+        compress: {
+          drop_console: isProduction,
+          drop_debugger: isProduction,
+          pure_funcs: isProduction ? ['console.log', 'console.info', 'console.debug', 'console.warn'] : [],
+        },
+        format: {
+          comments: false,
+        },
+      },
       rollupOptions: {
         output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'firebase-vendor': ['firebase/app', 'firebase/firestore', 'firebase/auth'],
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('firebase')) return 'firebase';
+              if (id.includes('lucide-react')) return 'icons';
+              if (id.includes('motion') || id.includes('framer-motion')) return 'motion';
+              if (id.includes('react')) return 'react';
+              if (id.includes('google-maps')) return 'maps';
+              // overige node_modules in een vendor chunk
+              return 'vendor';
+            }
           },
+          chunkFileNames: 'assets/[name].[hash].js',
+          entryFileNames: 'assets/[name].[hash].js',
         },
       },
       chunkSizeWarningLimit: 500,
@@ -40,6 +60,11 @@ export default defineConfig(({ mode }) => {
       include: ['react', 'react-dom', 'firebase/app', 'firebase/firestore', 'firebase/auth'],
       esbuildOptions: {
         target: 'es2020',
+      },
+    },
+    server: {
+      hmr: {
+        overlay: false,
       },
     },
   };

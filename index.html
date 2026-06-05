@@ -13,16 +13,22 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://youngdolphins.nl/" />
     
+    <!-- Preload fonts - render-blocking voorkomen -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" />
+    </noscript>
+    
+    <!-- Preload hero image / logo indien nodig -->
+    <link rel="preload" as="image" href="/favicon.svg" />
+    
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#1B365D" />
     
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    
+    <!-- Critical CSS (inline voor FCP verbetering) -->
     <style>
-      /* Critical CSS: Zorgt voor direct zichtbare content */
+      /* Critical styles voor eerste weergave */
       body { 
         background-color: #ffffff; 
         color: #1B365D; 
@@ -32,6 +38,11 @@
         text-rendering: optimizeLegibility;
       }
       #root { min-height: 100vh; }
+      .bg-primary { background-color: #1B365D; }
+      .text-secondary { color: #0c8ec6; }
+      .btn-primary { background-color: #1B365D; color: white; }
+      .container { max-width: 1280px; margin: 0 auto; }
+      .text-center { text-align: center; }
     </style>
   </head>
   <body class="antialiased text-slate-800 bg-white">

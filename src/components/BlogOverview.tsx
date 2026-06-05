@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../lib/LanguageContext';
 
 const BLOG_POSTS = [

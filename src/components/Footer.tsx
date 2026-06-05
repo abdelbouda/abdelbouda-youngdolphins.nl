@@ -1,9 +1,12 @@
 import { Instagram, Facebook, Phone, Mail, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
-
 import Logo from './Logo';
 
-export default function Footer() {
+interface FooterProps {
+  settings?: any; // Wordt niet gebruikt in de component, maar nodig voor de prop van App.tsx
+}
+
+export default function Footer({ settings }: FooterProps) {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
