@@ -4,7 +4,7 @@ import { useLanguage } from '../lib/LanguageContext';
 import { Phone, ArrowRight, MapPin } from 'lucide-react';
 
 interface HeroProps {
-  settings?: any; // niet gebruikt, maar nodig voor App.tsx
+  settings?: any;
 }
 
 export default function Hero({ settings }: HeroProps) {
@@ -13,7 +13,7 @@ export default function Hero({ settings }: HeroProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const m = window.matchMedia("(max-width: 640px)");
+    const m = window.matchMedia("(max-width: 768px)");
     setIsMobile(m.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     m.addEventListener('change', handler);
@@ -49,19 +49,20 @@ export default function Hero({ settings }: HeroProps) {
   ], [t]);
 
   const handleCardClick = (e: React.MouseEvent, index: number) => {
-    if (isMobile) {
-      if (activeCard !== index) {
-        e.preventDefault();
-        setActiveCard(index);
-      }
+    if (isMobile && activeCard !== index) {
+      e.preventDefault();
+      setActiveCard(index);
     }
   };
 
+  // Verminder aantal bubbles op mobiel (2) vs desktop (4)
+  const bubbleCount = isMobile ? 2 : 4;
+
   return (
     <section id="hero" className="relative pt-32 pb-2 lg:pt-40 lg:pb-4 overflow-hidden scroll-mt-24 bg-aquatic">
-      {/* Dynamic Background Elements */}
+      {/* Achtergrond elementen - alleen op desktop volledig, op mobiel vereenvoudigd */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
-        {[...Array(6)].map((_, i) => (
+        {!isMobile && [...Array(bubbleCount)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full bg-secondary/10"
@@ -83,20 +84,22 @@ export default function Hero({ settings }: HeroProps) {
               ease: "linear",
               delay: i * 3
             }}
-            style={{ filter: "blur(40px)" }}
+            style={{ filter: "blur(40px)", willChange: "transform" }}
           />
         ))}
 
-        {/* Animated Wave */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-          <svg className="relative block w-[200%] h-24 text-white fill-current opacity-50" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <motion.path 
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.47,105.7,112.51,105.1,162.22,95.83,211.92,86.56,263.4,67.23,321.39,56.44Z"
-              animate={{ x: ["-50%", "0%"] }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            />
-          </svg>
-        </div>
+        {/* Wave animatie alleen op desktop (vermindert reflow op mobiel) */}
+        {!isMobile && (
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+            <svg className="relative block w-[200%] h-24 text-white fill-current opacity-50" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <motion.path 
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.47,105.7,112.51,105.1,162.22,95.83,211.92,86.56,263.4,67.23,321.39,56.44Z"
+                animate={{ x: ["-50%", "0%"] }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              />
+            </svg>
+          </div>
+        )}
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -169,17 +172,17 @@ export default function Hero({ settings }: HeroProps) {
                 href="#signup-form"
                 onClick={(e) => handleCardClick(e, i)}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: [0, -5, 0] }}
-                whileHover={{ y: -10, scale: 1.05 }}
+                animate={{ opacity: 1, y: isMobile ? 0 : [0, -5, 0] }}
+                whileHover={!isMobile ? { y: -10, scale: 1.05 } : {}}
                 whileTap={{ scale: 0.98 }}
                 transition={{ 
-                  y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+                  y: !isMobile ? { duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 } : {},
                   opacity: { duration: 0.5, delay: 0.25 + (i * 0.1) },
                   scale: { duration: 0.2 }
                 }}
                 className={`${card.color} ${card.text} p-4 rounded-xl shadow-premium border border-slate-100 transition-all flex flex-col items-center group relative cursor-pointer overflow-hidden min-h-[120px]`}
-                onMouseEnter={() => setActiveCard(i)}
-                onMouseLeave={() => setActiveCard(null)}
+                onMouseEnter={() => !isMobile && setActiveCard(i)}
+                onMouseLeave={() => !isMobile && setActiveCard(null)}
               >
                 {card.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest leading-none z-10 whitespace-nowrap">
