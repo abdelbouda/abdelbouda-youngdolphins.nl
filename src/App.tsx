@@ -1,8 +1,6 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
 import { useSettings } from './hooks/useFirestore';
-import { auth } from './firebase';
-import { onAuthStateChanged } from 'firebase/auth';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import USPSection from './components/USPSection';
@@ -61,7 +59,6 @@ function AppContent() {
       <Navbar settings={settings} />
       
       <main>
-        {/* ✅ Hero boven USPSection */}
         <Hero settings={settings} />
         <USPSection />
         
@@ -95,12 +92,45 @@ export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
 
+  // Auth alleen initialiseren als we op de admin route zijn
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAdmin(!!user);
+    // Check of de admin route actief is (hash of als we op een admin-pagina zijn)
+    const isAdminRoute = window.location.hash === '#admin';
+    if (!isAdminRoute) {
+      // Geen admin route, dus zet checkingAuth uit en doe niets
       setCheckingAuth(false);
-    });
-    return () => unsubscribe();
+      return;
+    }
+
+    // Dynamisch Firebase Auth laden en luisteren
+    let unsubscribe: (() => void) | null = null;
+    let mounted = true;
+
+    const initAuth = async () => {
+      try {
+        const { auth } = await import('./firebase');
+        const { onAuthStateChanged } = await import('firebase/auth');
+        if (!mounted) return;
+        unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (mounted) {
+            setIsAdmin(!!user);
+            setCheckingAuth(false);
+          }
+        });
+      } catch (err) {
+        if (mounted) {
+          console.error('Auth init failed', err);
+          setCheckingAuth(false);
+        }
+      }
+    };
+
+    initAuth();
+
+    return () => {
+      mounted = false;
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const pathname = typeof window !== 'undefined' ? window.location.pathname : '';

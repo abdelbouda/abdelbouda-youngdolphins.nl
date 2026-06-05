@@ -2,8 +2,6 @@ import { motion } from 'motion/react';
 import { Send, Phone, Mail, ShieldCheck, Accessibility, Users, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../lib/LanguageContext';
-import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
 
 const DolphinIcon = ({ className = "w-5 h-5", color = "#5AC1E6" }: { className?: string; color?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
@@ -60,7 +58,12 @@ export default function InteractiveSignup() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+
     try {
+      // 🔥 LAZY LOAD FIREBASE – pas laden wanneer nodig
+      const { db } = await import('../firebase');
+      const { collection, addDoc } = await import('firebase/firestore');
+
       await addDoc(collection(db, 'wachtlijst'), {
         ouderNaam: formData.name,
         email: formData.email,
@@ -75,11 +78,13 @@ export default function InteractiveSignup() {
         inschrijfdatum: new Date(),
         status: 'nieuw'
       });
+
       await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: formData.name, phone: formData.phone, email: formData.email, childInfo: formData.childInfo, package: formData.package })
       });
+
       setSubmitted(true);
       setFormData({ name: '', phone: '', email: '', childInfo: '', package: 'Progress+', gewenstNiveau: '', tijdstip: '', notities: '' });
     } catch (err) {
@@ -94,7 +99,7 @@ export default function InteractiveSignup() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.1),transparent_50%)]"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
-          {/* Linker kolom */}
+          {/* Linker kolom (informatie) – ongewijzigd */}
           <div className="lg:sticky lg:top-32">
             <h2 className="text-4xl lg:text-5xl font-display font-black mb-8 leading-[1.1] text-white">{t('contact_title')}</h2>
             <p className="text-xl text-slate-300 mb-16 max-w-md font-medium leading-relaxed">{t('contact_desc')}</p>
@@ -123,12 +128,12 @@ export default function InteractiveSignup() {
             </div>
           </div>
 
-          {/* Rechter kolom – formulier ZONDER forced reflow */}
-          <motion.div 
-            id="signup-form" 
-            initial={{ opacity: 0 }} 
-            whileInView={{ opacity: 1 }} 
-            viewport={{ once: true }} 
+          {/* Rechter kolom – formulier */}
+          <motion.div
+            id="signup-form"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.2 }}
             className="bg-white rounded-[2rem] p-6 lg:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.3)] text-primary max-w-lg mx-auto lg:ml-auto"
           >
