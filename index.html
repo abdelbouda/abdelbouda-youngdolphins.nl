@@ -9,15 +9,17 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#1B365D" />
     
-    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- CSS normaal laden (werkt gegarandeerd) -->
-    <link rel="stylesheet" href="/assets/style.css" />
+    <style>body{background:#fff;color:#1B365D;margin:0}#root{min-height:100vh}</style>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/assets/style.css" as="style" />
+    <link rel="stylesheet" href="/assets/style.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="/assets/style.css" /></noscript>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" /></noscript>
   </head>
   <body>
     <div id="root"></div>

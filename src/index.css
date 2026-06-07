@@ -5,7 +5,7 @@
   --font-display: "Sora", sans-serif;
   
   --color-primary: #1B365D;
-  --color-secondary: #0c8ec6;    /* Donkerder voor beter contrast (was #5AC1E6) */
+  --color-secondary: #0c8ec6;
   --color-accent: #F43F5E;
   --color-coral: #FF7F50;
   --color-glass: rgba(255, 255, 255, 0.8);
@@ -14,7 +14,6 @@
   --shadow-3d: 0 10px 30px -10px rgba(0, 31, 63, 0.3);
 }
 
-/* Basis stijlen – licht en snel */
 @layer utilities {
   .bg-aquatic {
     background: radial-gradient(circle at 10% 20%, rgba(90, 193, 230, 0.05) 0%, transparent 40%),
@@ -60,12 +59,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
   transform: rotate(45deg);
   transition: 0.5s;
 }
@@ -84,92 +78,9 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Verbeterde contrast voor tekst op secundaire achtergrond */
 .bg-secondary {
   background-color: #0c8ec6;
 }
-.bg-secondary\/10 {
-  background-color: rgba(12, 142, 198, 0.1);
-}
 .text-secondary {
   color: #0c8ec6;
-}
-.hover\:text-secondary:hover {
-  color: #0c8ec6;
-}
-
-/* ============================================ */
-/*          MOBIELE PERFORMANCE FIXES          */
-/* ============================================ */
-
-/* Verminder complexiteit op kleine schermen */
-@media (max-width: 768px) {
-  /* Verwijder achtergrondgradients die te veel reflow veroorzaken */
-  .bg-aquatic {
-    background: none;
-    background-color: #f8fafc;
-  }
-  
-  /* Verminder blur effecten (zwaar op mobiele GPU) */
-  .glass-card {
-    backdrop-filter: none;
-    background-color: rgba(255, 255, 255, 0.9);
-  }
-  
-  /* Verwijder zwevende animaties op mobiel */
-  .animate-float,
-  .gradient-shine::after {
-    animation: none;
-    display: none;
-  }
-  
-  /* Schaduwen lichter maken (minder schilderwerk) */
-  .shadow-premium {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* 3D effecten uitschakelen */
-  .pricing-card-3d:hover {
-    transform: none;
-    box-shadow: var(--shadow-premium);
-  }
-  
-  /* Vereenvoudigde overgangen */
-  * {
-    transition-duration: 0.15s !important;
-  }
-}
-
-/* Als gebruiker 'reduce motion' prefereert – helemaal uitzetten */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  
-  .animate-float,
-  .gradient-shine::after,
-  .pricing-card-3d {
-    animation: none;
-    transform: none;
-  }
-}
-
-/* Voorkom forced reflow door animerende elementen naar eigen layer te promoten */
-.animate-float,
-.motion-div,
-[class*="motion"] {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* Zorg dat hover animaties alleen transform gebruiken */
-.pricing-card-3d {
-  will-change: transform;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

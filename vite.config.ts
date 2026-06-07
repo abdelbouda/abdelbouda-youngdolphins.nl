@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       'process.env.GOOGLE_MAPS_PLATFORM_KEY': JSON.stringify(env.GOOGLE_MAPS_PLATFORM_KEY || ''),
     },
     build: {
-      cssCodeSplit: false, // alles in één CSS-bestand
+      cssCodeSplit: false,
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -24,11 +24,6 @@ export default defineConfig(({ mode }) => {
       },
       rollupOptions: {
         output: {
-          assetFileNames: (assetInfo) => {
-            // Vaste naam voor CSS (geen hash)
-            if (assetInfo.name?.endsWith('.css')) return 'assets/style.css';
-            return 'assets/[name].[hash][extname]';
-          },
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
               if (id.includes('firebase')) return 'firebase';

@@ -19,9 +19,9 @@ export default function Hero({ settings }: HeroProps) {
   }, []);
 
   const pricingCards = useMemo(() => [
-    { title: t('pricing_starter_title'), price: '€25', unit: '/ les', color: 'bg-white', text: 'text-primary', desc: t('pricing_starter_desc') },
-    { title: t('pricing_progress_title'), price: '€170', unit: '/ maand', color: 'bg-secondary', text: 'text-white', popular: true, desc: t('pricing_progress_desc') },
-    { title: t('pricing_private_title'), price: '€50', unit: '/ les', color: 'bg-white', text: 'text-primary', desc: t('pricing_private_desc') }
+    { title: t('pricing_starter_title'), price: '€25', unit: '/ les', color: 'bg-white', text: 'text-primary', desc: t('pricing_starter_desc'), popular: false },
+    { title: t('pricing_progress_title'), price: '€170', unit: '/ maand', color: 'bg-secondary', text: 'text-white', desc: t('pricing_progress_desc'), popular: true },
+    { title: t('pricing_private_title'), price: '€50', unit: '/ les', color: 'bg-white', text: 'text-primary', desc: t('pricing_private_desc'), popular: false }
   ], [t]);
 
   const handleCardClick = (e: React.MouseEvent, index: number) => {
@@ -35,19 +35,17 @@ export default function Hero({ settings }: HeroProps) {
     <section id="hero" className="relative pt-32 pb-2 lg:pt-40 lg:pb-4 overflow-hidden scroll-mt-24 bg-aquatic">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto py-2 lg:py-4">
-          {/* Badge - statisch */}
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-white text-xs sm:text-sm font-black uppercase tracking-widest mb-4 shadow-md">
-            {t('hero_badge')}
+            🚀 {t('hero_badge')}
           </div>
 
-          {/* Titel - statisch */}
+          {/* Titel */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black text-primary leading-[1.1] mb-2">
-            {t('hero_title').split(':').map((part, i) => (
-              <span key={i} className={i === 1 ? 'block text-secondary' : ''}>{part.trim()}</span>
-            ))}
+            {t('hero_title')}
           </h1>
 
-          {/* Subtitel - statisch (LCP element) */}
+          {/* Subtitel */}
           <p className="text-lg sm:text-xl text-slate-600 mb-4 max-w-2xl mx-auto leading-relaxed font-medium">
             {t('hero_subtitle')}
           </p>
@@ -66,11 +64,15 @@ export default function Hero({ settings }: HeroProps) {
             </a>
           </div>
 
-          {/* Pricing Cards - statisch */}
+          {/* Pricing Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 max-w-3xl mx-auto">
             {pricingCards.map((card, i) => (
-              <div key={i} className={`${card.color} ${card.text} p-4 rounded-xl shadow-premium border border-slate-100 flex flex-col items-center min-h-[120px]`}>
-                {card.popular && <div className="bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full mb-2">{t('hero_most_popular')}</div>}
+              <div key={i} className={`${card.color} ${card.text} p-4 rounded-xl shadow-premium border border-slate-100 flex flex-col items-center min-h-[120px] relative`}>
+                {card.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">
+                    {t('hero_most_popular')}
+                  </div>
+                )}
                 <span className="text-[10px] font-black uppercase tracking-widest mb-1 text-primary">{card.title}</span>
                 <div className="flex items-baseline gap-0.5">
                   <span className="text-xl font-black tracking-tight">{card.price}</span>
@@ -85,8 +87,8 @@ export default function Hero({ settings }: HeroProps) {
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <a href="#signup-form" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-[2rem] font-black text-lg shadow-premium">
-              {t('cta_register')} <ArrowRight size={22} className="inline ml-2" />
+            <a href="#signup-form" className="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-[2rem] font-black text-lg shadow-premium flex items-center justify-center gap-2">
+              {t('cta_register')} <ArrowRight size={22} />
             </a>
             <a href="tel:0628421354" className="w-full sm:w-auto flex items-center justify-center gap-3 text-primary font-black text-lg px-10 py-4">
               <div className="w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center">
