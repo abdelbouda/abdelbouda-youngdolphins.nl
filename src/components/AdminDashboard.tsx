@@ -70,6 +70,10 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleEditChange = (key: string, value: string) => {
+    setEditData((prev: any) => ({ ...prev, [key]: value }));
+  };
+
   const formatValue = (value: any): string => {
     if (value === null || value === undefined) return '-';
     if (value instanceof Date || (typeof value === 'object' && value?.seconds)) {
@@ -147,13 +151,13 @@ export default function AdminDashboard() {
                         {editingId === doc.id ? (
                           <input
                             value={editData[key] ?? ''}
-                            onChange={e => setEditData(prev => ({ ...prev, [key]: e.target.value }))}
+                            onChange={e => handleEditChange(key, e.target.value)}
                             className="w-full border px-2 py-1 rounded text-xs"
                           />
                         ) : (
                           <span title={formatValue(doc[key])}>{formatValue(doc[key])}</span>
                         )}
-                      </td>
+                       </td>
                     ))}
                     <td className="px-4 py-2 space-x-2">
                       {editingId === doc.id ? (
@@ -168,7 +172,7 @@ export default function AdminDashboard() {
                         </>
                       )}
                     </td>
-                  </tr>
+                   </tr>
                 ))}
               </tbody>
             </table>

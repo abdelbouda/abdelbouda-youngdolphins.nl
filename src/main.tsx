@@ -1,14 +1,18 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { inject } from '@vercel/analytics';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from './App';
-// @ts-ignore: CSS module types are not declared in this project
+// @ts-ignore - CSS module (werkt in runtime)
 import './index.css';
 
-inject(); // <-- moet hier staan
+// Vercel Analytics pas laden na idle
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => import('@vercel/analytics').then(({ inject }) => inject()));
+} else {
+  setTimeout(() => import('@vercel/analytics').then(({ inject }) => inject()), 2000);
+}
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
     <App />
-  </StrictMode>
+  </React.StrictMode>
 );
