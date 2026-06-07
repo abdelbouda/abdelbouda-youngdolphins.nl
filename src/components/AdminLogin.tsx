@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { GoogleAuthProvider } from 'firebase/auth';
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -13,10 +12,9 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
     setLoading(true);
     setError('');
     try {
-      // Dynamisch de auth module laden
-      const { getAuthModule } = await import('../firebase');
-      const auth = await getAuthModule();
-      const { signInWithPopup } = await import('firebase/auth');
+      // Laad de auth module dynamisch
+      const auth = await (await import('../firebase')).getAuthModule();
+      const { signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       console.log('Ingelogd als:', result.user.email);

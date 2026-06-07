@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
-// Configuratie (wordt later ook gebruikt voor admin)
 export const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -11,22 +10,24 @@ export const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// Initieer app alleen voor Firestore (geen auth!)
+// Initieer app voor Firestore (geen auth)
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// Auth wordt pas geïnitialiseerd wanneer nodig (lazy)
+// Lazy auth: wordt pas geïnitialiseerd wanneer nodig
 let authInstance = null;
 let authApp = null;
 
 export const getAuthModule = async () => {
   if (!authInstance) {
-    // Importeer auth dynamisch (wordt alleen geladen wanneer nodig)
-    const { getAuth, initializeApp: initApp } = await import('firebase/auth');
+    // Dynamische import van de volledige auth module
+    const authModule = await import('firebase/auth');
     if (!authApp) {
+      // Hergebruik dezelfde config, maar initialiseer een nieuwe app voor auth
+      const { initializeApp: initApp } = await import('firebase/app');
       authApp = initApp(firebaseConfig);
     }
-    authInstance = getAuth(authApp);
+    authInstance = authModule.getAuth(authApp);
   }
   return authInstance;
 };
