@@ -1,6 +1,5 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { LanguageProvider, useLanguage } from './lib/LanguageContext';
-import { useSettings } from './hooks/useFirestore';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import USPSection from './components/USPSection';
@@ -35,35 +34,34 @@ const ServiceAreas = lazy(() => import('./components/ServiceAreas'));
 const AdminLogin = lazy(() => import('./components/AdminLogin'));
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 
-interface Settings {
-  schoolName?: string;
-  tagline_key?: string;
-  telefoon?: string;
-  email?: string;
-  [key: string]: any;
-}
-
 function AppContent() {
   const { t } = useLanguage();
-  const { settings } = useSettings() as { settings: Settings | null; loading: boolean };
-
-  const title = settings?.schoolName ? `${settings.schoolName} - ${t('seo_title')}` : t('seo_title');
+  
+  // Hardcoded SEO (geen Firestore call meer)
+  const title = t('seo_title');
+  const description = t('seo_description');
+  const keywords = t('seo_keywords');
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO title={title} description={settings?.tagline_key ? t(settings.tagline_key) : t('seo_description')} keywords={t('seo_keywords')} />
-      <Navbar settings={settings} />
+      <SEO title={title} description={description} keywords={keywords} />
+      <Navbar settings={null} />
       <main>
-        <Hero settings={settings} />
+        <Hero settings={null} />
         <USPSection />
         <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div></div>}>
-          <RegioSEO /><BentoFeatures /><ServiceAreas /><Pricing /><About /><Locations /><FAQSection /><InteractiveSignup />
+          <RegioSEO /><BentoFeatures /><ServiceAreas /><Pricing /><About /><Locations /><FAQSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <InteractiveSignup />
+        </Suspense>
+        <Suspense fallback={null}>
           <Privacy /><Voorwaarden /><Cookies />
         </Suspense>
       </main>
-      <Suspense fallback={null}><Footer settings={settings} /></Suspense>
-      <Suspense fallback={null}><StickyCTA settings={settings} /></Suspense>
-      <Suspense fallback={null}><WhatsAppWidget settings={settings} /></Suspense>
+      <Suspense fallback={null}><Footer settings={null} /></Suspense>
+      <Suspense fallback={null}><StickyCTA settings={null} /></Suspense>
+      <Suspense fallback={null}><WhatsAppWidget settings={null} /></Suspense>
     </div>
   );
 }
