@@ -14,10 +14,12 @@
     
     <style>body{background:#fff;color:#1B365D;margin:0}#root{min-height:100vh}</style>
     
+    <!-- CSS deferred (render-blocking voorkomen) -->
     <link rel="preload" href="/assets/style.css" as="style" />
     <link rel="stylesheet" href="/assets/style.css" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="/assets/style.css" /></noscript>
     
+    <!-- Fonts deferred -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" /></noscript>
   </head>
