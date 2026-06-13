@@ -1,57 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Hoofdpagina -->
   <url>
     <loc>https://www.youngdolphins.nl/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.youngdolphins.nl/?lang=nl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.youngdolphins.nl/?lang=en" />
   </url>
+
+  <!-- Landingspagina's -->
   <url>
     <loc>https://www.youngdolphins.nl/zwemles-amsterdam</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
     <loc>https://www.youngdolphins.nl/zwemles-monnickendam</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Blog overzicht -->
   <url>
-    <loc>https://www.youngdolphins.nl/#lessen</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/blog</loc>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.youngdolphins.nl/#tarieven</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.youngdolphins.nl/#locaties</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Blog artikelen -->
   <url>
-    <loc>https://www.youngdolphins.nl/#over-ons</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/blog/zwemles-monnickendam-waterland</loc>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://www.youngdolphins.nl/#faq</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.youngdolphins.nl/blog/zwemles-amsterdam-diploma-kijkles</loc>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://www.youngdolphins.nl/#signup-form</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://www.youngdolphins.nl/blog/zwemkleding-checklist</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+
+  <url>
+    <loc>https://www.youngdolphins.nl/blog/planner-zwemonderwijs</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Anker links (optioneel, maar nuttig) -->
+  <url><loc>https://www.youngdolphins.nl/#lessen</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.youngdolphins.nl/#tarieven</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.youngdolphins.nl/#locaties</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.youngdolphins.nl/#over-ons</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.youngdolphins.nl/#faq</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.youngdolphins.nl/#signup-form</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+
 </urlset>
