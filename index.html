@@ -12,9 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <style>body{background:#fff;color:#1B365D;margin:0}#root{min-height:100vh}</style>
+    <!-- Kritische CSS inline (minimaal) -->
+    <style>body{background:#fff;color:#1B365D;margin:0}#root{min-height:100vh}.bg-primary{background:#1B365D}.text-secondary{color:#0c8ec6}</style>
     
-    <!-- CSS deferred (render-blocking voorkomen) -->
+    <!-- Volledige CSS deferred (laden na render) -->
     <link rel="preload" href="/assets/style.css" as="style" />
     <link rel="stylesheet" href="/assets/style.css" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="/assets/style.css" /></noscript>
