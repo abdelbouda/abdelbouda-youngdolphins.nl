@@ -13,6 +13,8 @@ import ZwemlesMonnickendamWaterland from './pages/blog/ZwemlesMonnickendamWaterl
 import ZwemlesAmsterdamDiplomaKijkles from './pages/blog/ZwemlesAmsterdamDiplomaKijkles';
 import ZwemkledingChecklist from './pages/blog/ZwemkledingChecklist';
 import ZwemonderwijsPlanner from './pages/blog/ZwemonderwijsPlanner';
+import InhaalslagZwemlessen from './pages/blog/InhaalslagZwemlessen';
+import InhaalslagZwemlessenVolkskrant from './pages/blog/InhaalslagZwemlessenVolkskrant';
 
 // Lazy load non‑critical components
 const StickyCTA = lazy(() => import('./components/ConversionWidgets').then(m => ({ default: m.default })));
@@ -134,14 +136,25 @@ export default function App() {
   if (isZwemlesAmsterdam) return <LanguageProvider><ZwemlesAmsterdam /></LanguageProvider>;
   if (isZwemlesMonnickendam) return <LanguageProvider><ZwemlesMonnickendam /></LanguageProvider>;
   if (isBlogOverview) return <LanguageProvider><BlogOverview /></LanguageProvider>;
+  
+  // Blog posts
   if (isBlogPost) {
     const slug = pathname.replace('/blog/', '').replace(/\/$/, '');
     switch (slug) {
-      case 'zwemles-monnickendam-waterland': return <LanguageProvider><ZwemlesMonnickendamWaterland /></LanguageProvider>;
-      case 'zwemles-amsterdam-diploma-kijkles': return <LanguageProvider><ZwemlesAmsterdamDiplomaKijkles /></LanguageProvider>;
-      case 'zwemkleding-checklist': return <LanguageProvider><ZwemkledingChecklist /></LanguageProvider>;
-      case 'planner-zwemonderwijs': return <LanguageProvider><ZwemonderwijsPlanner /></LanguageProvider>;
-      default: return <LanguageProvider><BlogOverview /></LanguageProvider>;
+      case 'zwemles-monnickendam-waterland':
+        return <LanguageProvider><ZwemlesMonnickendamWaterland /></LanguageProvider>;
+      case 'zwemles-amsterdam-diploma-kijkles':
+        return <LanguageProvider><ZwemlesAmsterdamDiplomaKijkles /></LanguageProvider>;
+      case 'zwemkleding-checklist':
+        return <LanguageProvider><ZwemkledingChecklist /></LanguageProvider>;
+      case 'planner-zwemonderwijs':
+        return <LanguageProvider><ZwemonderwijsPlanner /></LanguageProvider>;
+      case 'inhaalslag-zwemlessen':
+        return <LanguageProvider><InhaalslagZwemlessen /></LanguageProvider>;
+      case 'inhaalslag-zwemlessen-volkskrant':
+        return <LanguageProvider><InhaalslagZwemlessenVolkskrant /></LanguageProvider>;
+      default:
+        return <LanguageProvider><BlogOverview /></LanguageProvider>;
     }
   }
 
