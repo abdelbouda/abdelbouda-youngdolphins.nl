@@ -2,52 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.youngdolphins.nl/</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/zwemles-amsterdam</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/zwemles-monnickendam</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/blog</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/blog/zwemles-monnickendam-waterland</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/blog/zwemles-amsterdam-diploma-kijkles</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/blog/zwemkleding-checklist</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.youngdolphins.nl/blog/planner-zwemonderwijs</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Nieuwe blogs -->
+  <url>
+    <loc>https://www.youngdolphins.nl/blog/inhaalslag-zwemlessen</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.youngdolphins.nl/blog/inhaalslag-zwemlessen-volkskrant</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Anker links -->
   <url>
     <loc>https://www.youngdolphins.nl/#lessen</loc>
     <changefreq>monthly</changefreq>
